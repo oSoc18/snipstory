@@ -1,21 +1,37 @@
 @import '../../../variables.scss';
 
 .register-title {
-  color: $brand-blue;
+  color: #3274ff;
   text-align: center;
   font-size: 2.5rem;
-  font-family: $brand-font-stack;
-  font-weight: 600;
-}
+  font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 600; }
 
 .name-container {
-  display: flex;
-}
+  display: flex; }
 
 .password-container {
-  display: flex;
-}
+  display: flex; }
 
 .etc-container {
+  display: flex; }
+
+.register-box{
+  position: relative;
+  width: 66%;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  background: #fff;
+  box-shadow: 4px 3px 39px -1px rgba(0,0,0,0.62);
+  padding: 3rem;
+  align-content: center;
   display: flex;
+}
+.test{
+  display: block;
+  margin: auto;
+  font-weight: 400;
+  font-size: 20px;
+  padding: 0.6rem 1rem;
 }

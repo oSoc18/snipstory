@@ -8,10 +8,10 @@
   border-radius: 4rem;
   // box-shadow: 0 0 1rem 0.2rem rgba($primary-color, .8);
   transition: all $transition-timing;
-  border: 3px $brand-blue solid;
-  width: 25rem;
-  height: 3.5rem;
-
+  border: 1px $brand-blue solid;
+  width: 15rem;
+  height: 3rem;
+  padding: 0.3rem 0.6rem;
   &::placeholder {
     color: $brand-blue--light;
   }
@@ -20,4 +20,7 @@
 .form-field__descr {
   border-radius: 2rem;
   padding: 1rem 1.5rem;
+}
+label{
+  display: block;
 }
