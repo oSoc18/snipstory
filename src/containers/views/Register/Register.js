@@ -41,9 +41,8 @@ const Register = ({
   return (
     <div className="page">
       <Navbar/>
+      <div className="container">
       <div className="register-box">
-          <h1 className="register-title">Registreer</h1>
-          <div>
             <form
               onSubmit={handleSubmit(
                 ({ name, email, password, typeOfUser, institution, password1, ...rest }) => {
@@ -83,21 +82,11 @@ const Register = ({
                     });
                   });
               })}
-            >
-              <div className="name-container flex_1">
-                <div>
-                  <Field
-                    name="name"
-                    component={FormField}
-                    type="text"
-                    label="Voornaam"
-                    required
-                  />
-                </div>
-              </div>
+            > 
+            <div className="flex_container_vertical">              
+            <h1 className="register-title">Registreer</h1>
 
-              <div className="toggle-container">
-                <div>
+              {/*<div className="toggle-container">
                   <Field
                     name="typeOfUser"
                     component="select"
@@ -111,30 +100,27 @@ const Register = ({
                     <option value="teacher">Teacher</option>
                     <option value="contentPartner">Content Partner</option>
                   </Field>
-                </div>
-              </div>
-
-              <div className="password-container ">
-                <div>
-                  <Field 
-                    name="password"
-                    component={FormField}
-                    type="password"
-                    label="Wachtwoord"
-                  />
-                </div>
-                <div>
+                  </div>*/}
+              <div className="name-container">
                   <Field
-                    name="password1"
+                    name="voornaam"
                     component={FormField}
-                    type="password"
-                    label="Wachtwoord herhalen"
+                    type="text"
+                    label="Voornaam"
+                    className="name_in"
+                    required
                   />
-                </div>
+                  <Field
+                    name="name"
+                    component={FormField}
+                    type="text"
+                    label="Familienaam"
+                    className="name_in"
+                    required
+                  />
               </div>
 
               <div className="etc-container">
-                <div>
                   <Field
                     name="email"
                     component={FormField}
@@ -149,9 +135,18 @@ const Register = ({
                   label={selectedTypeOfUsers == "contentPartner" ?
                   "Institution": "School"}
                   type="text"
-                  component={FormField} />
+                  component={FormField} 
+                  required
+                  />
                 </div>
-              </div>
+              <div className="password-container ">
+                  <Field 
+                    name="password"
+                    component={FormField}
+                    type="password"
+                    label="Wachtwoord"
+                  />
+                  <p className="notice">Password must contain at least 8 characters</p>
               <div>
                 {selectedTypeOfUsers == 'contentPartner' ? 
                     (ContentPartnerOnly): undefined}
@@ -160,20 +155,24 @@ const Register = ({
                 <div>
                   {error}
                 </div>}
+               
+              </div>
+              <div className="submit_div">
 
               <Button
-                className="test"
+                className="submit_button"
                 type="submit"
                 disabled={pristine || submitting}
               >
                 Submit
               </Button>
+                <span>Heb je al een account?<br />
+                <Link to="/teacher/login">Log hier in!</Link></span>
+              </div>
+              </div>
+
             </form>
-          </div>
-          <div>
-            <span>Heb je al een account?</span>
-            <Link to="/teacher/login">Log hier in!</Link>
-          </div>
+        </div>
         </div>
         <Footer/>
     </div>
