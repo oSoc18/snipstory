@@ -84,7 +84,7 @@ const Register = ({
                   });
               })}
             >
-              <div className="name-container">
+              <div className="name-container flex_1">
                 <div>
                   <Field
                     name="name"
@@ -114,7 +114,7 @@ const Register = ({
                 </div>
               </div>
 
-              <div className="password-container">
+              <div className="password-container ">
                 <div>
                   <Field 
                     name="password"
@@ -166,7 +166,7 @@ const Register = ({
                 type="submit"
                 disabled={pristine || submitting}
               >
-                Registreer
+                Submit
               </Button>
             </form>
           </div>
