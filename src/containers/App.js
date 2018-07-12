@@ -27,6 +27,7 @@ import ScrollToTop from '../components/util/ScrollToTop';
 import StoryDashboard from './views/StoryDashboard/StoryDashboard'
 import AddStories from './views/AddStories/AddStories'
 import './App.css';
+import AddFunfact from './views/AddFunfact/AddFunfact';
 
 class App extends Component {
   componentDidMount() {
@@ -106,6 +107,15 @@ class App extends Component {
                 render={props =>
                   <SnipperDetail
                     showToast={showToast}
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <Route
+                path="/teacher/dashboard/:storyId/addfunfact"
+                exact
+                render={props =>
+                  <AddFunfact
                     user={user}
                     {...props}
                   />}
