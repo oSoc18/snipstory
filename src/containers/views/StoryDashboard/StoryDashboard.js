@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchStory } from '../../../redux/actions';
 import Spinner from '../../../components/spinner/Spinner';
+import Button from '../../../components/button/Button'
 import './StoryDashboard.css';
 
 
@@ -23,6 +24,9 @@ class StoryDashboard extends React.Component {
         return (<div>
             <h1>Manage a story {story.id}</h1>
             <h2>{story.general.title}</h2>
+            <Button to="/teacher/editstory">
+                Edit Story
+            </Button>
         </div>)
     }
 };
