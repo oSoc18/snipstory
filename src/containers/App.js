@@ -24,6 +24,7 @@ import SnipperDetail from './views/SnipperDetail/SnipperDetail';
 import Share from './views/Share/Share';
 import deepEqual from 'deep-equal';
 import ScrollToTop from '../components/util/ScrollToTop';
+import StoryDashboard from './views/StoryDashboard/StoryDashboard'
 import AddStories from './views/AddStories/AddStories'
 import './App.css';
 
@@ -105,6 +106,15 @@ class App extends Component {
                 render={props =>
                   <SnipperDetail
                     showToast={showToast}
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <Route 
+                path="/teacher/dashboard/:storyId"
+                exact
+                render={props => 
+                  <StoryDashboard 
                     user={user}
                     {...props}
                   />}

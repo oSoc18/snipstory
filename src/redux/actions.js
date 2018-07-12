@@ -77,6 +77,9 @@ export const actionTypes = {
   updateUsersStarted: 'UPDATE_USERS_STARTED',
   updateUsersFulfilled: 'UPDATE_USERS_FULFILLED',
   updateUsersRejected: 'UPDATE_USERS_REJECTED',
+  fetchStoryStarted: 'FETCH_STORY_STARTED',
+  fetchStoryFulFilled: 'FETCH_STORY_FULFILLED',
+  fetchStoryRejected: 'FETCH_STORY_REJECTED',
   clearState: 'CLEAR_STATE'
 };
 
@@ -113,6 +116,37 @@ export const fetchRandomStories = () => {
       });
   };
 };
+
+export const fetchStory = storyId => {
+  return dispatch => {
+    dispatch(fetchStoryStarted());
+    console.log(`The story id is ${storyId}`)
+    firebaseDatabase
+      .ref("/stories")
+      .child(storyId)
+      .once('value')
+      .then(story => {
+        dispatch(fetchStoryFulFilled(story.val()));
+      })
+      .catch(err => {
+        dispatch(fetchStoryRejected(err));
+      });
+  };
+};
+
+export const fetchStoryStarted = () => ({
+  type: actionTypes.fetchStoryStarted
+});
+
+export const fetchStoryFulFilled = story => ({
+  type: actionTypes.fetchStoryFulFilled,
+  story
+});
+
+export const fetchStoryRejected = err => ({
+  type: actionTypes.fetchStoryRejected,
+  err
+});
 
 export const receiveClasses = classes => ({
   type: actionTypes.receiveClasses,
