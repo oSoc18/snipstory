@@ -8,7 +8,10 @@ import PopUp from 'reactjs-popup';
 
 import { connect } from 'react-redux';
 import { history } from '../../../redux/store';
-import { fetchStoriesDashboardList } from '../../../redux/actions';
+import {
+    fetchStoriesDashboardList,
+    deleteStory
+ } from '../../../redux/actions';
 
 
 import { Link } from 'react-router-dom';
@@ -29,32 +32,20 @@ class DashboardStoryList extends React.Component {
             pristine,
             submitting,
             user,
-            logout
+            logout,
+            deleteStory
         } = this.props;
 
-        const deleteStory = (e) => {
-            console.log("delete");
-        //     return (
-        //     // <Popup trigger={<button> Trigger</button>} position="right center">
-        //     //     <div>Popup content here !!</div>
-        //     // </Popup>
-        // )
+        const deleteSt = (story) => {
+            console.log(story.id);
+            deleteStory(story);
+
         }
 
 
         if (isLoading || !stories || stories.length === 0) {
           return <Spinner page size="large" />;
         }
-
-        // if (isLoading) {
-        //     console.log("isLoading");
-        // }
-        // if (!stories) {
-        //     console.log("NOT STORIES");
-        // }
-        // else if (stories.length === 0) {
-        //     console.log("LENGTH IS 0");
-        // }
 
         return (
             <div className="page">
@@ -66,6 +57,7 @@ class DashboardStoryList extends React.Component {
                         <div
                             key={story.id}
                             className="storyCards"
+                            id = {story.id}
                             // onClick= { => {
                             //     history.push('/stories/' + story.id);
                             // }}
@@ -80,10 +72,10 @@ class DashboardStoryList extends React.Component {
 
                                 <div className="flex">
                                 <Button>Aanpassen</Button>
-                                <button  onClick={(e) => {
-                                    if (window.confirm('Are you sure you wish to delete this item?')) deleteStory(e) } }>
+                                <Button  onClick={(e) => {
+                                    if (window.confirm('Are you sure you wish to delete this item?')) deleteSt(story) } }>
                                 Verwijder
-                                </button>
+                                </Button>
                                 </div>
 
                                 <div className="flex">
@@ -103,4 +95,7 @@ class DashboardStoryList extends React.Component {
 
 
 const mapStateToProps = state => ({...state.stories});
-export default connect(mapStateToProps, {fetchStoriesDashboardList})(DashboardStoryList);
+export default connect(mapStateToProps,
+    {fetchStoriesDashboardList,
+        deleteStory
+    })(DashboardStoryList);

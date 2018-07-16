@@ -901,7 +901,7 @@ export const deleteStory = storyObj => {
         .then(() => {
             dispatch(
                 showToast({
-                    text: `Het verhaal van "${storyObj.title}" werd verwijderd`
+                    text: `Het verhaal van "${storyObj.general.title}" werd verwijderd`
                 })
             );
         })
