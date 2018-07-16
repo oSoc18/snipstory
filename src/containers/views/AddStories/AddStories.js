@@ -122,7 +122,7 @@ class AddStories extends React.Component {
                         <Field
                             name="dayOfBirth"
                             component={FormField}
-                            type="text"
+                            type="date"
                             label="Geboorte datum"
                             placeholder="vb. 24/05/1905"
                             required
@@ -132,7 +132,7 @@ class AddStories extends React.Component {
                         <Field
                             name="dayOfDeath"
                             component={FormField}
-                            type="text"
+                            type="date"
                             label="Datum van overlijden"
                             placeholder="vb. 21/04/1963"
 
@@ -211,6 +211,14 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="checkbox"
                             label="Copyright"
+                        />
+                    </div>
+                    <div>
+                        <Field
+                            name="visible"
+                            component={FormField}
+                            type="checkbox"
+                            label="Zichtbaar"
                         />
                     </div>
 
