@@ -1,8 +1,9 @@
 import React from 'react';
-import Button from '../../../components/button/Button';
+import Button from '../../../components/button-small/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Spinner from '../../../components/spinner/Spinner';
+import PopUp from 'reactjs-popup';
 
 
 import { connect } from 'react-redux';
@@ -31,6 +32,15 @@ class DashboardStoryList extends React.Component {
             logout
         } = this.props;
 
+        const deleteStory = (e) => {
+            console.log("delete");
+        //     return (
+        //     // <Popup trigger={<button> Trigger</button>} position="right center">
+        //     //     <div>Popup content here !!</div>
+        //     // </Popup>
+        // )
+        }
+
 
         if (isLoading || !stories || stories.length === 0) {
           return <Spinner page size="large" />;
@@ -55,23 +65,31 @@ class DashboardStoryList extends React.Component {
                     return (
                         <div
                             key={story.id}
-                            className=""
+                            className="storyCards"
                             // onClick= { => {
                             //     history.push('/stories/' + story.id);
                             // }}
                         >
                             <div
-                                className=""
-                                //style={{
-                                //   display: 'flex',
-                                //   flexDirection: 'column',
-                                //   justifyContent: 'space-between'
-                                // }}
+                                className="flex"
                             >
-                                <div>
+                                <div className="">
                                     <h2>{story.general.title}</h2>
                                     <p>{story.general.summary}</p>
                                 </div>
+
+                                <div className="flex">
+                                <Button>Aanpassen</Button>
+                                <button  onClick={(e) => {
+                                    if (window.confirm('Are you sure you wish to delete this item?')) deleteStory(e) } }>
+                                Verwijder
+                                </button>
+                                </div>
+
+                                <div className="flex">
+                                <Button>Maak onzichtbaar</Button>
+                                </div>
+
                             </div>
                         </div>
                     );

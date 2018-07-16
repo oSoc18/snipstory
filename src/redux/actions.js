@@ -886,10 +886,29 @@ export const fetchStoriesDashboardList = () => {
                 const val = stories.val();
                 const keys = Object.keys(val);
                 dispatch(fetchStoriesDashboardListFulfilled(keys.map(id => val[id])));
-                console.log("DATA IS FETCHED")
             })
             .catch(err => {
                 dispatch(fetchStoriesDashboardListRejected(err));
             });
     };
 };
+
+export const deleteStory = storyObj => {
+    return (dispatch, getState) => {
+        Promise.all([
+            firebaseDatabase.ref(`/stories/${storyObj.id}`).remove(),
+        ])
+        .then(() => {
+            dispatch(
+                showToast({
+                    text: `Het verhaal van "${storyObj.title}" werd verwijderd`
+                })
+            );
+        })
+        .catch(_ =>
+          showToast({
+            text: `Verhaal kon niet verwijderd worden, probeer het opnieuw`
+          })
+        );
+    }
+}
