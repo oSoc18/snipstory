@@ -62,10 +62,7 @@ class AddStories extends React.Component {
     return (
         <div className="page">
             <Navbar />
-            <h1>Voeg een verhaal toe</h1>
-            <div>
-                <p> Hi, {user.displayName}</p>
-            </div>
+
 
             <form onSubmit={this.props.handleSubmit(({id,...fields}) => {
                 let o = firebaseDatabase.ref('stories/');
@@ -79,16 +76,21 @@ class AddStories extends React.Component {
             })
             }>
             <div className="general-container">
-                <div>
-                    <Field
-                        name="id"
-                        component={FormField}
-                        type="text"
-                        label="Referentie nummer"
-                        required
-                    />
-                </div>
-                    <div>
+                <div className="form-box container">
+                    <h1>Voeg een verhaal toe</h1>
+                    <div className="row">
+                        <div className="col-md-4">
+                        <Field
+                            name="id"
+                            component={FormField}
+                            type="text"
+                            label="Referentie nummer"
+                            required
+                        />
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
                         <Field
                             name="title"
                             component={FormField}
@@ -97,8 +99,20 @@ class AddStories extends React.Component {
                             placeholder="vb. Gerard Vanoosthuyze"
                             required
                         />
+                        </div>
+                        <div className="col-md-6">
+                        <Field
+                            name="nationality"
+                            component={FormField}
+                            type="text"
+                            label="Nationaliteit"
+                            placeholder="vb. Belg"
+                            required
+                        />
+                        </div>
                     </div>
-                    <div>
+                    <div className="row">
+                        <div className="col-md">
                         <Field
                             name="summary"
                             component={FormField}
@@ -107,39 +121,31 @@ class AddStories extends React.Component {
                             placeholder=""
                             required
                         />
+                        </div>
                     </div>
-                    <div>
-                        <Field
-                            name="source"
-                            component={FormField}
-                            type="text"
-                            label="Bron"
-                            placeholder=""
-                            required
-                        />
-                    </div>
-                    <div>
+                    <div className="row">
+                        <div className="col-md-5">
                         <Field
                             name="dayOfBirth"
                             component={FormField}
-                            type="text"
-                            label="Geboorte datum"
+                            type="date"
+                            label="Geboorte&#8239;datum"
                             placeholder="vb. 24/05/1905"
                             required
                         />
-                    </div>
-                    <div>
+                        </div>
+                        <div className="col-md-5">
                         <Field
                             name="dayOfDeath"
                             component={FormField}
-                            type="text"
-                            label="Datum van overlijden"
+                            type="date"
+                            label="Datum&#8239;van&#8239;overlijden"
                             placeholder="vb. 21/04/1963"
 
                             required
                         />
-                    </div>
-                    <div>
+                        </div>
+                        <div className="col-md-2">
                         <Field
                             name="age"
                             component={FormField}
@@ -148,8 +154,10 @@ class AddStories extends React.Component {
                             placeholder="vb. 23"
                             required
                         />
+                        </div>
                     </div>
-                    <div>
+                    <div  className="row">
+                        <div className="col-md-6">
                         <Field
                             name="level"
                             component={FormField}
@@ -158,8 +166,9 @@ class AddStories extends React.Component {
                             placeholder="vb. 3-4e leerjaar"
                             required
                         />
-                    </div>
-                    <div>
+                        </div>
+                        <div className="col-md-6">
+                        <label>Moeilijkheidsgraad</label>
                         <Field
                             name="difficulty"
                             component="select"
@@ -173,9 +182,10 @@ class AddStories extends React.Component {
                         <option value="rather difficult">Eerder moeilijk</option>
                         <option value="difficult">Moeilijk</option>
                         </Field>
-
+                        </div>
                     </div>
-                    <div>
+                    <div className="row">
+                        <div className="col">
                         <Field
                             name="creationTips"
                             component={FormField}
@@ -184,8 +194,10 @@ class AddStories extends React.Component {
                             placeholder="vb. monument maken in plasticine"
                             required
                         />
+                        </div>
                     </div>
-                    <div>
+                    <div className="row">
+                        <div className="col">
                         <Field
                             name="link"
                             component={FormField}
@@ -194,29 +206,33 @@ class AddStories extends React.Component {
                             placeholder="vb. www.museum.be"
                             required
                         />
+                        </div>
                     </div>
-                    <div>
+                    <div className="row">
+                        <div className="col">
                         <Field
-                            name="nationality"
+                            name="source"
                             component={FormField}
                             type="text"
-                            label="Nationaliteit"
-                            placeholder="vb. Belg"
+                            label="Bron"
+                            placeholder=""
                             required
                         />
+                        </div>
                     </div>
-                    <div>
+                    <div className="row">
+                        <div className="col">
                         <Field
                             name="copyright"
                             component={FormField}
                             type="checkbox"
                             label="Copyright"
-                        />
+                        />                        
+                        </div>
                     </div>
 
-                    <Button type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
-
-                <Button onClick={logout}>Uitloggen</Button>
+                    <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
+                </div>
             </div>
             </form>
             <Footer />

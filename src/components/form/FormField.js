@@ -8,9 +8,12 @@ const FormField = ({
   placeholder,
   meta: { asyncValidating, touched, error },
   required = false
-}) =>
-  <div className="form-field">
-    <label>{label}</label>
+}) => {
+  let className = "";
+  if (type == "checkbox") className = "checkbox-label";
+  
+return <div className="form-field">
+    <label className={className}>{label}</label>
     <input
       className="form-field__input"
       {...input}
@@ -24,5 +27,5 @@ const FormField = ({
         {error}
       </span>}
   </div>;
-
+}
 export default FormField;

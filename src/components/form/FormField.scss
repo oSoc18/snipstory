@@ -1,6 +1,6 @@
 @import '../../variables.scss';
 
-.form-field__input {
+.form-field__input, select {
   font-family: $brand-font-stack;
   color: black;
   background-color: white;
@@ -11,6 +11,8 @@
   border: 1px $brand-blue solid;
   height: 3rem;
   padding: 0.3rem 0.6rem;
+  width: 100%;
+  margin: 0;
   &::placeholder {
     color: $brand-blue--light;
   }
@@ -20,6 +22,14 @@
   border-radius: 2rem;
   padding: 1rem 1.5rem;
 }
-label{
-  display: block;
+.checkbox-label{
+  display: inline;
+  padding: 0 0 0 5px;
+  margin: 0;
+  width: auto;
+}
+.checkbox-label + input{
+  display: inline;
+  width: auto;
+  height: auto;
 }

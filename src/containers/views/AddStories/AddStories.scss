@@ -1,1 +1,34 @@
 @import '../../../variables.scss';
+
+.general-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form-box{
+    display: block;
+    position: relative;
+    width: 60%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    background: #fff;
+    box-shadow: 4px 3px 39px -1px rgba(0,0,0,0.62);
+    padding: 2rem;
+}
+.submit_button{
+    display: flex;
+    font-weight: 400;
+    font-size: 20px;
+    padding: 0.6rem 1rem;
+    margin: 17px auto 10px auto;
+}
+.label-inline>*{
+    display: inline-block;
+}
+.row{
+    margin-top: 15px;
+}
+h1{
+    padding-bottom: 35px;
+}
