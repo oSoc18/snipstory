@@ -6,6 +6,7 @@ import { firebaseDatabase, firebaseStorage } from '../../../helpers/firebase';
 import FormField from '../../../components/form/FormField';
 import Button from '../../../components/button/Button';
 import FileField from '../../../components/filefield/FileField';
+import moment from 'moment';
 import { resolve } from 'url';
 
 class AddImageQuiz extends React.Component {
@@ -34,6 +35,7 @@ class AddImageQuiz extends React.Component {
                   .ref()
                   .child(user.uid)
                   .child("story")
+                  .child(moment().format('YYYYMMDD_hhmmss'))
                   .child(names[index])
                   .put(file);
               }
