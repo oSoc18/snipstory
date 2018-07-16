@@ -1,15 +1,69 @@
 .register-title {
   color: #3274ff;
-  text-align: center;
   font-size: 2.5rem;
   font-family: Poppins, -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI", Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  font-weight: 600; }
+  font-weight: 600;
+  text-align: left;
+  padding: 1rem 0 2rem 10px; }
 
 .name-container {
   display: flex; }
 
-.password-container {
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.register-box {
+  position: relative;
+  display: inline-block;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  background: #fff;
+  box-shadow: 4px 3px 39px -1px rgba(0, 0, 0, 0.62);
+  padding: 2rem; }
+
+.submit_button {
+  display: flex;
+  font-weight: 400;
+  font-size: 20px;
+  padding: 0.6rem 1rem;
+  align-self: flex-end;
+  margin: 17px 0 10px auto; }
+
+.flex_container_vertical {
+  display: flex;
+  flex-direction: column; }
+
+.flex_container_vertical > div {
+  margin-bottom: 17px; }
+
+.flex_container_horizontal {
+  display: flex;
+  flex-direction: row; }
+
+.name-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+
+.name_in {
   display: flex; }
 
-.etc-container {
-  display: flex; }
+.submit_div {
+  text-align: right;
+  margin: 0;
+  font-size: 0.6rem; }
+
+input {
+  margin: 0 10px;
+  width: 95%; }
+
+label {
+  padding-left: 16px; }
+
+.notice {
+  padding-left: 16px;
+  font-size: 0.6rem;
+  color: #555; }

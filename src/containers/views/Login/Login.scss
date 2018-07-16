@@ -2,19 +2,21 @@
 
 /*LOGIN*/
 
-.login-big-container {
+.container{
   display: flex;
-  flex-flow: column;
-  align-items: center;
   justify-content: center;
-  height: 100vh;
+  align-items: center;
 }
 
-.login-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 70vw;
+.login-box {
+  position: relative;
+  display: inline-block;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 100px;
+  background: #fff;
+  box-shadow: 4px 3px 39px -1px rgba(0,0,0,0.62);
+  padding: 2rem;
 }
 
 .login-small-container {
@@ -36,8 +38,8 @@
 }
 
 .input-field {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .submit {
@@ -49,14 +51,17 @@
   margin-top: 1.5rem;
 }
 
-.login-button {
-  height: 5rem;
+.submit_button{
   display: flex;
-  justify-content: center;
+  font-weight: 400;
+  font-size: 20px;
+  padding: 0.6rem 1rem;
+  margin: 17px auto 10px auto;
 }
-
-.login-text {
-  margin-top: -0.6rem;
+.submit_div{
+  text-align: center;
+  margin: 0;
+  font-size: 0.6rem;
 }
 
 .form-field__error {
@@ -65,4 +70,7 @@
   font-size: 1.5rem;
   text-align: center;
   margin-top: 2rem;
+}
+input{
+  width: 95%;
 }
