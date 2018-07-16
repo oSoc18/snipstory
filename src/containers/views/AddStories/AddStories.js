@@ -151,7 +151,7 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="number"
                             label="Leeftijd"
-                            placeholder="vb. 23"
+                            placeholder="23"
                             required
                         />
                         </div>
