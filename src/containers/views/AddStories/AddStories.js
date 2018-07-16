@@ -79,12 +79,12 @@ class AddStories extends React.Component {
                 <div className="form-box container">
                     <h1>Voeg een verhaal toe</h1>
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-md-3">
                         <Field
                             name="id"
                             component={FormField}
                             type="text"
-                            label="Referentie nummer"
+                            label="Referentie&#8239;nummer"
                             required
                         />
                         </div>
