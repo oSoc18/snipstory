@@ -35,6 +35,11 @@ class StoryDashboard extends React.Component {
                 size="small">
                     Add Image quiz
             </Button>
+            <Button
+                to={`/teacher/dashboard/${story.id}/addquiz/`}
+                size="small">
+                    Add quiz
+            </Button>
 
             {story.modules && Object.keys(story.modules).map((moduleId, index) => {
                 let module = story.modules[moduleId];
@@ -57,6 +62,11 @@ class StoryDashboard extends React.Component {
                             { module.text }
                           </p>
                           { module.resources.map((url, index) => <img key={moduleId} src={url} height="70" width="70" key={index}/>) }
+                        </div>);
+                    case "quiz":
+                        return (<div>
+                          <h3>Quiz</h3>
+                          <p> { module.text } </p>
                         </div>);
                     }
                 })
