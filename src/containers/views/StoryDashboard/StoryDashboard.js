@@ -25,16 +25,22 @@ class StoryDashboard extends React.Component {
             <Button to="/teacher/editstory" size="small">
                 Edit Story
             </Button>
-            <Button 
+            <Button
                 to={`/teacher/dashboard/${story.id}/addfunfact/`}
-                size="small">                    
+                size="small">
                     Add Fun fact
+            </Button>
+            <Button
+                to={`/teacher/dashboard/${story.id}/addimagequiz/`}
+                size="small">
+                    Add Image quiz
             </Button>
 
             {story.modules && Object.keys(story.modules).map((moduleId, index) => {
                 let module = story.modules[moduleId];
                 console.log(`module text ${module.text} ${module.type}`)
                 switch (module.contentType){
+                    // TODO set key={module.order}
                     case "funfact":
                         return (<div className="funfact-dashboard" key={moduleId}>
                             <h3>
@@ -43,6 +49,14 @@ class StoryDashboard extends React.Component {
                             <p>
                                 {module.text}
                             </p>
+                        </div>);
+                    case "imagequiz":
+                        return (<div>
+                          <h3>Image Quiz</h3>
+                          <p>
+                            { module.text }
+                          </p>
+                          { module.resources.map((url, index) => <img key={moduleId} src={url} height="70" width="70" key={index}/>) }
                         </div>);
                     }
                 })
