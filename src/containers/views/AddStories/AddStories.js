@@ -67,14 +67,38 @@ class AddStories extends React.Component {
                 <p> Hi, {user.displayName}</p>
             </div>
 
-            <form onSubmit={this.props.handleSubmit(({id,...fields}) => {
+            <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,...fields}) => {
                 let o = firebaseDatabase.ref('stories/');
 
-                o.child(id).set({
-                    id,
-                    general: {
+                const years = {
+                    thirdYear,
+                    fourthYear,
+                    fifthYear,
+                    sixthYear,
+                    firstYearSecondary,
+                    secondYearSecondary
+                }
+                //
+                // years.forEach((year) => {
+                //     if (!year) {
+                //         year = false;
+                //     }
+                //     return;
+                // })
+                console.log(years);
+
+
+
+                o.child(id).child("general").set({
+                        schoolYear: {
+                            thirdYear: thirdYear || false,
+                            fourthYear: fourthYear || false,
+                            fifthYear: fifthYear || false,
+                            sixthYear: sixthYear || false,
+                            firstYearSecondary: firstYearSecondary || false,
+                            secondYearSecondary: secondYearSecondary || false
+                        },
                         ...fields
-                    }
                 })
             })
             }>
@@ -149,16 +173,16 @@ class AddStories extends React.Component {
                             required
                         />
                     </div>
+                    <legend>Geschikt voor welk leerjaar?</legend>
                     <div>
-                        <Field
-                            name="level"
-                            component={FormField}
-                            type="text"
-                            label="Geschikte leerjaar"
-                            placeholder="vb. 3-4e leerjaar"
-                            required
-                        />
+                    <Field name="thirdYear" component={FormField} type="checkbox" label="Derde leerjaar" id="thirdYear"/>
+                    <Field name="fourthYear" component={FormField} type="checkbox" label="Vierde leerjaar" id="fourthYear"/>
+                    <Field name="fifthYear" component={FormField} type="checkbox" label="Vijfde leerjaar" id="fifthYear"/>
+                    <Field name="sixthYear" component={FormField} type="checkbox" label="Zesde leerjaar" id="sixthYear"/>
+                    <Field name="firstYearSecondary" component={FormField} type="checkbox" label="Eerste middelbaar" id="firstYearSecondary"/>
+                    <Field name="secondYearSecondary" component={FormField} type="checkbox" label="Tweede middelbaar" id="secondYearSecondary"/>
                     </div>
+
                     <div>
                         <Field
                             name="difficulty"
