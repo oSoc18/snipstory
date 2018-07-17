@@ -32,24 +32,6 @@ class AddStories extends React.Component {
         }
     }
 
-    // handleSubmit(e) {
-    //     e.preventDefault();
-    //     console.log(this.state.summary);
-    //
-    //     const storiesRef = firebase.firebaseDatabase().ref('stories');
-    //     const story = {
-    //         title: this.state.title,
-    //         summary: this.state.summary,
-    //         source: this.state.source
-    //     }
-    //     storiesRef.push(story);
-    //     this.setState({
-    //
-    //     })
-    //
-    //
-    // }
-
 
     render() {
         const {
