@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchStory } from '../../../redux/actions';
+import { fetchStory, deleteModule } from '../../../redux/actions';
 import Spinner from '../../../components/spinner/Spinner';
 import Button from '../../../components/button/Button'
 import './StoryDashboard.css';
@@ -13,7 +13,7 @@ class StoryDashboard extends React.Component {
     }
 
     render(){
-        const { story, isLoading } = this.props;
+        const { story, isLoading, deleteModule, currentlyDeletingId } = this.props;
 
         if (isLoading || !story ) {
             return <Spinner page size="large" />;
@@ -51,6 +51,10 @@ class StoryDashboard extends React.Component {
                             <h3>
                                 Funfact
                             </h3>
+                            <button
+                            disabled={currentlyDeletingId != null}
+                            onClick={() => deleteModule(story.id, moduleId)}
+                              >Delete</button>
                             <p>
                                 {module.text}
                             </p>
@@ -61,11 +65,19 @@ class StoryDashboard extends React.Component {
                           <p>
                             { module.text }
                           </p>
+                          <button
+                            disabled={currentlyDeletingId != null}
+                            onClick={() => deleteModule(story.id, moduleId)}
+                              >Delete</button>
                           { module.resources.map((url, index) => <img key={moduleId} src={url} height="70" width="70" key={index}/>) }
                         </div>);
                     case "quiz":
                         return (<div>
                           <h3>Quiz</h3>
+                          <button
+                            disabled={currentlyDeletingId != null}
+                            onClick={() => deleteModule(story.id, moduleId)}
+                              >Delete</button>
                           <p> { module.text } </p>
                         </div>);
                     }
@@ -78,4 +90,4 @@ class StoryDashboard extends React.Component {
 
 const mapStateToProps = state => state.story;
 
-export default connect(mapStateToProps, { fetchStory })(StoryDashboard);
+export default connect(mapStateToProps, { fetchStory, deleteModule })(StoryDashboard);

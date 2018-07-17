@@ -80,6 +80,9 @@ export const actionTypes = {
   fetchStoryStarted: 'FETCH_STORY_STARTED',
   fetchStoryFulFilled: 'FETCH_STORY_FULFILLED',
   fetchStoryRejected: 'FETCH_STORY_REJECTED',
+  deleteModuleStarted: 'DELETE_MODULE_STARTED',
+  deleteModuleFulFilled: 'DELETE_MODULE_FULFILLED',
+  deleteModuleRejected: 'DELETE_MODULE_REJECTED',
   clearState: 'CLEAR_STATE'
 };
 
@@ -147,6 +150,42 @@ export const fetchStoryRejected = err => ({
   type: actionTypes.fetchStoryRejected,
   err
 });
+
+export const deleteModuleStarted = moduleId => ({
+  type: actionTypes.deleteModuleStarted,
+  moduleId
+});
+
+export const deleteModuleFulFilled = moduleId => ({
+  type: actionTypes.deleteModuleFulFilled,
+  moduleId
+});
+
+export const deleteModuleRejected = error => ({
+  type: actionTypes.deleteModuleRejected,
+  error
+});
+
+export const deleteModule = (storyId, moduleId) => {
+  return dispatch => {
+    dispatch(deleteModuleStarted(moduleId));
+
+    firebaseDatabase
+      .ref("/stories")
+      .child(storyId)
+      .child("modules")
+      .child(moduleId)
+      .remove()
+      .then(story => {
+        dispatch(deleteModuleFulFilled(moduleId));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(deleteModuleRejected(err));
+      });
+  };
+};
+
 
 export const receiveClasses = classes => ({
   type: actionTypes.receiveClasses,
