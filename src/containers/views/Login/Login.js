@@ -58,10 +58,10 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
                 >
                   Login
                 </Button>
-                  <span>Heb je al een account?<br />
-                  <Link to="/teacher/login">Log hier in!</Link></span>
+                  <span>Wachtwoord vergeten?<br />
+                  <Link to="/teacher/resetpassword">Reset hier uw wachtwoord!</Link></span>
                 </div>
-        
+
 
             </form>
           </div>

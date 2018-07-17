@@ -50,7 +50,7 @@ class EditStory extends React.Component {
             }
         }
         // this.handleTag = this.handleTag.bind(this)
-        this.props.handleSubmit = this.props.handleSubmit.bind(this)
+        // this.props.handleSubmit = this.props.handleSubmit.bind(this)
     }
 
     handleTag(e) {
@@ -109,9 +109,6 @@ class EditStory extends React.Component {
                                 sixthYear,
                                 firstYearSecondary,
                                 secondYearSecondary
-                            },
-                            tags: {
-                                ...this.state.tags
                             },
                             ...fields
                     })
