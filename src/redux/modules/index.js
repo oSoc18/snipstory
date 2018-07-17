@@ -27,6 +27,6 @@ export const rootReducer = combineReducers({
   knutseltips,
   snipper,
   snippers,
-  stories
+  stories,
   story
 });

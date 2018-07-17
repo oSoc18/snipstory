@@ -77,13 +77,19 @@ export const actionTypes = {
   updateUsersStarted: 'UPDATE_USERS_STARTED',
   updateUsersFulfilled: 'UPDATE_USERS_FULFILLED',
   updateUsersRejected: 'UPDATE_USERS_REJECTED',
+
   clearState: 'CLEAR_STATE',
 
   //new actions
   fetchStoriesDashboardList: 'FETCH_STORIES_DASHBOARD_LIST',
   fetchStoriesDashboardListStarted: 'FETCH_STORIES_DASHBOARD_LIST_STARTED',
   fetchStoriesDashboardListFulfilled: 'FETCH_STORIES_DASHBOARD_LIST_FULFILLED',
-  fetchStoriesDashboardListRejected: 'FETCH_STORIES_DASHBOARD_LIST_REJECTED'
+  fetchStoriesDashboardListRejected: 'FETCH_STORIES_DASHBOARD_LIST_REJECTED',
+
+  fetchStoryStarted: 'FETCH_STORY_STARTED',
+  fetchStoryFulFilled: 'FETCH_STORY_FULFILLED',
+  fetchStoryRejected: 'FETCH_STORY_REJECTED',
+  clearState: 'CLEAR_STATE'
 
 };
 
@@ -120,6 +126,37 @@ export const fetchRandomStories = () => {
       });
   };
 };
+
+export const fetchStory = storyId => {
+  return dispatch => {
+    dispatch(fetchStoryStarted());
+    console.log(`The story id is ${storyId}`)
+    return firebaseDatabase
+      .ref("/stories")
+      .child(storyId)
+      .once('value')
+      .then(story => {
+        dispatch(fetchStoryFulFilled(story.val()));
+      })
+      .catch(err => {
+        dispatch(fetchStoryRejected(err));
+      });
+  };
+};
+
+export const fetchStoryStarted = () => ({
+  type: actionTypes.fetchStoryStarted
+});
+
+export const fetchStoryFulFilled = story => ({
+  type: actionTypes.fetchStoryFulFilled,
+  story
+});
+
+export const fetchStoryRejected = err => ({
+  type: actionTypes.fetchStoryRejected,
+  err
+});
 
 export const receiveClasses = classes => ({
   type: actionTypes.receiveClasses,
