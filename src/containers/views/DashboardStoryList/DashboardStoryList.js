@@ -10,7 +10,8 @@ import { connect } from 'react-redux';
 import { history } from '../../../redux/store';
 import {
     fetchStoriesDashboardList,
-    deleteStory
+    deleteStory,
+    fetchStory
  } from '../../../redux/actions';
 
 
@@ -71,8 +72,13 @@ class DashboardStoryList extends React.Component {
                                 </div>
 
                                 <div className="flex">
-                                <Button>Aanpassen</Button>
-                                <Button  onClick={(e) => {
+                                <Button
+                                onClick={(e) => {
+                                    this.props.fetchStory(story.id)
+                                    .then(() => history.push(`/dashboardstorylist/${story.id}/edit`));
+                                }}
+                                >Aanpassen</Button>
+                                <Button onClick={(e) => {
                                     if (window.confirm('Are you sure you wish to delete this item?')) deleteSt(story) } }>
                                 Verwijder
                                 </Button>
@@ -97,5 +103,6 @@ class DashboardStoryList extends React.Component {
 const mapStateToProps = state => ({...state.stories});
 export default connect(mapStateToProps,
     {fetchStoriesDashboardList,
-        deleteStory
+        deleteStory,
+        fetchStory
     })(DashboardStoryList);
