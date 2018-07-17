@@ -24,9 +24,16 @@ import SnipperDetail from './views/SnipperDetail/SnipperDetail';
 import Share from './views/Share/Share';
 import deepEqual from 'deep-equal';
 import ScrollToTop from '../components/util/ScrollToTop';
+
 import AddStories from './views/AddStories/AddStories';
 import DashboardStoryList from './views/DashboardStoryList/DashboardStoryList';
+import EditStory from './views/EditStory/EditStory';
+
+import StoryDashboard from './views/StoryDashboard/StoryDashboard';
+
+
 import './App.css';
+import AddFunfact from './views/AddFunfact/AddFunfact';
 
 class App extends Component {
   componentDidMount() {
@@ -115,7 +122,29 @@ class App extends Component {
                 exact
                 render={props => <DashboardStoryList user={user} {...props} />}
               />
-
+              <Route
+                path="/dashboardstorylist/:storyId/edit"
+                exact
+                render={props => <EditStory user={user} {...props} />}
+              />
+              <Route
+                path="/teacher/dashboard/:storyId/addfunfact"
+                exact
+                render={props =>
+                  <AddFunfact
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <Route
+                path="/teacher/dashboard/:storyId"
+                exact
+                render={props =>
+                  <StoryDashboard
+                    user={user}
+                    {...props}
+                  />}
+              />
               <ProtectedRoute
                 path="/teacher/stories/create"
                 isAuthorized={isAuthorized}
