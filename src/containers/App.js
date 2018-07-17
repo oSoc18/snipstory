@@ -11,6 +11,7 @@ import ProtectedRoute from '../components/auth/ProtectedRoute';
 import Home from './views/Home/Home';
 import TeacherArea from './views/TeacherArea';
 import Login from '././views/Login/Login';
+import ResetPassword from './views/ResetPassword/ResetPassword';
 import Register from './views/Register/Register';
 import CreateRoom from './views/CreateRoom';
 import KnutselTips from './views/KnutselTips/KnutselTips';
@@ -166,6 +167,14 @@ class App extends Component {
                 exact
                 render={props =>
                   <Login user={user} showToast={showToast} {...props} />}
+              />
+              <ProtectedRoute
+                path="/teacher/resetpassword"
+                isAuthorized={!isAuthorized}
+                redirectUrl="/teacher"
+                exact
+                render={props =>
+                  <ResetPassword user={user} showToast={showToast} {...props} />}
               />
               <Route render={() => <Redirect to="/" />} />
             </Switch>
