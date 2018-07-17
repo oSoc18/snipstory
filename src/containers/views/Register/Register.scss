@@ -8,56 +8,24 @@
   text-align: left;
   padding: 1rem 0 2rem 10px;
 }
-.container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 .register-box{
+  display: block;
   position: relative;
-  display: inline-block;
+  width: 50%;
   margin: auto;
   margin-top: 50px;
   margin-bottom: 100px;
   background: #fff;
   box-shadow: 4px 3px 39px -1px rgba(0,0,0,0.62);
   padding: 2rem;
-
 }
 .submit_button{
-  display: flex;
   font-weight: 400;
   font-size: 20px;
   padding: 0.6rem 1rem;
-  align-self: flex-end;
-  margin: 17px 0 10px auto;
+  display: inline-block;
+  margin-left: auto;
 }
-.flex_container_vertical{
-  display: flex;
-  flex-direction: column;
-}
-.flex_container_vertical > div{
-  margin-bottom: 17px;
-}
-.flex_container_horizontal{
-  display: flex;
-  flex-direction: row;
-}
-.name-container{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-.name_in{
-  display: flex;
-}
-.submit_div{
-  text-align: right;
-  margin: 0;
-  font-size: 0.6rem;
-}
-
-
 label{
   padding-left: 16px;
 }
@@ -65,4 +33,7 @@ label{
   padding-left: 16px;
   font-size: 0.6rem;
   color: #555;
+}
+.login-span{
+  text-align: center;
 }

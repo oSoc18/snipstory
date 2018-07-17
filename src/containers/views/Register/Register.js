@@ -41,8 +41,8 @@ const Register = ({
   return (
     <div className="page">
       <Navbar/>
-      <div className="container">
-      <div className="register-box">
+      <div className="general-container">
+      <div className="register-box container">
             <form
               onSubmit={handleSubmit(
                 ({ name, email, password, typeOfUser, institution, password1, ...rest }) => {
@@ -83,96 +83,107 @@ const Register = ({
                   });
               })}
             > 
-            <div className="flex_container_vertical">              
-            <h1 className="register-title">Registreer</h1>
-
-              {/*<div className="toggle-container">
-                  <Field
-                    name="typeOfUser"
-                    component="select"
-                    label="Type of account"
-                    onChange={(e, value) => {
-                      change('typeOfUser', value);
-                      console.log(value)
-                    }}
-                    required
-                  >
-                    <option value="teacher">Teacher</option>
-                    <option value="contentPartner">Content Partner</option>
-                  </Field>
-                  </div>*/}
-              <div className="name-container">
-                  <Field
-                    name="voornaam"
-                    component={FormField}
-                    type="text"
-                    label="Voornaam"
-                    className="name_in"
-                    required
-                  />
-                  <Field
-                    name="name"
-                    component={FormField}
-                    type="text"
-                    label="Familienaam"
-                    className="name_in"
-                    required
-                  />
-              </div>
-
-              <div className="etc-container">
-                  <Field
-                    name="email"
-                    component={FormField}
-                    type="email"
-                    label="Email"
-                    required
-                  />
+              <div className="row">
+                <div className="col">
+                  <h1 className="register-title">Registreer</h1>
                 </div>
-                <div>
-                  <Field
-                  name="institution"
-                  label={selectedTypeOfUsers == "contentPartner" ?
-                  "Institution": "School"}
-                  type="text"
-                  component={FormField} 
-                  required
-                  />
+              </div>
+                {/*<div className="toggle-container">
+                    <Field
+                      name="typeOfUser"
+                      component="select"
+                      label="Type of account"
+                      onChange={(e, value) => {
+                        change('typeOfUser', value);
+                        console.log(value)
+                      }}
+                      required
+                    >
+                      <option value="teacher">Teacher</option>
+                      <option value="contentPartner">Content Partner</option>
+                    </Field>
+                    </div>*/}
+                <div className="row">
+                    <div className="col-md-6">
+                      <Field
+                        name="voornaam"
+                        component={FormField}
+                        type="text"
+                        label="Voornaam"
+                        className="name_in"
+                        required
+                      />
+                    </div>
+                    <div className="col-md-6">
+                      <Field
+                        name="name"
+                        component={FormField}
+                        type="text"
+                        label="Familienaam"
+                        className="name_in"
+                        required
+                      />
+                    </div>
                 </div>
-              <div className="password-container ">
-                  <Field 
-                    name="password"
-                    component={FormField}
-                    type="password"
-                    label="Wachtwoord"
-                  />
-                  <p className="notice">Password must contain at least 8 characters</p>
-              <div>
-                {selectedTypeOfUsers == 'contentPartner' ? 
-                    (ContentPartnerOnly): undefined}
-              </div>
-              {error &&
-                <div>
-                  {error}
-                </div>}
-               
-              </div>
-              <div className="submit_div">
+                <div className="row">
+                  <div className="col">
+                    <Field
+                    name="institution"
+                    label={selectedTypeOfUsers == "contentPartner" ?
+                    "Institution": "School"}
+                    type="text"
+                    component={FormField} 
+                    required
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col">
+                    <Field
+                      name="email"
+                      component={FormField}
+                      type="email"
+                      label="Email"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-md-6">
 
-              <Button
-                className="submit_button"
-                type="submit"
-                disabled={pristine || submitting}
-              >
-                Submit
-              </Button>
-                <span>Heb je al een account?<br />
-                <Link to="/teacher/login">Log hier in!</Link></span>
-              </div>
-              </div>
+                    <Field 
+                      name="password"
+                      component={FormField}
+                      type="password"
+                      label="Wachtwoord"
+                    />
+                    <p className="notice">Password must contain at least 8 characters</p>
+                    <div>
+                      {selectedTypeOfUsers == 'contentPartner' ? 
+                          (ContentPartnerOnly): undefined}
+                    </div>
+                    {error &&
+                      <div>
+                        {error}
+                      </div>}
+                  </div>
+                </div>
+                <div className="row justify-content-center">
+                  <div className="col-md-12">
+                    <Button
+                      className="submit_button"
+                      type="submit"
+                      disabled={pristine || submitting}
+                    >
+                      Submit
+                    </Button>
+                    <span className="login-span">Heb je al een account?<br />
+                    <Link to="/teacher/login">Log hier in!</Link></span>
+                  </div>
+                </div>
 
             </form>
-        </div>
+          </div>
         </div>
         <Footer/>
     </div>
