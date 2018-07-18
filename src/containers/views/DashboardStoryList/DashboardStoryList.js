@@ -3,7 +3,6 @@ import Button from '../../../components/button-small/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Spinner from '../../../components/spinner/Spinner';
-import PopUp from 'reactjs-popup';
 
 
 import { connect } from 'react-redux';
@@ -54,11 +53,15 @@ class DashboardStoryList extends React.Component {
                 <h1>Beheer uw verhalen</h1>
                 <div className="row">
                 {stories.map(story => {
+                    if (story.general.userId === user.uid) {
+                        console.log(story.general.userId)
+                        console.log(user.uid)
+
                     return (
                         <div
-                            key={story.id}
+                            key={story.general.id}
                             className="storyCards"
-                            id = {story.id}
+                            id = {story.general.id}
                             // onClick= { => {
                             //     history.push('/stories/' + story.id);
                             // }}
@@ -90,7 +93,7 @@ class DashboardStoryList extends React.Component {
 
                             </div>
                         </div>
-                    );
+                    )}
                 })}
                 </div>
                 <Footer />
