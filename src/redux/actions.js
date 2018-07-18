@@ -77,6 +77,15 @@ export const actionTypes = {
   updateUsersStarted: 'UPDATE_USERS_STARTED',
   updateUsersFulfilled: 'UPDATE_USERS_FULFILLED',
   updateUsersRejected: 'UPDATE_USERS_REJECTED',
+
+  clearState: 'CLEAR_STATE',
+
+  //new actions
+  fetchStoriesDashboardList: 'FETCH_STORIES_DASHBOARD_LIST',
+  fetchStoriesDashboardListStarted: 'FETCH_STORIES_DASHBOARD_LIST_STARTED',
+  fetchStoriesDashboardListFulfilled: 'FETCH_STORIES_DASHBOARD_LIST_FULFILLED',
+  fetchStoriesDashboardListRejected: 'FETCH_STORIES_DASHBOARD_LIST_REJECTED',
+
   fetchStoryStarted: 'FETCH_STORY_STARTED',
   fetchStoryFulFilled: 'FETCH_STORY_FULFILLED',
   fetchStoryRejected: 'FETCH_STORY_REJECTED',
@@ -84,6 +93,7 @@ export const actionTypes = {
   deleteModuleFulFilled: 'DELETE_MODULE_FULFILLED',
   deleteModuleRejected: 'DELETE_MODULE_REJECTED',
   clearState: 'CLEAR_STATE'
+
 };
 
 export const showToast = toast => ({ type: actionTypes.showToast, toast });
@@ -124,7 +134,7 @@ export const fetchStory = storyId => {
   return dispatch => {
     dispatch(fetchStoryStarted());
     console.log(`The story id is ${storyId}`)
-    firebaseDatabase
+    return firebaseDatabase
       .ref("/stories")
       .child(storyId)
       .once('value')
@@ -924,3 +934,57 @@ export const updateUsersRejected = error => ({
 export const clearState = () => ({
   type: actionTypes.clearState
 });
+
+
+// new actionFunctions
+
+export const fetchStoriesDashboardListStarted = () => ({
+    type: actionTypes.fetchStoriesDashboardListStarted
+});
+
+export const fetchStoriesDashboardListFulfilled = stories => ({
+    type: actionTypes.fetchStoriesDashboardListFulfilled,
+    stories
+});
+
+export const fetchStoriesDashboardListRejected = error => ({
+    type: actionTypes.fetchStoriesDashboardListRejected,
+    error
+})
+
+export const fetchStoriesDashboardList = () => {
+    return dispatch => {
+        dispatch(fetchStoriesDashboardListStarted());
+        firebaseDatabase
+            .ref('/stories')
+            .once('value')
+            .then(stories => {
+                const val = stories.val();
+                const keys = Object.keys(val);
+                dispatch(fetchStoriesDashboardListFulfilled(keys.map(id => val[id])));
+            })
+            .catch(err => {
+                dispatch(fetchStoriesDashboardListRejected(err));
+            });
+    };
+};
+
+export const deleteStory = storyObj => {
+    return (dispatch, getState) => {
+        Promise.all([
+            firebaseDatabase.ref(`/stories/${storyObj.id}`).remove(),
+        ])
+        .then(() => {
+            dispatch(
+                showToast({
+                    text: `Het verhaal van "${storyObj.general.title}" werd verwijderd`
+                })
+            );
+        })
+        .catch(_ =>
+          showToast({
+            text: `Verhaal kon niet verwijderd worden, probeer het opnieuw`
+          })
+        );
+    }
+}

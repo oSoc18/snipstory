@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../../components/button/Button';
+import SmallButton from '../../../components/button-small/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
@@ -27,28 +28,34 @@ class AddStories extends React.Component {
             creationTips:"",
             link:"",
             nationality:"",
-
-
+            tags: {
+                poperinge: false,
+                brugge: false,
+                ieper: false,
+                food: false,
+                sport: false,
+                transportation: false
+            }
         }
     }
 
-    // handleSubmit(e) {
-    //     e.preventDefault();
-    //     console.log(this.state.summary);
-    //
-    //     const storiesRef = firebase.firebaseDatabase().ref('stories');
-    //     const story = {
-    //         title: this.state.title,
-    //         summary: this.state.summary,
-    //         source: this.state.source
-    //     }
-    //     storiesRef.push(story);
-    //     this.setState({
-    //
-    //     })
-    //
-    //
-    // }
+    handleTag(e) {
+        e.preventDefault;
+        console.log(e.target.value);
+
+        let tags = Object.keys(this.state.tags);
+        let newState = Object.assign({}, this.state);
+        for(let i = 0; i < tags.length; i++) {
+
+            if(e.target.value === tags[i]) {
+                let tag = tags[i];
+                newState.tags[e.target.value] = !newState.tags[e.target.value]
+                this.setState(newState)
+
+            }
+        }
+        console.log(this.state.tags);
+        }
 
 
     render() {
@@ -62,16 +69,35 @@ class AddStories extends React.Component {
     return (
         <div className="page">
             <Navbar />
+            <h1>Voeg een verhaal toe</h1>
 
-
-            <form onSubmit={this.props.handleSubmit(({id,...fields}) => {
+            <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,...fields}) => {
                 let o = firebaseDatabase.ref('stories/');
 
-                o.child(id).set({
-                    id,
-                    general: {
+
+
+                o.child(id).child("general").set({
+                        schoolYear: {
+                            thirdYear: thirdYear || false,
+                            fourthYear: fourthYear || false,
+                            fifthYear: fifthYear || false,
+                            sixthYear: sixthYear || false,
+                            firstYearSecondary: firstYearSecondary || false,
+                            secondYearSecondary: secondYearSecondary || false
+                        },
+                        tags: {
+                            locations: {
+                                poperinge: this.state.tags.poperinge,
+                                brugge: this.state.tags.brugge,
+                                ieper: this.state.tags.ieper
+                            },
+                            categories: {
+                                food: this.state.tags.food,
+                                sport: this.state.tags.sport,
+                                transportation: this.state.tags.transportation
+                            }
+                        },
                         ...fields
-                    }
                 })
             })
             }>
@@ -156,19 +182,18 @@ class AddStories extends React.Component {
                         />
                         </div>
                     </div>
-                    <div  className="row">
-                        <div className="col-md-6">
-                        <Field
-                            name="level"
-                            component={FormField}
-                            type="text"
-                            label="Geschikte leerjaar"
-                            placeholder="vb. 3-4e leerjaar"
-                            required
-                        />
-                        </div>
-                        <div className="col-md-6">
-                        <label>Moeilijkheidsgraad</label>
+
+                    <div>
+                    <legend>Geschikt voor welk leerjaar?</legend>
+                    <Field name="thirdYear" component={FormField} type="checkbox" label="Derde leerjaar" id="thirdYear"/>
+                    <Field name="fourthYear" component={FormField} type="checkbox" label="Vierde leerjaar" id="fourthYear"/>
+                    <Field name="fifthYear" component={FormField} type="checkbox" label="Vijfde leerjaar" id="fifthYear"/>
+                    <Field name="sixthYear" component={FormField} type="checkbox" label="Zesde leerjaar" id="sixthYear"/>
+                    <Field name="firstYearSecondary" component={FormField} type="checkbox" label="Eerste middelbaar" id="firstYearSecondary"/>
+                    <Field name="secondYearSecondary" component={FormField} type="checkbox" label="Tweede middelbaar" id="secondYearSecondary"/>
+                    </div>
+
+                    <div>
                         <Field
                             name="difficulty"
                             component="select"
@@ -227,12 +252,37 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="checkbox"
                             label="Copyright"
-                        />                        
+                        />
                         </div>
                     </div>
+                    <div>
+                        <Field
+                            name="visible"
+                            component={FormField}
+                            type="checkbox"
+                            label="Zichtbaar"
+                        />
+                    </div>
+
+                    <div>
+                    <span>Belangrijke locaties</span>
+
+                    <SmallButton type="button" className={this.state.tags.brugge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="brugge">Brugge</SmallButton>
+                    <SmallButton type="button" className={this.state.tags.ieper ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="ieper">Ieper</SmallButton>
+                    <SmallButton type="button" className={this.state.tags.poperinge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="poperinge">Poperinge</SmallButton>
+
+                    </div>
+                    <div>
+                    <span>Categorie</span>
+
+                    <SmallButton type="button" className={this.state.tags.food ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="food">Voedsel</SmallButton>
+                    <SmallButton type="button" className={this.state.tags.sport ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="sport">Sport</SmallButton>
+                    <SmallButton type="button" className={this.state.tags.transportation ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="transportation">Transport</SmallButton>
+
+                    </div>
+
 
                     <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
-                </div>
             </div>
             </form>
             <Footer />

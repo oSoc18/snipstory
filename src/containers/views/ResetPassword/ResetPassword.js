@@ -5,12 +5,16 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { Link } from 'react-router-dom';
 
 import FormField from '../../../components/form/FormField';
-import './Login.css';
+import './ResetPassword.css';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer.js';
 
+// resetPassword(e) {
+//     e.preventDefault;
+//
+// }
 
-const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
+const ResetPassword = ({ pristine, submitting, handleSubmit, error, showToast }) => {
   return (
     <div className="page">
       <Navbar />
@@ -19,20 +23,25 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
           <div className="login-small-container">
             <h1 className="login-title">Inloggen</h1>
             <form
-              onSubmit={handleSubmit(({ email, password }) => {
+              onSubmit={handleSubmit(({ email }) => {
                 return firebaseAuth
-                  .signInWithEmailAndPassword(email, password)
-                  .catch(_ => {
-                    throw new SubmissionError({
-                      _error: 'Sorry, e-mailadres of paswoord is niet correct'
-                    });
-                  });
-              })}
+                    .sendPasswordResetEmail(email)
+                    .then(function() {
+                        showToast({
+                            text: `We hebben naar "${email}" een link gestuurd om uw wachtwoord te resetten.`
+                        })
+                    })
+                    .catch(function(error) {
+                      // Error occurred. Inspect error.code.
+                    })
+                  })
+              }
             >
               {error &&
                 <div className="form-field__error">
                   {error}
                 </div>}
+
               <div className="input-field">
                 <Field
                   name="email"
@@ -41,28 +50,15 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
                   label="E-mailadres"
                 />
               </div>
-              <div className="input-field">
-                <Field
-                  name="password"
-                  component={FormField}
-                  type="password"
-                  label="Wachtwoord"
-                />
-              </div>
               <div className="submit_div">
-
                 <Button
                   className="submit_button"
                   type="submit"
                   disabled={pristine || submitting}
                 >
-                  Login
+                  Reset uw wachtwoord
                 </Button>
-                  <span>Wachtwoord vergeten?<br />
-                  <Link to="/teacher/resetpassword">Reset hier uw wachtwoord!</Link></span>
                 </div>
-
-
             </form>
           </div>
         </div>
@@ -71,4 +67,4 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
     </div>
   );
 };
-export default reduxForm({ form: 'login' })(Login);
+export default reduxForm({ form: 'resetPassword' })(ResetPassword);
