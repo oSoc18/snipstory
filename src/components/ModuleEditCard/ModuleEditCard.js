@@ -10,18 +10,19 @@ export default class ModuleEditCard extends React.Component {
       onOrderUp,
       order,
       onOrderDown,
+      deleteDisabled,
+      orderDisabled,
       text } = this.props;
 
     return <div>
-      <div>{order}</div>
-      <h2 className="type-title">{ type }</h2>
+      <h2 className="type-title">({order + 1}) { type }</h2>
       <div>
         { text }
       </div>
       <div className="module-button-container">
-        <button className="module-delete" onClick={(e) => onDelete(e)}>delete</button>
-        <button className="module-up" onClick={(e) => onOrderUp(e)}>Up</button>
-        <button className="module-down" onClick={(e) => onOrderDown(e)}>Down</button>
+        <button disabled={deleteDisabled} className="module-delete" onClick={(e) => onDelete(e)}>delete</button>
+        <button disabled={orderDisabled} className="module-up" onClick={(e) => onOrderUp(e)}>Up</button>
+        <button disabled={orderDisabled} className="module-down" onClick={(e) => onOrderDown(e)}>Down</button>
       </div>
     </div>;
   }

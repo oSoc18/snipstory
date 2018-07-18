@@ -83,6 +83,11 @@ export const actionTypes = {
   deleteModuleStarted: 'DELETE_MODULE_STARTED',
   deleteModuleFulFilled: 'DELETE_MODULE_FULFILLED',
   deleteModuleRejected: 'DELETE_MODULE_REJECTED',
+  uploadModuleStarted: 'UPLOAD_MODULE_STARTED',
+  uploadModuleFulFilled: 'UPLOAD_MODULE_FULFILLED',
+  uploadModuleRejected: 'UPLOAD_MODULE_REJECTED',
+  resetModulesOrder: 'RESET_MODULES_ORDER',
+  switchModules: 'SWITCH_MODULES',
   clearState: 'CLEAR_STATE'
 };
 
@@ -132,6 +137,7 @@ export const fetchStory = storyId => {
         dispatch(fetchStoryFulFilled(story.val()));
       })
       .catch(err => {
+        console.error(err);
         dispatch(fetchStoryRejected(err));
       });
   };
@@ -151,9 +157,8 @@ export const fetchStoryRejected = err => ({
   err
 });
 
-export const deleteModuleStarted = moduleId => ({
+export const deleteModuleStarted = () => ({
   type: actionTypes.deleteModuleStarted,
-  moduleId
 });
 
 export const deleteModuleFulFilled = moduleId => ({
@@ -168,7 +173,7 @@ export const deleteModuleRejected = error => ({
 
 export const deleteModule = (storyId, moduleId) => {
   return dispatch => {
-    dispatch(deleteModuleStarted(moduleId));
+    dispatch(deleteModuleStarted());
 
     firebaseDatabase
       .ref("/stories")
@@ -186,6 +191,74 @@ export const deleteModule = (storyId, moduleId) => {
   };
 };
 
+export const upOrder = (index) => {
+  return dispatch => {
+    if (index <= 0) return;
+    dispatch(switchModules(index, index - 1));
+  };
+};
+
+export const downOrder = (index) => {
+  return dispatch => {
+    dispatch(switchModules(index, index + 1));
+  };
+};
+
+export const storySaveModules = () => ({
+  type: actionTypes.storySaveStarted
+});
+
+export const switchModules = (indexA, indexB) => ({
+  type: actionTypes.switchModules,
+  indexA,
+  indexB // ofc | indexA - indexB | = 1
+});
+
+export const story = () => ({
+  type: actionTypes.storySaveStarted
+});
+
+export const storySaveModulesStarted = () => ({
+  type: actionTypes.storySaveModulesStarted
+});
+
+export const resetOrder = () => {
+  return dispatch => {
+    dispatch(resetModulesOrder());
+  };
+}
+
+export const resetModulesOrder = () => ({
+  type: actionTypes.resetModulesOrder
+});
+
+export const uploadModuleStarted = () => ({
+  type: actionTypes.uploadModuleStarted
+});
+
+export const uploadModuleFulFilled = () => ({
+  type: actionTypes.uploadModuleFulFilled
+});
+
+export const uploadModuleRejected = error => ({
+  type: actionTypes.uploadModuleRejected,
+  error
+});
+
+export const uploadModules = (storyId, modules) => {
+  return dispatch => {
+    dispatch(uploadModuleStarted());
+    Promise.all(modules.map((module, index) => firebaseDatabase
+      .ref(`/stories/${storyId}/modules/${module.id}`)
+      .child("order").set(index)
+    ))
+    .then(() => dispatch(uploadModuleFulFilled()))
+    .catch(error => {
+      console.log(error)
+      dispatch(uploadModuleRejected(error))}
+    );
+  };
+};
 
 export const receiveClasses = classes => ({
   type: actionTypes.receiveClasses,
