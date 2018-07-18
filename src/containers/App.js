@@ -11,6 +11,7 @@ import ProtectedRoute from '../components/auth/ProtectedRoute';
 import Home from './views/Home/Home';
 import TeacherArea from './views/TeacherArea';
 import Login from '././views/Login/Login';
+import ResetPassword from './views/ResetPassword/ResetPassword';
 import Register from './views/Register/Register';
 import CreateRoom from './views/CreateRoom';
 import KnutselTips from './views/KnutselTips/KnutselTips';
@@ -24,8 +25,14 @@ import SnipperDetail from './views/SnipperDetail/SnipperDetail';
 import Share from './views/Share/Share';
 import deepEqual from 'deep-equal';
 import ScrollToTop from '../components/util/ScrollToTop';
-import StoryDashboard from './views/StoryDashboard/StoryDashboard'
-import AddStories from './views/AddStories/AddStories'
+
+import AddStories from './views/AddStories/AddStories';
+import DashboardStoryList from './views/DashboardStoryList/DashboardStoryList';
+import EditStory from './views/EditStory/EditStory';
+
+import StoryDashboard from './views/StoryDashboard/StoryDashboard';
+
+
 import './App.css';
 import AddFunfact from './views/AddFunfact/AddFunfact';
 
@@ -112,6 +119,16 @@ class App extends Component {
                   />}
               />
               <Route
+                path="/dashboardstorylist"
+                exact
+                render={props => <DashboardStoryList user={user} {...props} />}
+              />
+              <Route
+                path="/dashboardstorylist/:storyId/edit"
+                exact
+                render={props => <EditStory user={user} {...props} />}
+              />
+              <Route
                 path="/teacher/dashboard/:storyId/addfunfact"
                 exact
                 render={props =>
@@ -120,11 +137,11 @@ class App extends Component {
                     {...props}
                   />}
               />
-              <Route 
+              <Route
                 path="/teacher/dashboard/:storyId"
                 exact
-                render={props => 
-                  <StoryDashboard 
+                render={props =>
+                  <StoryDashboard
                     user={user}
                     {...props}
                   />}
@@ -150,6 +167,14 @@ class App extends Component {
                 exact
                 render={props =>
                   <Login user={user} showToast={showToast} {...props} />}
+              />
+              <ProtectedRoute
+                path="/teacher/resetpassword"
+                isAuthorized={!isAuthorized}
+                redirectUrl="/teacher"
+                exact
+                render={props =>
+                  <ResetPassword user={user} showToast={showToast} {...props} />}
               />
               <Route render={() => <Redirect to="/" />} />
             </Switch>
