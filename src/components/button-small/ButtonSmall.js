@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { SIZES } from '../../constants';
 import './Button.css';
 
-const Button = ({
+const ButtonSmall = ({
   inverted = false,
   size = SIZES.SMALL,
   children = '',
@@ -33,4 +33,4 @@ const Button = ({
   );
 };
 
-export default Button;
+export default ButtonSmall;

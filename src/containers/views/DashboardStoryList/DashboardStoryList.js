@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../../components/button-small/Button';
+import ButtonSmall from '../../../components/button-small/ButtonSmall';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Spinner from '../../../components/spinner/Spinner';
@@ -72,20 +72,20 @@ class DashboardStoryList extends React.Component {
                                 </div>
 
                                 <div className="flex">
-                                <Button
+                                <ButtonSmall
                                 onClick={(e) => {
                                     this.props.fetchStory(story.id)
                                     .then(() => history.push(`/dashboardstorylist/${story.id}/edit`));
                                 }}
-                                >Aanpassen</Button>
-                                <Button onClick={(e) => {
+                                >Aanpassen</ButtonSmall>
+                                <ButtonSmall onClick={(e) => {
                                     if (window.confirm('Are you sure you wish to delete this item?')) deleteSt(story) } }>
                                 Verwijder
-                                </Button>
+                                </ButtonSmall>
                                 </div>
 
                                 <div className="flex">
-                                <Button>Maak onzichtbaar</Button>
+                                <ButtonSmall>Maak onzichtbaar</ButtonSmall>
                                 </div>
 
                             </div>

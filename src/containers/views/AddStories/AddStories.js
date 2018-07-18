@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../../components/button/Button';
+import ButtonSmall from '../../../components/button-small/ButtonSmall';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
@@ -186,7 +186,6 @@ class AddStories extends React.Component {
                         <option value="rather difficult">Eerder moeilijk</option>
                         <option value="difficult">Moeilijk</option>
                         </Field>
-                        </div>
                     </div>
                     <div className="row">
                         <div className="col">
@@ -243,8 +242,9 @@ class AddStories extends React.Component {
                         />
                     </div>
 
-                    <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
+                    <ButtonSmall className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</ButtonSmall>
                 </div>
+            </div>
             </form>
             <Footer />
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../../../components/button/Button';
-import SmallButton from '../../../components/button-small/Button';
+import ButtonSmall from '../../../components/button-small/ButtonSmall';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Spinner from '../../../components/spinner/Spinner';
@@ -261,21 +261,21 @@ class EditStory extends React.Component {
                         <div>
                         <span>Belangrijke locaties</span>
 
-                        <SmallButton type="button" className={this.state.tags.brugge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="brugge">Brugge</SmallButton>
-                        <SmallButton type="button" className={this.state.tags.ieper ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="ieper">Ieper</SmallButton>
-                        <SmallButton type="button" className={this.state.tags.poperinge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="poperinge">Poperinge</SmallButton>
+                        <ButtonSmall type="button" className={this.state.tags.brugge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="brugge">Brugge</ButtonSmall>
+                        <ButtonSmall type="button" className={this.state.tags.ieper ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="ieper">Ieper</ButtonSmall>
+                        <ButtonSmall type="button" className={this.state.tags.poperinge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="poperinge">Poperinge</ButtonSmall>
 
                         </div>
                         <div>
                         <span>Categorie</span>
 
-                        <SmallButton type="button" className={this.state.tags.food ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="food">Voedsel</SmallButton>
-                        <SmallButton type="button" className={this.state.tags.sport ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="sport">Sport</SmallButton>
-                        <SmallButton type="button" className={this.state.tags.transportation ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="transportation">Transport</SmallButton>
+                        <ButtonSmall type="button" className={this.state.tags.food ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="food">Voedsel</ButtonSmall>
+                        <ButtonSmall type="button" className={this.state.tags.sport ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="sport">Sport</ButtonSmall>
+                        <ButtonSmall type="button" className={this.state.tags.transportation ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="transportation">Transport</ButtonSmall>
 
                         </div>
 
-                        <Button type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
+                        <ButtonSmall type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</ButtonSmall>
                 </div>
                 </form>
                 <Footer />
