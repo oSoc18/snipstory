@@ -26,15 +26,10 @@ const FormField = ({
       {...input}
       type={type}
       placeholder={placeholder}
-<<<<<<< HEAD
-      required={required} />
-    {after}
-=======
       defaultValue={value}
       id={id}
       required={required}
     />
->>>>>>> 10d08e455a4f0a6b0e826445ef15ff04ee79081b
     {touched &&
       error &&
       <span className="form-field__error">

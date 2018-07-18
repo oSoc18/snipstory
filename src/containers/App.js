@@ -140,7 +140,6 @@ class App extends Component {
                   />}
               />
               <Route
-<<<<<<< HEAD
                 path="/teacher/dashboard/:storyId/addimagequiz"
                 exact
                 render={props =>
@@ -159,8 +158,6 @@ class App extends Component {
                   />}
               />
               <Route
-=======
->>>>>>> 10d08e455a4f0a6b0e826445ef15ff04ee79081b
                 path="/teacher/dashboard/:storyId"
                 exact
                 render={props =>
