@@ -28,8 +28,7 @@ class AddFunfact extends React.Component {
                 .push({
                     text,
                     contentType: "funfact"
-                });
-                history.push(`/teacher/dashboard/${storyId}`)
+                }).then(() => history.push(`/teacher/dashboard/${storyId}`));
             })
             }>
             <div className="general-container">
