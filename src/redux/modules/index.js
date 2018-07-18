@@ -11,6 +11,7 @@ import { reducer as creation } from './creation';
 import { reducer as knutseltips } from './knutseltips';
 import { reducer as snipper } from './snipper';
 import { reducer as snippers } from './snippers';
+import { reducer as stories } from './dashboardStoryList';
 import { reducer as story } from './story';
 
 export const rootReducer = combineReducers({
@@ -26,5 +27,6 @@ export const rootReducer = combineReducers({
   knutseltips,
   snipper,
   snippers,
+  stories,
   story
 });

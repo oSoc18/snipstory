@@ -6,6 +6,8 @@ const FormField = ({
   label,
   type,
   placeholder,
+  value,
+  id,
   meta: { asyncValidating, touched, error },
   required = false
 }) => {
@@ -19,6 +21,8 @@ return <div className="form-field">
       {...input}
       type={type}
       placeholder={placeholder}
+      defaultValue={value}
+      id={id}
       required={required}
     />
     {touched &&

@@ -32,24 +32,6 @@ class AddStories extends React.Component {
         }
     }
 
-    // handleSubmit(e) {
-    //     e.preventDefault();
-    //     console.log(this.state.summary);
-    //
-    //     const storiesRef = firebase.firebaseDatabase().ref('stories');
-    //     const story = {
-    //         title: this.state.title,
-    //         summary: this.state.summary,
-    //         source: this.state.source
-    //     }
-    //     storiesRef.push(story);
-    //     this.setState({
-    //
-    //     })
-    //
-    //
-    // }
-
 
     render() {
         const {
@@ -64,14 +46,38 @@ class AddStories extends React.Component {
             <Navbar />
 
 
-            <form onSubmit={this.props.handleSubmit(({id,...fields}) => {
+            <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,...fields}) => {
                 let o = firebaseDatabase.ref('stories/');
 
-                o.child(id).set({
-                    id,
-                    general: {
+                const years = {
+                    thirdYear,
+                    fourthYear,
+                    fifthYear,
+                    sixthYear,
+                    firstYearSecondary,
+                    secondYearSecondary
+                }
+                //
+                // years.forEach((year) => {
+                //     if (!year) {
+                //         year = false;
+                //     }
+                //     return;
+                // })
+                console.log(years);
+
+
+
+                o.child(id).child("general").set({
+                        schoolYear: {
+                            thirdYear: thirdYear || false,
+                            fourthYear: fourthYear || false,
+                            fifthYear: fifthYear || false,
+                            sixthYear: sixthYear || false,
+                            firstYearSecondary: firstYearSecondary || false,
+                            secondYearSecondary: secondYearSecondary || false
+                        },
                         ...fields
-                    }
                 })
             })
             }>
@@ -156,19 +162,17 @@ class AddStories extends React.Component {
                         />
                         </div>
                     </div>
-                    <div  className="row">
-                        <div className="col-md-6">
-                        <Field
-                            name="level"
-                            component={FormField}
-                            type="text"
-                            label="Geschikte leerjaar"
-                            placeholder="vb. 3-4e leerjaar"
-                            required
-                        />
-                        </div>
-                        <div className="col-md-6">
-                        <label>Moeilijkheidsgraad</label>
+                    <legend>Geschikt voor welk leerjaar?</legend>
+                    <div>
+                    <Field name="thirdYear" component={FormField} type="checkbox" label="Derde leerjaar" id="thirdYear"/>
+                    <Field name="fourthYear" component={FormField} type="checkbox" label="Vierde leerjaar" id="fourthYear"/>
+                    <Field name="fifthYear" component={FormField} type="checkbox" label="Vijfde leerjaar" id="fifthYear"/>
+                    <Field name="sixthYear" component={FormField} type="checkbox" label="Zesde leerjaar" id="sixthYear"/>
+                    <Field name="firstYearSecondary" component={FormField} type="checkbox" label="Eerste middelbaar" id="firstYearSecondary"/>
+                    <Field name="secondYearSecondary" component={FormField} type="checkbox" label="Tweede middelbaar" id="secondYearSecondary"/>
+                    </div>
+
+                    <div>
                         <Field
                             name="difficulty"
                             component="select"
@@ -230,10 +234,17 @@ class AddStories extends React.Component {
                         />                        
                         </div>
                     </div>
+                    <div>
+                        <Field
+                            name="visible"
+                            component={FormField}
+                            type="checkbox"
+                            label="Zichtbaar"
+                        />
+                    </div>
 
                     <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
                 </div>
-            </div>
             </form>
             <Footer />
         </div>
