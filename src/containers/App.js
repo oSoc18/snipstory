@@ -13,6 +13,7 @@ import TeacherArea from './views/TeacherArea';
 import Login from '././views/Login/Login';
 import ResetPassword from './views/ResetPassword/ResetPassword';
 import Register from './views/Register/Register';
+import CreateUser from './views/Admin/CreateUser/CreateUser';
 import CreateRoom from './views/CreateRoom';
 import KnutselTips from './views/KnutselTips/KnutselTips';
 import StorySelect from './views/StorySelect/StorySelect';
@@ -146,6 +147,14 @@ class App extends Component {
                     {...props}
                   />}
               />
+              <Route
+                path="/admin/createuser"
+                isAuthorized={isAuthorized}
+                redirectUrl="/admin/login"
+                exact
+                render={props => <CreateUser user={user} {...props} />}
+              />
+
               <ProtectedRoute
                 path="/teacher/stories/create"
                 isAuthorized={isAuthorized}
