@@ -31,6 +31,7 @@ import DashboardStoryList from './views/DashboardStoryList/DashboardStoryList';
 import EditStory from './views/EditStory/EditStory';
 
 import StoryDashboard from './views/StoryDashboard/StoryDashboard';
+import FilterView from './views/FilterView/FilterView';
 
 
 import './App.css';
@@ -142,6 +143,15 @@ class App extends Component {
                 exact
                 render={props =>
                   <StoryDashboard
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <Route
+                path="/filterview"
+                exact
+                render={props =>
+                  <FilterView
                     user={user}
                     {...props}
                   />}
