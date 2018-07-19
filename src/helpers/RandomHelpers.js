@@ -24,3 +24,6 @@ export const shuffle = arr => {
   }
   return arr;
 };
+
+
+export default RoomIdGenerator;

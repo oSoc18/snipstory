@@ -63,20 +63,22 @@ class AddStories extends React.Component {
             pristine,
             submitting,
             user,
+            history,
             logout
         } = this.props;
 
+        console.log(user.uid);
     return (
+
         <div className="page">
             <Navbar />
             <h1>Voeg een verhaal toe</h1>
 
-            <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,...fields}) => {
+            <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,...fields,...props}) => {
                 let o = firebaseDatabase.ref('stories/');
-
-
-
                 o.child(id).child("general").set({
+                        id,
+                        userId: user.uid,
                         schoolYear: {
                             thirdYear: thirdYear || false,
                             fourthYear: fourthYear || false,
@@ -99,6 +101,7 @@ class AddStories extends React.Component {
                         },
                         ...fields
                 })
+                .then(() => history.push("/teacher/dashboardstorylist"))
             })
             }>
             <div className="general-container">

@@ -13,6 +13,7 @@ import TeacherArea from './views/TeacherArea';
 import Login from '././views/Login/Login';
 import ResetPassword from './views/ResetPassword/ResetPassword';
 import Register from './views/Register/Register';
+import CreateUser from './views/Admin/CreateUser/CreateUser';
 import CreateRoom from './views/CreateRoom';
 import KnutselTips from './views/KnutselTips/KnutselTips';
 import StorySelect from './views/StorySelect/StorySelect';
@@ -76,11 +77,6 @@ class App extends Component {
                 render={props => <Register user={user} {...props} />}
               />
               <Route
-                path="/teacher/addstory"
-                exact
-                render={props => <AddStories user={user} {...props} />}
-              />
-              <Route
                 path="/story/select"
                 exact
                 render={props => <StorySelect user={user} {...props} />}
@@ -119,11 +115,6 @@ class App extends Component {
                     user={user}
                     {...props}
                   />}
-              />
-              <Route
-                path="/dashboardstorylist"
-                exact
-                render={props => <DashboardStoryList user={user} {...props} />}
               />
               <Route
                 path="/dashboardstorylist/:storyId/edit"
@@ -166,6 +157,25 @@ class App extends Component {
                     {...props}
                   />}
               />
+              <Route
+                path="/admin/createuser"
+                isAuthorized={isAuthorized}
+                redirectUrl="/admin/login"
+                exact
+                render={props => <CreateUser user={user} {...props} />}
+              />
+              <ProtectedRoute
+                path="/teacher/addstory"
+                isAuthorized={isAuthorized}
+                redirectUrl="/teacher/login"
+                render={props => <AddStories user={user} {...props} />}
+              />
+              <ProtectedRoute
+                path="/teacher/dashboardstorylist"
+                isAuthorized={isAuthorized}
+                redirectUrl="/teacher/login"
+                render={props => <DashboardStoryList user={user} {...props} />}
+              />
               <ProtectedRoute
                 path="/teacher/stories/create"
                 isAuthorized={isAuthorized}
@@ -183,7 +193,7 @@ class App extends Component {
               <ProtectedRoute
                 path="/teacher/login"
                 isAuthorized={!isAuthorized}
-                redirectUrl="/teacher"
+                redirectUrl="/teacher/dashboardstorylist"
                 exact
                 render={props =>
                   <Login user={user} showToast={showToast} {...props} />}
