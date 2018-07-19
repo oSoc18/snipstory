@@ -45,7 +45,7 @@ const Register = ({
       <div className="register-box">
             <form
               onSubmit={handleSubmit(
-                ({ name, email, password, typeOfUser, institution, password1, ...rest }) => {
+                ({ firstname, name, email, password, typeOfUser, institution, password1, ...rest }) => {
                 if (typeOfUser != "contentPartner"){
                   rest = {};
                 }
@@ -57,13 +57,14 @@ const Register = ({
                     return firebaseDatabase
                       .ref(`/users/${user.uid}`)
                       .set({ ...user.providerData[0],
-                        displayName: name,
-                        typeOfUser,
+                        firstname,
+                        name,
+                        typeOfUser: "teacher",
                         institution,
                         ...rest
                       })
                       .then(_ => {
-                        history.push('/teacher');
+                        history.push('/teacher/dashboardstorylist');
                       });
                   })
                   .catch(err => {
@@ -82,8 +83,8 @@ const Register = ({
                     });
                   });
               })}
-            > 
-            <div className="flex_container_vertical">              
+            >
+            <div className="flex_container_vertical">
             <h1 className="register-title">Registreer</h1>
 
               {/*<div className="toggle-container">
@@ -103,7 +104,7 @@ const Register = ({
                   </div>*/}
               <div className="name-container">
                   <Field
-                    name="voornaam"
+                    name="firstname"
                     component={FormField}
                     type="text"
                     label="Voornaam"
@@ -135,27 +136,20 @@ const Register = ({
                   label={selectedTypeOfUsers == "contentPartner" ?
                   "Institution": "School"}
                   type="text"
-                  component={FormField} 
+                  component={FormField}
                   required
                   />
                 </div>
               <div className="password-container ">
-                  <Field 
+                  <Field
                     name="password"
                     component={FormField}
                     type="password"
                     label="Wachtwoord"
                   />
                   <p className="notice">Password must contain at least 8 characters</p>
-              <div>
-                {selectedTypeOfUsers == 'contentPartner' ? 
-                    (ContentPartnerOnly): undefined}
-              </div>
-              {error &&
-                <div>
-                  {error}
-                </div>}
-               
+
+
               </div>
               <div className="submit_div">
 

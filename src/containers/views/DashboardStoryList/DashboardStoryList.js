@@ -36,6 +36,8 @@ class DashboardStoryList extends React.Component {
             deleteStory
         } = this.props;
 
+
+
         const deleteSt = (story) => {
             console.log(story.id);
             deleteStory(story);
@@ -47,54 +49,62 @@ class DashboardStoryList extends React.Component {
           return <Spinner page size="large" />;
         }
 
+        const filteredStories = stories.filter(story =>
+            story.general.userId === user.uid
+        )
         return (
             <div className="page">
                 <Navbar />
-                <h1>Beheer uw verhalen</h1>
+                <h1>Dag {user.name}</h1>
+                <Button onClick={(e) => history.push("/teacher/addstory")}>Maak een nieuw verhaal aan</Button>
                 <div className="row">
-                {stories.map(story => {
-                    if (story.general.userId === user.uid) {
-                        console.log(story.general.userId)
-                        console.log(user.uid)
 
-                    return (
-                        <div
-                            key={story.general.id}
-                            className="storyCards"
-                            id = {story.general.id}
-                            // onClick= { => {
-                            //     history.push('/stories/' + story.id);
-                            // }}
-                        >
+                {filteredStories && filteredStories.length > 0
+                  ?
+                    filteredStories.map(story => {
+
+                        return (
                             <div
-                                className="flex"
+                                key={story.general.id}
+                                className="storyCards"
+                                id = {story.general.id}
                             >
-                                <div className="">
-                                    <h2>{story.general.title}</h2>
-                                    <p>{story.general.summary}</p>
-                                </div>
+                                <div
+                                    className="flex"
+                                >
+                                    <div className="">
+                                        <h2>{story.general.title}</h2>
+                                        <p>{story.general.summary}</p>
+                                    </div>
 
-                                <div className="flex">
-                                <Button
-                                onClick={(e) => {
-                                    this.props.fetchStory(story.id)
-                                    .then(() => history.push(`/dashboardstorylist/${story.id}/edit`));
-                                }}
-                                >Aanpassen</Button>
-                                <Button onClick={(e) => {
-                                    if (window.confirm('Are you sure you wish to delete this item?')) deleteSt(story) } }>
-                                Verwijder
-                                </Button>
-                                </div>
+                                    <div className="flex">
+                                    <Button
+                                    onClick={(e) => {
+                                        this.props.fetchStory(story.id)
+                                        .then(() => history.push(`/dashboardstorylist/${story.id}/edit`));
+                                    }}
+                                    >Aanpassen</Button>
+                                    <Button onClick={(e) => {
+                                        if (window.confirm('Are you sure you wish to delete this item?')) deleteSt(story) } }>
+                                    Verwijder
+                                    </Button>
+                                    </div>
 
-                                <div className="flex">
-                                <Button>Maak onzichtbaar</Button>
-                                </div>
+                                    <div className="flex">
+                                    <Button onClick={(e) => this.handleVisibility(e)}>Maak onzichtbaar</Button>
+                                    </div>
 
+                                </div>
                             </div>
-                        </div>
-                    )}
-                })}
+                        )
+                    })
+                    : <div>
+                        Je hebt nog geen verhalen toegevoegd
+                        <span role="img" aria-label="Crying face">
+                          😢
+                        </span>
+                      </div>
+                }
                 </div>
                 <Footer />
             </div>

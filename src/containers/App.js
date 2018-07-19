@@ -75,11 +75,6 @@ class App extends Component {
                 render={props => <Register user={user} {...props} />}
               />
               <Route
-                path="/teacher/addstory"
-                exact
-                render={props => <AddStories user={user} {...props} />}
-              />
-              <Route
                 path="/story/select"
                 exact
                 render={props => <StorySelect user={user} {...props} />}
@@ -120,11 +115,6 @@ class App extends Component {
                   />}
               />
               <Route
-                path="/dashboardstorylist"
-                exact
-                render={props => <DashboardStoryList user={user} {...props} />}
-              />
-              <Route
                 path="/dashboardstorylist/:storyId/edit"
                 exact
                 render={props => <EditStory user={user} {...props} />}
@@ -154,7 +144,18 @@ class App extends Component {
                 exact
                 render={props => <CreateUser user={user} {...props} />}
               />
-
+              <ProtectedRoute
+                path="/teacher/addstory"
+                isAuthorized={isAuthorized}
+                redirectUrl="/teacher/login"
+                render={props => <AddStories user={user} {...props} />}
+              />
+              <ProtectedRoute
+                path="/teacher/dashboardstorylist"
+                isAuthorized={isAuthorized}
+                redirectUrl="/teacher/login"
+                render={props => <DashboardStoryList user={user} {...props} />}
+              />
               <ProtectedRoute
                 path="/teacher/stories/create"
                 isAuthorized={isAuthorized}
@@ -172,7 +173,7 @@ class App extends Component {
               <ProtectedRoute
                 path="/teacher/login"
                 isAuthorized={!isAuthorized}
-                redirectUrl="/teacher"
+                redirectUrl="/teacher/dashboardstorylist"
                 exact
                 render={props =>
                   <Login user={user} showToast={showToast} {...props} />}

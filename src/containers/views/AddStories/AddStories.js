@@ -63,6 +63,7 @@ class AddStories extends React.Component {
             pristine,
             submitting,
             user,
+            history,
             logout
         } = this.props;
 
@@ -75,9 +76,6 @@ class AddStories extends React.Component {
 
             <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,...fields,...props}) => {
                 let o = firebaseDatabase.ref('stories/');
-
-
-
                 o.child(id).child("general").set({
                         id,
                         userId: user.uid,
@@ -103,6 +101,7 @@ class AddStories extends React.Component {
                         },
                         ...fields
                 })
+                .then(() => history.push("teacher/dashboardstorylist"))
             })
             }>
             <div className="general-container">
