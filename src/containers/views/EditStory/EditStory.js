@@ -114,7 +114,7 @@ class EditStory extends React.Component {
                     })
                 })
                 }>
-                <div className="general-container">
+                <div className="general-container container">
                     <div>
                         <Field
                             name="id"

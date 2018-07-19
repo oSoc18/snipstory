@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../../components/button/Button';
+import SmallButton from '../../../components/button-small/Button';
 import { firebaseAuth, googleAuthProvider } from '../../../helpers/firebase';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { Link } from 'react-router-dom';
@@ -14,7 +15,7 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
   return (
     <div className="page">
       <Navbar />
-      <div className="container">
+      <div className="general-container container">
         <div className="login-box">
           <div className="login-small-container">
             <h1 className="login-title">Inloggen</h1>
@@ -30,10 +31,10 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
               })}
             >
               {error &&
-                <div className="form-field__error">
+                <div className="form-field__error row">
                   {error}
                 </div>}
-              <div className="input-field">
+              <div className="input-field row">
                 <Field
                   name="email"
                   component={FormField}
@@ -41,7 +42,7 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
                   label="E-mailadres"
                 />
               </div>
-              <div className="input-field">
+              <div className="input-field row">
                 <Field
                   name="password"
                   component={FormField}
@@ -49,18 +50,26 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
                   label="Wachtwoord"
                 />
               </div>
-              <div className="submit_div">
+              <div className="submit_div row">
 
-                <Button
-                  className="submit_button"
-                  type="submit"
-                  disabled={pristine || submitting}
-                >
-                  Login
-                </Button>
-                  <span>Wachtwoord vergeten?<br />
-                  <Link to="/teacher/resetpassword">Reset hier uw wachtwoord!</Link></span>
+                  <Button
+                    className="submit_button"
+                    type="submit"
+                    disabled={pristine || submitting}
+                  >
+                    Login
+                  </Button>
                 </div>
+              <div className="row submit_div">
+                <p className="col">Wachtwoord vergeten?<br />
+                  <Link to="/teacher/resetpassword">Reset hier uw wachtwoord!</Link>
+                </p>
+              </div>
+              <div className="row submit_div">
+                <div className="col">
+                  <Link to="/teacher/register">Registreer</Link>
+                </div>
+              </div>
 
 
             </form>
