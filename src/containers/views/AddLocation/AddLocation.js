@@ -3,9 +3,11 @@ import { Field, reduxForm } from 'redux-form';
 import FormField from '../../../components/form/FormField';
 import mapboxgl from 'mapbox-gl';
 import './AddLocation.css'
-import { firebaseDatabase } from '../../../helpers/firebase';
 import Button from '../../../components/button/Button'
-const { DOM: { textarea } } = React
+import { firebaseDatabase, firebaseStorage } from '../../../helpers/firebase';
+
+import FileField from '../../../components/filefield/FileField';
+import moment from 'moment';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXphaG1lZDA5NiIsImEiOiJjampyNnh6OTYyajlxM3dwYmFvMnc0dTV4In0.7X4yOZDGwbjF4zx4s0kw6A';
 
@@ -39,22 +41,43 @@ class AddLocation extends React.Component {
       pristine,
       submitting,
       match: { params: { storyId } },
-      history
+      history,
+      handleChange,
+      user
     } = this.props;
 
     return <div className="AddLocation">
       <h1>Add location</h1>
-      <form onSubmit={this.props.handleSubmit(({ motivation, title }) => {
-        let lngLat = this.marker.getLngLat();
-        firebaseDatabase
-          .ref('stories/')
-          .child(storyId)
-          .child("locations")
-          .push({
-            motivation,
-            title,
-            lngLat
-          }).then(() => history.push(`/teacher/dashboard/${storyId}`));
+      <form onSubmit={this.props.handleSubmit(({ motivation, title, image }) => {
+        let imagePromise = firebaseStorage()
+              .ref()
+              .child(user.uid)
+              .child("story")
+              .child("locations")
+              .child(moment().format('YYYYMMDD_hhmmss'))
+              .child(title)
+              .put(image);
+
+        return new Promise((resolve, reject) => {
+          imagePromise.then(task => {
+            let image = task.metadata.downloadURLs[0];
+            let lngLat = this.marker.getLngLat();
+
+            firebaseDatabase
+            .ref('stories/')
+            .child(storyId)
+            .child("locations")
+            .push({
+              motivation,
+              title,
+              lngLat,
+              image
+            })
+            .catch(err => reject(err))
+            .then(() => resolve())
+            .then(history.push(`/teacher/dashboard/${storyId}`));
+          });
+        });
       })}>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
         <div id="map"></div>
@@ -76,8 +99,19 @@ class AddLocation extends React.Component {
             required
           />
         </div>
+        <div>
+          <Field
+            name="image"
+            type="file"
+            label="Image"
+            component={FileField}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
         <Button type="submit" disabled={pristine || submitting}>Add location</Button>
+
 
       </form>
     </div>
