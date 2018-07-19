@@ -55,7 +55,8 @@ export const reducer = (state = initialState, action) => {
         }
       });
       delete newState.story.modules[action.moduleId];
-      newState["modules"] = getArrayFrom(newState.story.modules);
+      newState["modules"] = getArrayFrom(newState.story.modules)
+      .map((module, index) => ({...module, order: index}));
       return newState;
     case actionTypes.switchModules:
       if (
