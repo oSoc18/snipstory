@@ -41,11 +41,7 @@ const Register = ({
   return (
     <div className="page">
       <Navbar/>
-<<<<<<< HEAD
-      <div className="register-container">
-=======
       <div className="general-container container">
->>>>>>> develop
       <div className="register-box">
             <form
               onSubmit={handleSubmit(
