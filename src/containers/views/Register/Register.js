@@ -41,7 +41,7 @@ const Register = ({
   return (
     <div className="page">
       <Navbar/>
-      <div className="container">
+      <div className="register-container">
       <div className="register-box">
             <form
               onSubmit={handleSubmit(

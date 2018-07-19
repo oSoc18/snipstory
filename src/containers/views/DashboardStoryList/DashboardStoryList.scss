@@ -14,12 +14,31 @@
     justifyContent: 'center';
 }
 
+.createbutton {
+    display: inline-block;
+    margin-left: 100px;
+}
+.row {
+    margin-left: 30px;
+}
+
 h1 {
     margin-left: 30px;
     margin-top: 50px;
     margin-bottom: 30px;
+    display: inline-block;
 }
 
 h2 {
     color: #fff;
 }
+
+Button {
+    margin-left: 30px;
+}
+
+// Footer {
+//     position: absolute;
+//     bottom: 0;
+//     width: 100%;
+// }

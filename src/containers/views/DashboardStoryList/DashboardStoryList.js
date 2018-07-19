@@ -56,8 +56,8 @@ class DashboardStoryList extends React.Component {
         return (
             <div className="page">
                 <Navbar />
-                <h1>Dag {user.name}</h1>
-                <Button to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
+                <h1>Dag {user.firstname} {user.name}</h1>
+                <Button className="createbutton" to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
                 <div className="row">
 
                 {filteredStories && filteredStories.length > 0
@@ -100,10 +100,7 @@ class DashboardStoryList extends React.Component {
                         )
                     })
                     : <div>
-                        Je hebt nog geen verhalen toegevoegd
-                        <span role="img" aria-label="Crying face">
-                          😢
-                        </span>
+                        <p>U heeft nog geen verhalen toegevoegd, maak hierboven een nieuw verhaal aan</p>
                       </div>
                 }
 

@@ -14,7 +14,7 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
   return (
     <div className="page">
       <Navbar />
-      <div className="container">
+      <div className="login-container">
         <div className="login-box">
           <div className="login-small-container">
             <h1 className="login-title">Inloggen</h1>

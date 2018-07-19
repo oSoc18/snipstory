@@ -30,6 +30,7 @@ const FormField = ({
       id={id}
       required={required}
     />
+    {after}
     {touched &&
       error &&
       <span className="form-field__error">
