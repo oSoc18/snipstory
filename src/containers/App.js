@@ -35,6 +35,8 @@ import StoryDashboard from './views/StoryDashboard/StoryDashboard';
 
 import './App.css';
 import AddFunfact from './views/AddFunfact/AddFunfact';
+import AddImageQuiz from './views/AddImageQuiz/AddImageQuiz';
+import AddQuiz from './views/AddQuiz/AddQuiz';
 
 class App extends Component {
   componentDidMount() {
@@ -133,6 +135,24 @@ class App extends Component {
                 exact
                 render={props =>
                   <AddFunfact
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <Route
+                path="/teacher/dashboard/:storyId/addimagequiz"
+                exact
+                render={props =>
+                  <AddImageQuiz
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <Route
+                path="/teacher/dashboard/:storyId/addquiz"
+                exact
+                render={props =>
+                  <AddQuiz
                     user={user}
                     {...props}
                   />}

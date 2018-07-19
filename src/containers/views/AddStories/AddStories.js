@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../../components/button/Button';
+import SmallButton from '../../../components/button-small/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
@@ -27,10 +28,34 @@ class AddStories extends React.Component {
             creationTips:"",
             link:"",
             nationality:"",
-
-
+            tags: {
+                poperinge: false,
+                brugge: false,
+                ieper: false,
+                food: false,
+                sport: false,
+                transportation: false
+            }
         }
     }
+
+    handleTag(e) {
+        e.preventDefault;
+        console.log(e.target.value);
+
+        let tags = Object.keys(this.state.tags);
+        let newState = Object.assign({}, this.state);
+        for(let i = 0; i < tags.length; i++) {
+
+            if(e.target.value === tags[i]) {
+                let tag = tags[i];
+                newState.tags[e.target.value] = !newState.tags[e.target.value]
+                this.setState(newState)
+
+            }
+        }
+        console.log(this.state.tags);
+        }
 
 
     render() {
@@ -44,27 +69,10 @@ class AddStories extends React.Component {
     return (
         <div className="page">
             <Navbar />
-
+            <h1>Voeg een verhaal toe</h1>
 
             <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,...fields}) => {
                 let o = firebaseDatabase.ref('stories/');
-
-                const years = {
-                    thirdYear,
-                    fourthYear,
-                    fifthYear,
-                    sixthYear,
-                    firstYearSecondary,
-                    secondYearSecondary
-                }
-                //
-                // years.forEach((year) => {
-                //     if (!year) {
-                //         year = false;
-                //     }
-                //     return;
-                // })
-                console.log(years);
 
 
 
@@ -76,6 +84,18 @@ class AddStories extends React.Component {
                             sixthYear: sixthYear || false,
                             firstYearSecondary: firstYearSecondary || false,
                             secondYearSecondary: secondYearSecondary || false
+                        },
+                        tags: {
+                            locations: {
+                                poperinge: this.state.tags.poperinge,
+                                brugge: this.state.tags.brugge,
+                                ieper: this.state.tags.ieper
+                            },
+                            categories: {
+                                food: this.state.tags.food,
+                                sport: this.state.tags.sport,
+                                transportation: this.state.tags.transportation
+                            }
                         },
                         ...fields
                 })
@@ -157,13 +177,18 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="number"
                             label="Leeftijd"
-                            placeholder="vb. 23"
+                            placeholder="23"
                             required
                         />
                         </div>
                     </div>
+<<<<<<< HEAD
                     <legend>Geschikt voor welk leerjaar?</legend>
+=======
+
+>>>>>>> 4390822f51a4d889d4d48679f88c78c4ea02d4b6
                     <div>
+                    <legend>Geschikt voor welk leerjaar?</legend>
                     <Field name="thirdYear" component={FormField} type="checkbox" label="Derde leerjaar" id="thirdYear"/>
                     <Field name="fourthYear" component={FormField} type="checkbox" label="Vierde leerjaar" id="fourthYear"/>
                     <Field name="fifthYear" component={FormField} type="checkbox" label="Vijfde leerjaar" id="fifthYear"/>
@@ -231,7 +256,7 @@ class AddStories extends React.Component {
                             component={FormField}
                             type="checkbox"
                             label="Copyright"
-                        />                        
+                        />
                         </div>
                     </div>
                     <div>
@@ -243,8 +268,30 @@ class AddStories extends React.Component {
                         />
                     </div>
 
+                    <div>
+                    <span>Belangrijke locaties</span>
+
+                    <SmallButton type="button" className={this.state.tags.brugge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="brugge">Brugge</SmallButton>
+                    <SmallButton type="button" className={this.state.tags.ieper ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="ieper">Ieper</SmallButton>
+                    <SmallButton type="button" className={this.state.tags.poperinge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="poperinge">Poperinge</SmallButton>
+
+                    </div>
+                    <div>
+                    <span>Categorie</span>
+
+                    <SmallButton type="button" className={this.state.tags.food ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="food">Voedsel</SmallButton>
+                    <SmallButton type="button" className={this.state.tags.sport ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="sport">Sport</SmallButton>
+                    <SmallButton type="button" className={this.state.tags.transportation ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="transportation">Transport</SmallButton>
+
+                    </div>
+
+
                     <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
+<<<<<<< HEAD
                 </div>
+=======
+            </div>
+>>>>>>> 4390822f51a4d889d4d48679f88c78c4ea02d4b6
             </form>
             <Footer />
         </div>

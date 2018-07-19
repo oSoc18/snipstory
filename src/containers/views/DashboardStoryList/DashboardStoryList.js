@@ -3,7 +3,6 @@ import Button from '../../../components/button-small/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Spinner from '../../../components/spinner/Spinner';
-import PopUp from 'reactjs-popup';
 
 
 import { connect } from 'react-redux';
