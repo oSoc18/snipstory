@@ -56,6 +56,12 @@ class StoryDashboard extends React.Component {
             </Button>
       <Button
         disabled={isModuleLoading}
+        to={`/teacher/dashboard/${story.id}/addlocation/`}
+        size="small">
+        Add location
+            </Button>
+      <Button
+        disabled={isModuleLoading}
         to={`/teacher/dashboard/${story.id}/addimagequiz/`}
         size="small">
         Add Image quiz
