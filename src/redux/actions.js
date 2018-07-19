@@ -934,10 +934,13 @@ export const fetchRandomSnippers = () => {
     dispatch(fetchSnippersStarted());
     firebaseDatabase.ref(`/creations`).once('value').then(snippers => {
       const val = snippers.val();
-      const keys = Object.keys(val);
-      let randomSnippers = shuffle(keys.map(key => val[key]));
-      // keys.map(id => val[id])
-      dispatch(fetchRandomSnippersFulfilled(randomSnippers.splice(0, 4)));
+      if (val) {
+          const keys = Object.keys(val);
+            let randomSnippers = shuffle(keys.map(key => val[key]));
+            // keys.map(id => val[id])
+            dispatch(fetchRandomSnippersFulfilled(randomSnippers.splice(0, 4)));
+        }
+
     });
   };
 };

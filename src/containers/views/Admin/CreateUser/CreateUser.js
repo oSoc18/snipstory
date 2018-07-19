@@ -1,19 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Button from '../../../components/button/Button';
+import Button from '../../../../components/button/Button';
+import ButtonSmall from '../../../../components/button-small/Button';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError, formValueSelector } from 'redux-form';
 import {
-  firebaseAuth,
-  firebaseDatabase
-} from '../../../helpers/firebase';
-import FormField from '../../../components/form/FormField';
-import './Register.css';
-import Navbar from '../../../components/nav/Navbar';
-import Footer from '../../../components/footer/Footer.js';
+    firebaseAuth,
+    firebaseDatabase
+} from '../../../../helpers/firebase';
+
+import RoomIdGenerator from '../../../../helpers/RandomHelpers';
+
+import FormField from '../../../../components/form/FormField';
+import './CreateUser.css';
+import Navbar from '../../../../components/nav/Navbar';
+import Footer from '../../../../components/footer/Footer.js';
 
 
-const Register = ({
+
+
+const CreateUser = ({
   pristine,
   submitting,
   handleSubmit,
@@ -38,6 +44,7 @@ const Register = ({
     </div>
   );
 
+
   return (
     <div className="page">
       <Navbar/>
@@ -45,27 +52,35 @@ const Register = ({
       <div className="register-box">
             <form
               onSubmit={handleSubmit(
-                ({ firstname, name, email, password, typeOfUser, institution, password1, ...rest }) => {
-                if (typeOfUser != "contentPartner"){
-                  rest = {};
-                }
+                ({ name, email, password, typeOfUser, institution, ...rest }) => {
 
+                const randomPass = RoomIdGenerator.generate();
+                console.log(randomPass)
                 return firebaseAuth
-                  .createUserWithEmailAndPassword(email, password)
+                  .createUserWithEmailAndPassword(email, randomPass)
                   .then(user => {
-
                     return firebaseDatabase
                       .ref(`/users/${user.uid}`)
                       .set({ ...user.providerData[0],
-                        firstname,
-                        name,
-                        typeOfUser: "teacher",
-                        institution,
-                        ...rest
+                          name,
+                          email,
+                          emailVerified: false,
+                          typeOfUser:"contentpartner",
+                          institution,
+                          disabled: false
                       })
-                      .then(_ => {
-                        history.push('/teacher/dashboardstorylist');
-                      });
+                      .then(function() {
+                          console.log("message is sent")
+                        firebaseAuth.sendPasswordResetEmail(email)
+                      })
+                      .then(function() {
+                          console.log("sendEmailVerification is sent")
+                        firebaseAuth.sendEmailVerification(email)
+                      })
+
+                      // .then(_ => {
+                      //   history.push('/contentpartner');
+                      // });
                   })
                   .catch(err => {
                     if (err.code === 400 || err.code === 'auth/weak-password') {
@@ -85,29 +100,13 @@ const Register = ({
               })}
             >
             <div className="flex_container_vertical">
-            <h1 className="register-title">Registreer</h1>
-
-              {/*<div className="toggle-container">
-                  <Field
-                    name="typeOfUser"
-                    component="select"
-                    label="Type of account"
-                    onChange={(e, value) => {
-                      change('typeOfUser', value);
-                      console.log(value)
-                    }}
-                    required
-                  >
-                    <option value="teacher">Teacher</option>
-                    <option value="contentPartner">Content Partner</option>
-                  </Field>
-                  </div>*/}
+            <h1 className="register-title">Registreer een nieuwe content partner</h1>
               <div className="name-container">
                   <Field
-                    name="firstname"
+                    name="id"
                     component={FormField}
                     type="text"
-                    label="Voornaam"
+                    label="Content partner code"
                     className="name_in"
                     required
                   />
@@ -115,12 +114,11 @@ const Register = ({
                     name="name"
                     component={FormField}
                     type="text"
-                    label="Familienaam"
+                    label="Naam content partner"
                     className="name_in"
                     required
                   />
               </div>
-
               <div className="etc-container">
                   <Field
                     name="email"
@@ -130,38 +128,30 @@ const Register = ({
                     required
                   />
                 </div>
+
                 <div>
-                  <Field
+                <Field
                   name="institution"
-                  label={selectedTypeOfUsers == "contentPartner" ?
-                  "Institution": "School"}
-                  type="text"
-                  component={FormField}
+                  component="select"
+                  label="Soort content partner"
                   required
-                  />
+                >
+                  <option value="overheid">Overheid</option>
+                  <option value="erfgoedcel">Erfgoedcel</option>
+                  <option value="museum">Museum</option>
+                  <option value="andere">Andere</option>
+                </Field>
+
                 </div>
-              <div className="password-container ">
-                  <Field
-                    name="password"
-                    component={FormField}
-                    type="password"
-                    label="Wachtwoord"
-                  />
-                  <p className="notice">Password must contain at least 8 characters</p>
 
-
-              </div>
               <div className="submit_div">
-
               <Button
                 className="submit_button"
                 type="submit"
                 disabled={pristine || submitting}
-              >
-                Submit
-              </Button>
-                <span>Heb je al een account?<br />
-                <Link to="/teacher/login">Log hier in!</Link></span>
+                >Submit</Button>
+
+
               </div>
               </div>
 
@@ -181,10 +171,7 @@ const validate = ({ password, password1, email }) => {
   return errors;
 };
 
-const formName = 'login';
+const formName = 'createUser';
 const selector = formValueSelector(formName);
 
-const RegisterForm = reduxForm({ form: formName, validate })(Register);
-export default connect(state => ({
-  selectedTypeOfUsers: selector(state, 'typeOfUser')
-}))(RegisterForm);
+export default reduxForm({ form: formName, validate })(CreateUser);
