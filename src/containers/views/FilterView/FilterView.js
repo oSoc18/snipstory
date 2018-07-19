@@ -18,18 +18,15 @@ class FilterView extends React.Component{
         return(
             <div className="page">
                 <Navbar />
-                <div className="general-container">
-                    <h1>Hey, look at my cards</h1>
+                    <h1>Story filter</h1>
                     <Card 
                         image="https://preview.ibb.co/gHNFgy/img.jpg"
-                        title="The Boule the Berlin guy
-                        Second text line if needed"
+                        title="The Boule the Berlin guy"
                         difficulty="3"
                         tags="Wetenschappen, wiskunde en fysica"
                         dates="23. March 2015 - 28. June 2018"
                         location="Antwerpen"
                     />
-                </div>
                 <Footer />
             </div>
         )

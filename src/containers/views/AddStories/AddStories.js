@@ -81,7 +81,6 @@ class AddStories extends React.Component {
                 })
             })
             }>
-            <div className="general-container">
                 <div className="form-box container">
                     <h1>Voeg een verhaal toe</h1>
                     <div className="row">
@@ -244,7 +243,6 @@ class AddStories extends React.Component {
 
                     <ButtonSmall className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</ButtonSmall>
                 </div>
-            </div>
             </form>
             <Footer />
         </div>

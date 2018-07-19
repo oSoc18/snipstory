@@ -9,6 +9,10 @@
     font-size: 14pt;
     color: #545454;
 }
+.container{
+    flex-direction: column;
+    align-items: flex-start;
+}
 .cards img{
     width: 100%;
     position: relative;
@@ -27,7 +31,8 @@
     color: #000;
     margin: 0;
     padding-bottom: 10px;
-    line-height: 20pt;
+    margin-top: -0.3rem;
+    padding-left: 0;
 }
 .info{
     height: auto;
@@ -35,7 +40,6 @@
 }
 
 .difficulty{
-    width: 100px;
     padding-bottom: 5pt;
     font-size: 16pt;
     color: #FDAE3F;
@@ -44,13 +48,13 @@
     font-family: 'Poppins';
     font-weight: 400;
     font-size: 10pt;
+    margin-top: -0.2rem;
 } 
 .card-line span{
-    margin-top: -5px;
     padding-right: 5px;
 }
 .last-line{
-    padding-bottom: 15px;
+    padding-bottom: 5px;
 }
 .card-tags{
     width: 100%;
@@ -59,8 +63,12 @@
     border: 1px solid #3778FB;
     color: #3778FB;
     border-radius: 30px;
-    padding: 2px 3.5px;
+    padding: 2px 3px;
     font-size: 9pt;
     margin-right: 5px;
     margin-bottom: 5px;
+}
+.year-tag{
+    border: 1px solid #FC6560;
+    color: #FC6560;
 }

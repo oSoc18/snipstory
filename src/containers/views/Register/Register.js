@@ -41,7 +41,6 @@ const Register = ({
   return (
     <div className="page">
       <Navbar/>
-      <div className="general-container">
       <div className="register-box container">
             <form
               onSubmit={handleSubmit(
@@ -183,7 +182,6 @@ const Register = ({
                 </div>
 
             </form>
-          </div>
         </div>
         <Footer/>
     </div>
