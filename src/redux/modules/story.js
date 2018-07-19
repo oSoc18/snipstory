@@ -11,7 +11,8 @@ const initialState = {
   modules: []
 };
 
-const getArrayFrom = (modules) => Object.keys(modules || {}).map(k => modules[k]);
+const getArrayFrom = (modules) => Object.keys(modules || {}).map(k => modules[k])
+.sort((a, b) => a.order - b.order);
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -19,7 +20,6 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { isLoading: true });
     case actionTypes.fetchStoryFulFilled:
       let modules = getArrayFrom(action.story.modules)
-      .sort((a, b) => a.order - b.order)
       .map(module => ({
         ...module,
         order: isNumber(module.order) ? module.order : modules.length - 1
@@ -76,6 +76,11 @@ export const reducer = (state = initialState, action) => {
         modules
       });
 
+    case actionTypes.resetModulesOrder:
+      return Object.assign({}, state, {
+        modules: getArrayFrom(state.story.modules)
+      });
+
     case actionTypes.uploadModuleStarted:
       return Object.assign({}, state, { isUploadingModules: true });
 
@@ -95,7 +100,7 @@ export const reducer = (state = initialState, action) => {
           ...state.story,
           modules: storyModules
         },
-        modules: getArrayFrom(storyModules).sort((a, b) => a.order - b.order)
+        modules: getArrayFrom(storyModules)
       });
 
     case actionTypes.uploadModuleRejected:
