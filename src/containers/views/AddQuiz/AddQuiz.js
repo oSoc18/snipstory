@@ -24,15 +24,16 @@ class AddQuiz extends React.Component {
         <h1> Add quiz for {storyId}</h1>
         <form onSubmit={this.props.handleSubmit(
           (formData) => {
-            return firebaseDatabase
+            let promise = firebaseDatabase
                 .ref('stories/')
                 .child(storyId)
                 .child("modules")
                 .push({
                   contentType: "quiz",
                   ...formData
-                })
-            .then(() => history.push(`/teacher/dashboard/${storyId}`))
+                });
+            promise.then(() => history.push(`/teacher/dashboard/${storyId}`));
+            return promise;
           })
         }>
           <div className="general-container">

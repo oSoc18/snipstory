@@ -46,7 +46,7 @@ class AddLocation extends React.Component {
       <h1>Add location</h1>
       <form onSubmit={this.props.handleSubmit(({ motivation, title }) => {
         let lngLat = this.marker.getLngLat();
-        firebaseDatabase
+        let promise = firebaseDatabase
           .ref('stories/')
           .child(storyId)
           .child("locations")
@@ -54,7 +54,10 @@ class AddLocation extends React.Component {
             motivation,
             title,
             lngLat
-          }).then(() => history.push(`/teacher/dashboard/${storyId}`));
+          });
+          promise.then(() => history.push(`/teacher/dashboard/${storyId}`));
+
+          return promise;
       })}>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
         <div id="map"></div>
