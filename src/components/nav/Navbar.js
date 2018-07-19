@@ -44,6 +44,9 @@ const Navbar = ({ fixed = true }) => {
               Start je verhaal hier
             </Button>
           </li>
+          <li className="nav-item">
+            <Navlink to="/teacher/login">Inloggen</Navlink>
+          </li>
         </ul>
       </div>
     </nav>

@@ -41,7 +41,11 @@ const Register = ({
   return (
     <div className="page">
       <Navbar/>
+<<<<<<< HEAD
       <div className="register-container">
+=======
+      <div className="general-container container">
+>>>>>>> develop
       <div className="register-box">
             <form
               onSubmit={handleSubmit(
@@ -84,7 +88,7 @@ const Register = ({
                   });
               })}
             >
-            <div className="flex_container_vertical">
+            <div className="container">
             <h1 className="register-title">Registreer</h1>
 
               {/*<div className="toggle-container">
@@ -102,26 +106,31 @@ const Register = ({
                     <option value="contentPartner">Content Partner</option>
                   </Field>
                   </div>*/}
-              <div className="name-container">
-                  <Field
-                    name="firstname"
-                    component={FormField}
-                    type="text"
-                    label="Voornaam"
-                    className="name_in"
-                    required
-                  />
-                  <Field
-                    name="name"
-                    component={FormField}
-                    type="text"
-                    label="Familienaam"
-                    className="name_in"
-                    required
-                  />
+              <div className="row">
+                  <div className="col-md-6">
+                    <Field
+                      name="firstname"
+                      component={FormField}
+                      type="text"
+                      label="Voornaam"
+                      className="name_in"
+                      required
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <Field
+                      name="name"
+                      component={FormField}
+                      type="text"
+                      label="Familienaam"
+                      className="name_in"
+                      required
+                    />
+                  </div>
               </div>
 
-              <div className="etc-container">
+              <div className="row">
+                  <div className="col">
                   <Field
                     name="email"
                     component={FormField}
@@ -129,8 +138,10 @@ const Register = ({
                     label="Email"
                     required
                   />
-                </div>
-                <div>
+                  </div>
+              </div>
+              <div className="row">
+                <div className="col">
                   <Field
                   name="institution"
                   label={selectedTypeOfUsers == "contentPartner" ?
@@ -140,7 +151,9 @@ const Register = ({
                   required
                   />
                 </div>
-              <div className="password-container ">
+              </div>
+              <div className="row">
+                <div className="col-md-6">
                   <Field
                     name="password"
                     component={FormField}
@@ -148,8 +161,7 @@ const Register = ({
                     label="Wachtwoord"
                   />
                   <p className="notice">Password must contain at least 8 characters</p>
-
-
+                </div>
               </div>
               <div className="submit_div">
 

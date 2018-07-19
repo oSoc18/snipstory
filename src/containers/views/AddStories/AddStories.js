@@ -185,31 +185,49 @@ class AddStories extends React.Component {
                         />
                         </div>
                     </div>
-
-                    <div>
-                    <legend>Geschikt voor welk leerjaar?</legend>
-                    <Field name="thirdYear" component={FormField} type="checkbox" label="Derde leerjaar" id="thirdYear"/>
-                    <Field name="fourthYear" component={FormField} type="checkbox" label="Vierde leerjaar" id="fourthYear"/>
-                    <Field name="fifthYear" component={FormField} type="checkbox" label="Vijfde leerjaar" id="fifthYear"/>
-                    <Field name="sixthYear" component={FormField} type="checkbox" label="Zesde leerjaar" id="sixthYear"/>
-                    <Field name="firstYearSecondary" component={FormField} type="checkbox" label="Eerste middelbaar" id="firstYearSecondary"/>
-                    <Field name="secondYearSecondary" component={FormField} type="checkbox" label="Tweede middelbaar" id="secondYearSecondary"/>
+                    <div className="row">
+                        <div className="col"><legend>Geschikt voor welk leerjaar?</legend></div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                        <Field name="thirdYear" component={FormField} type="checkbox" label="Derde leerjaar" id="thirdYear"/>
+                        </div>
+                        <div className="col-md-6">
+                        <Field name="fourthYear" component={FormField} type="checkbox" label="Vierde leerjaar" id="fourthYear"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                        <Field name="fifthYear" component={FormField} type="checkbox" label="Vijfde leerjaar" id="fifthYear"/>
+                        </div>
+                        <div className="col-md-6">
+                        <Field name="sixthYear" component={FormField} type="checkbox" label="Zesde leerjaar" id="sixthYear"/>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-md-6">
+                        <Field name="firstYearSecondary" component={FormField} type="checkbox" label="Eerste middelbaar" id="firstYearSecondary"/>
+                        </div>
+                        <div className="col-md-6">
+                        <Field name="secondYearSecondary" component={FormField} type="checkbox" label="Tweede middelbaar" id="secondYearSecondary"/>
+                        </div>
                     </div>
 
-                    <div>
-                        <Field
-                            name="difficulty"
-                            component="select"
-                            type="text"
-                            label="Moeilijkheidsgraad"
-                            required
-                        >
-                        <option value="easy">Gemakkelijk</option>
-                        <option value="rather-easy">Eerder gemakkelijk</option>
-                        <option value="intermediary">Gemiddeld</option>
-                        <option value="rather difficult">Eerder moeilijk</option>
-                        <option value="difficult">Moeilijk</option>
-                        </Field>
+                    <div className="row">
+                        <div className="col-md-4">
+                            <Field
+                                name="difficulty"
+                                component="select"
+                                type="text"
+                                label="Moeilijkheidsgraad"
+                                required
+                            >
+                                <option value="easy">Gemakkelijk</option>
+                                <option value="rather-easy">Eerder gemakkelijk</option>
+                                <option value="intermediary">Gemiddeld</option>
+                                <option value="rather difficult">Eerder moeilijk</option>
+                                <option value="difficult">Moeilijk</option>
+                            </Field>
                         </div>
                     </div>
                     <div className="row">
@@ -249,44 +267,58 @@ class AddStories extends React.Component {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col">
-                        <Field
-                            name="copyright"
-                            component={FormField}
-                            type="checkbox"
-                            label="Copyright"
-                        />
+                        <div className="col-md-6">
+                            <Field
+                                name="copyright"
+                                component={FormField}
+                                type="checkbox"
+                                label="Copyright"
+                            />
+                        </div>
+                        <div className="col-md-6">
+                            <Field
+                                name="visible"
+                                component={FormField}
+                                type="checkbox"
+                                label="Zichtbaar"
+                            />
                         </div>
                     </div>
+
                     <div>
-                        <Field
-                            name="visible"
-                            component={FormField}
-                            type="checkbox"
-                            label="Zichtbaar"
-                        />
+                    <div className="row">Belangrijke locaties</div>
+                    <div className="row">
+                        <div className="col-md-4">
+                            <SmallButton type="button" className={this.state.tags.brugge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="brugge">Brugge</SmallButton>
+                        </div>
+                        <div className="col-md-4">
+                            <SmallButton type="button" className={this.state.tags.ieper ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="ieper">Ieper</SmallButton>
+                        </div>
+                        <div className="col-md-4">
+                            <SmallButton type="button" className={this.state.tags.poperinge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="poperinge">Poperinge</SmallButton>
+                        </div>
                     </div>
-
-                    <div>
-                    <span>Belangrijke locaties</span>
-
-                    <SmallButton type="button" className={this.state.tags.brugge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="brugge">Brugge</SmallButton>
-                    <SmallButton type="button" className={this.state.tags.ieper ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="ieper">Ieper</SmallButton>
-                    <SmallButton type="button" className={this.state.tags.poperinge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="poperinge">Poperinge</SmallButton>
-
                     </div>
                     <div>
-                    <span>Categorie</span>
-
-                    <SmallButton type="button" className={this.state.tags.food ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="food">Voedsel</SmallButton>
-                    <SmallButton type="button" className={this.state.tags.sport ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="sport">Sport</SmallButton>
-                    <SmallButton type="button" className={this.state.tags.transportation ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="transportation">Transport</SmallButton>
-
+                    <div className="row">Categorie</div>
+                    <div className="row">
+                        <div className="col-md-4">
+                            <SmallButton type="button" className={this.state.tags.food ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="food">Voedsel</SmallButton>
+                        </div>
+                        <div className="col-md-4">
+                            <SmallButton type="button" className={this.state.tags.sport ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="sport">Sport</SmallButton>
+                        </div>
+                        <div className="col-md-4">
+                            <SmallButton type="button" className={this.state.tags.transportation ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="transportation">Transport</SmallButton>
+                        </div>
+                    </div>
                     </div>
 
 
                     <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
-            </div>
+                </div>
+                </div>
+
             </form>
             <Footer />
         </div>
