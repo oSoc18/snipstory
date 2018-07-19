@@ -1,5 +1,5 @@
 import { actionTypes } from '../actions';
-import changeOrder from '../../helpers/ordering';
+import { isNumber } from 'util';
 
 const initialState = {
   story: null,
@@ -18,10 +18,16 @@ export const reducer = (state = initialState, action) => {
     case actionTypes.fetchStoryStarted:
       return Object.assign({}, state, { isLoading: true });
     case actionTypes.fetchStoryFulFilled:
+      let modules = getArrayFrom(action.story.modules)
+      .sort((a, b) => a.order - b.order)
+      .map(module => ({
+        ...module,
+        order: isNumber(module.order) ? module.order : modules.length - 1
+      }));
       return Object.assign({}, state, {
         isLoading: false,
         story: action.story,
-        modules: getArrayFrom(action.story.modules).sort((a, b) => a.order - b.order),
+        modules,
         isDirty: false,
       });
     case actionTypes.fetchStoryRejected:
@@ -61,7 +67,7 @@ export const reducer = (state = initialState, action) => {
         console.log("No changes");
         return state;
       }
-      let modules = state.modules.slice();
+      modules = state.modules.slice();
       modules[action.indexA] = state.modules[action.indexB];
       modules[action.indexB] = state.modules[action.indexA];
       return Object.assign({}, state, {
@@ -89,7 +95,7 @@ export const reducer = (state = initialState, action) => {
           ...state.story,
           modules: storyModules
         },
-        modules: getArrayFrom(state.story.modules).sort((a, b) => a.order - b.order)
+        modules: getArrayFrom(storyModules).sort((a, b) => a.order - b.order)
       });
 
     case actionTypes.uploadModuleRejected:
