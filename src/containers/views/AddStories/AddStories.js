@@ -101,7 +101,7 @@ class AddStories extends React.Component {
                         },
                         ...fields
                 })
-                .then(() => history.push("teacher/dashboardstorylist"))
+                .then(() => history.push("/teacher/dashboardstorylist"))
             })
             }>
             <div className="general-container">

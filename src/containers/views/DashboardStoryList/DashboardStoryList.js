@@ -10,7 +10,8 @@ import { history } from '../../../redux/store';
 import {
     fetchStoriesDashboardList,
     deleteStory,
-    fetchStory
+    fetchStory,
+    logout
  } from '../../../redux/actions';
 
 
@@ -56,7 +57,7 @@ class DashboardStoryList extends React.Component {
             <div className="page">
                 <Navbar />
                 <h1>Dag {user.name}</h1>
-                <Button onClick={(e) => history.push("/teacher/addstory")}>Maak een nieuw verhaal aan</Button>
+                <Button to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
                 <div className="row">
 
                 {filteredStories && filteredStories.length > 0
@@ -105,7 +106,9 @@ class DashboardStoryList extends React.Component {
                         </span>
                       </div>
                 }
+
                 </div>
+                <Button onClick={logout}>Uitloggen</Button>
                 <Footer />
             </div>
         )
@@ -117,5 +120,6 @@ const mapStateToProps = state => ({...state.stories});
 export default connect(mapStateToProps,
     {fetchStoriesDashboardList,
         deleteStory,
-        fetchStory
+        fetchStory,
+        logout
     })(DashboardStoryList);
