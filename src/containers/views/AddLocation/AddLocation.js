@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl';
 import './AddLocation.css'
 import { firebaseDatabase } from '../../../helpers/firebase';
 import Button from '../../../components/button/Button'
-const  { DOM: { textarea } } = React
+const { DOM: { textarea } } = React
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXphaG1lZDA5NiIsImEiOiJjampyNnh6OTYyajlxM3dwYmFvMnc0dTV4In0.7X4yOZDGwbjF4zx4s0kw6A';
 
@@ -20,13 +20,17 @@ class AddLocation extends React.Component {
     });
 
     this.marker = new mapboxgl.Marker()
-    .setLngLat([4.33, 50.80])
-    .addTo(this.map);
+      .setLngLat([4.33, 50.80])
+      .addTo(this.map);
 
     this.map.on('click', this.onClick.bind(this));
   }
 
-  onClick(evt){
+  componentWillUnmount() {
+    this.map.remove();
+  }
+
+  onClick(evt) {
     this.marker.setLngLat(evt.lngLat);
   }
 
@@ -34,51 +38,51 @@ class AddLocation extends React.Component {
     let {
       pristine,
       submitting,
-      match: { params: {storyId} },
+      match: { params: { storyId } },
       history
     } = this.props;
 
     return <div className="AddLocation">
       <h1>Add location</h1>
-      <form onSubmit={this.props.handleSubmit(({motivation, title}) => {
+      <form onSubmit={this.props.handleSubmit(({ motivation, title }) => {
         let lngLat = this.marker.getLngLat();
         firebaseDatabase
-        .ref('stories/')
-        .child(storyId)
-        .child("locations")
-        .push({
-          motivation,
-          title,
-          lngLat
-        }).then(() => history.push(`/teacher/dashboard/${storyId}`));
+          .ref('stories/')
+          .child(storyId)
+          .child("locations")
+          .push({
+            motivation,
+            title,
+            lngLat
+          }).then(() => history.push(`/teacher/dashboard/${storyId}`));
       })}>
-      <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
-      <div id="map"></div>
-      <div>
-        <Field
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
+        <div id="map"></div>
+        <div>
+          <Field
             name="title"
             component={FormField}
             type="text"
             label="Title"
             required
-        />
-      </div>
-      <div>
-        <Field
+          />
+        </div>
+        <div>
+          <Field
             name="motivation"
             component={FormField}
             label="Motivation"
             type="text"
             required
-        />
-      </div>
+          />
+        </div>
 
-      <Button type="submit" disabled={pristine || submitting}>Add location</Button>
+        <Button type="submit" disabled={pristine || submitting}>Add location</Button>
 
       </form>
     </div>
   }
 }
 
-export default reduxForm({ form: 'addLocation'})(AddLocation);
+export default reduxForm({ form: 'addLocation' })(AddLocation);
 
