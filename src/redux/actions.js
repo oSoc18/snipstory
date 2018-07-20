@@ -86,6 +86,10 @@ export const actionTypes = {
   fetchStoriesDashboardListFulfilled: 'FETCH_STORIES_DASHBOARD_LIST_FULFILLED',
   fetchStoriesDashboardListRejected: 'FETCH_STORIES_DASHBOARD_LIST_REJECTED',
 
+  fetchStoryModulesStarted: 'FETCH_STORY_MODULES_STARTED',
+  fetchStoryModulesFulfilled: 'FETCH_STORY_MODULES_FULFILLED',
+  fetchStoryModulesRejected: 'FETCH_STORY_MODULES_REJECTED',
+
   fetchStoryStarted: 'FETCH_STORY_STARTED',
   fetchStoryFulFilled: 'FETCH_STORY_FULFILLED',
   fetchStoryRejected: 'FETCH_STORY_REJECTED',
@@ -1044,6 +1048,39 @@ export const fetchStoriesDashboardList = () => {
             });
     };
 };
+
+export const fetchStoryModules = storyId => {
+  return dispatch => {
+    dispatch(fetchStoryModulesStarted());
+    firebaseDatabase
+      .ref("/stories")
+      .child()
+      .child(storyId)
+      .child("modules")
+      .then(modules => {
+          const val = modules.val();
+          const keys = Object.keys(val);
+          dispatch(fetchStoryModulesFulfilled(keys.map(id => val[id])));
+      })
+      .catch(err => {
+        dispatch(fetchStoryModulesRejected(err.message));
+      });
+  };
+};
+
+export const fetchStoryModulesStarted = () => ({
+  type: actionTypes.fetchStoryModulesStarted
+});
+
+export const fetchStoryModulesFulfilled = () => ({
+  type: actionTypes.updateModuleFulfilled
+});
+
+export const fetchStoryModulesRejected = errorMessage => ({
+  type: actionTypes.updateModuleRejected,
+  error: errorMessage
+});
+
 
 export const deleteStory = storyObj => {
     return (dispatch, getState) => {
