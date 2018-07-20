@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../../../components/button/Button';
+import Filter from '../../../components/filter/Filter';
 import SmallButton from '../../../components/button-small/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
@@ -10,6 +11,7 @@ import { Field, reduxForm, SubmissionError } from 'redux-form';
 import {firebaseAuth, googleAuthProvider, firebaseDatabase} from '../../../helpers/firebase';
 import FormField from '../../../components/form/FormField';
 import './AddStories.css'
+
 
 class AddStories extends React.Component {
 
@@ -35,7 +37,8 @@ class AddStories extends React.Component {
                 food: false,
                 sport: false,
                 transportation: false
-            }
+            },
+            tagValues: []
         }
     }
 
@@ -223,7 +226,7 @@ class AddStories extends React.Component {
                                 required
                             >
                                 <option value="easy">Gemakkelijk</option>
-                                <option value="rather-easy">Eerder gemakkelijk</option>
+                                <option value="rather-eay">Eerder gemakkelijk</option>
                                 <option value="intermediary">Gemiddeld</option>
                                 <option value="rather difficult">Eerder moeilijk</option>
                                 <option value="difficult">Moeilijk</option>
@@ -285,32 +288,18 @@ class AddStories extends React.Component {
                         </div>
                     </div>
 
-                    <div>
-                    <div className="row">Belangrijke locaties</div>
-                    <div className="row">
-                        <div className="col-md-4">
-                            <SmallButton type="button" className={this.state.tags.brugge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="brugge">Brugge</SmallButton>
-                        </div>
-                        <div className="col-md-4">
-                            <SmallButton type="button" className={this.state.tags.ieper ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="ieper">Ieper</SmallButton>
-                        </div>
-                        <div className="col-md-4">
-                            <SmallButton type="button" className={this.state.tags.poperinge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="poperinge">Poperinge</SmallButton>
-                        </div>
-                    </div>
-                    </div>
+
                     <div>
                     <div className="row">Categorie</div>
                     <div className="row">
-                        <div className="col-md-4">
-                            <SmallButton type="button" className={this.state.tags.food ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="food">Voedsel</SmallButton>
-                        </div>
-                        <div className="col-md-4">
-                            <SmallButton type="button" className={this.state.tags.sport ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="sport">Sport</SmallButton>
-                        </div>
-                        <div className="col-md-4">
-                            <SmallButton type="button" className={this.state.tags.transportation ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="transportation">Transport</SmallButton>
-                        </div>
+                    {Object.keys(this.state.tags).map((tag,i) => {
+                        return (
+                            <div key={tag} className="col-md-4">
+                                <SmallButton type="button" className={Object.values(this.state.tags)[i] ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value={tag}>{tag}</SmallButton>
+                            </div>
+                        )}
+                    )}
+
                     </div>
                     </div>
 
