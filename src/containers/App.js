@@ -33,6 +33,7 @@ import EditStory from './views/EditStory/EditStory';
 
 import StoryDashboard from './views/StoryDashboard/StoryDashboard';
 
+import StoryPreview from './views/StoryPreview/StoryPreview';
 import FilterView from './views/FilterView/FilterView';
 
 
@@ -122,6 +123,11 @@ class App extends Component {
                     user={user}
                     {...props}
                   />}
+              />
+              <Route
+                path="/teacher/dashboard/:storyId/preview"
+                exact
+                render={props => <StoryPreview user={user} {...props} />}
               />
               <Route
                 path="/dashboardstorylist/:storyId/edit"
