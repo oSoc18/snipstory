@@ -33,6 +33,8 @@ import EditStory from './views/EditStory/EditStory';
 
 import StoryDashboard from './views/StoryDashboard/StoryDashboard';
 
+import FilterView from './views/FilterView/FilterView';
+
 
 import './App.css';
 import AddFunfact from './views/AddFunfact/AddFunfact';
@@ -70,6 +72,11 @@ class App extends Component {
                 path="/"
                 exact
                 render={props => <Home user={user} {...props} />}
+              />
+              <Route
+                path="/filterview"
+                exact
+                render={props => <FilterView user={user} {...props} />}
               />
               <Route
                 path="/teacher/register"
