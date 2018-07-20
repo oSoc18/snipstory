@@ -58,6 +58,7 @@ class DashboardStoryList extends React.Component {
                 <Navbar />
                 <h1>Dag {user.name}</h1>
                 <Button to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
+
                 <div className="row">
 
                 {filteredStories && filteredStories.length > 0
@@ -93,6 +94,8 @@ class DashboardStoryList extends React.Component {
 
                                     <div className="flex">
                                     <Button onClick={(e) => this.handleVisibility(e)}>Maak onzichtbaar</Button>
+                                    <Button
+                                    to={`/teacher/dashboard/${story.id}`}>Add modules</Button>
                                     </div>
 
                                 </div>

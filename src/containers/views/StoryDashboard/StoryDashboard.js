@@ -48,6 +48,11 @@ class StoryDashboard extends React.Component {
         to="/teacher/editstory" size="small">
         Edit Story
             </Button>
+        <Button
+        to={`/teacher/dashboard/${story.id}/preview/`}
+        size="small">
+        Preview
+            </Button>
       <Button
         disabled={isModuleLoading}
         to={`/teacher/dashboard/${story.id}/addfunfact/`}
