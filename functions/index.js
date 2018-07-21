@@ -43,6 +43,9 @@ exports.orderOfNewModule = functions.database.ref("/stories/{storyId}/modules/{m
     });
   });
 
+exports.onNewLocation = functions.database.ref("/stories/{storyId}/locations/{locationId}")
+.onCreate((snap, context) => snap.ref.child("id").set(context.params.locationId));
+
 exports.orderAfterDeleteModule = functions.database.ref("/stories/{storyId}/modules/{moduleId}")
   .onDelete((snap, index) => {
 // TODO
