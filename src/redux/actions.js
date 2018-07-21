@@ -92,6 +92,9 @@ export const actionTypes = {
   deleteModuleStarted: 'DELETE_MODULE_STARTED',
   deleteModuleFulFilled: 'DELETE_MODULE_FULFILLED',
   deleteModuleRejected: 'DELETE_MODULE_REJECTED',
+  deleteLocationStarted: 'DELETE_LOCATION_STARTED',
+  deleteLocationFulFilled: 'DELETE_LOCATION_FULFILLED',
+  deleteLocationRejected: 'DELETE_LOCATION_REJECTED',
   uploadModuleStarted: 'UPLOAD_MODULE_STARTED',
   uploadModuleFulFilled: 'UPLOAD_MODULE_FULFILLED',
   uploadModuleRejected: 'UPLOAD_MODULE_REJECTED',
@@ -197,6 +200,40 @@ export const deleteModule = (storyId, moduleId) => {
       .catch(err => {
         console.log(err);
         dispatch(deleteModuleRejected(err));
+      });
+  };
+};
+
+
+export const deleteLocationStarted = () => ({
+  type: actionTypes.deleteLocationStarted,
+});
+
+export const deleteLocationFulFilled = locationId => ({
+  type: actionTypes.deleteLocationFulFilled,
+  locationId
+});
+
+export const deleteLocationRejected = error => ({
+  type: actionTypes.deleteLocationRejected,
+  error
+});
+
+export const deleteLocation = (storyId, locationId) => {
+  return dispatch => {
+    dispatch(deleteLocationStarted());
+
+    firebaseDatabase
+      .ref("/stories")
+      .child(storyId)
+      .child("locations")
+      .child(locationId)
+      .remove()
+      .then(story => {
+        dispatch(deleteLocationFulFilled(locationId));
+      })
+      .catch(err => {
+        dispatch(deleteLocationRejected(err));
       });
   };
 };

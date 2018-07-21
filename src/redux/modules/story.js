@@ -35,6 +35,14 @@ export const reducer = (state = initialState, action) => {
         isLoading: false,
         error: action.error
       });
+    case actionTypes.deleteLocationStarted:
+      return Object.assign({}, state, {
+        isModuleLoading: true
+      });
+    case actionTypes.deleteLocationRejected:
+      return Object.assign({}, state, {
+        isModuleLoading: false
+      });
     case actionTypes.deleteModuleStarted:
       return Object.assign({}, state, {
         isModuleLoading: true
@@ -58,6 +66,23 @@ export const reducer = (state = initialState, action) => {
       newState["modules"] = getArrayFrom(newState.story.modules)
       .map((module, index) => ({...module, order: index}));
       return newState;
+    case actionTypes.deleteLocationFulFilled:
+      let locations = Object.keys(state.story.locations)
+      .reduce((newLocations, locationId) => {
+        let location = state.story.locations[locationId];
+        if (locationId != action.locationId){
+          newLocations[location.id] = location;
+        }
+        return newLocations;
+      }, {});
+
+      return Object.assign({}, state, {
+        isModuleLoading: false,
+        story: {
+          ...state.story,
+          locations
+        }
+      });
     case actionTypes.switchModules:
       if (
         state.modules.length <= action.indexA ||
