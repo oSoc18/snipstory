@@ -13,6 +13,7 @@ import { reducer as snipper } from './snipper';
 import { reducer as snippers } from './snippers';
 import { reducer as stories } from './dashboardStoryList';
 import { reducer as story } from './story';
+import { reducer as browse } from './storyBrowse';
 
 export const rootReducer = combineReducers({
   user,
@@ -28,5 +29,6 @@ export const rootReducer = combineReducers({
   snipper,
   snippers,
   stories,
+  browse,
   story
 });

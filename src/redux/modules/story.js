@@ -16,6 +16,12 @@ const getArrayFrom = (modules) => Object.keys(modules || {}).map(k => modules[k]
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.selectStory:
+      return Object.assign({}, state, {
+        isLoading: false,
+        story: action.story,
+        modules: getArrayFrom(action.story.modules)
+      });
     case actionTypes.fetchStoryStarted:
       return Object.assign({}, state, { isLoading: true });
     case actionTypes.fetchStoryFulFilled:

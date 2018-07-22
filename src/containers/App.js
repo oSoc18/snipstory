@@ -39,6 +39,7 @@ import AddFunfact from './views/AddFunfact/AddFunfact';
 import AddImageQuiz from './views/AddImageQuiz/AddImageQuiz';
 import AddQuiz from './views/AddQuiz/AddQuiz';
 import AddLocation from './views/AddLocation/AddLocation';
+import Story from './views/Story/Story';
 
 class App extends Component {
   componentDidMount() {
@@ -116,6 +117,11 @@ class App extends Component {
                     user={user}
                     {...props}
                   />}
+              />
+              <Route
+                path="/story/:storyId"
+                exact
+                render={props => <Story user={user} {...props} />}
               />
               <Route
                 path="/dashboardstorylist/:storyId/edit"

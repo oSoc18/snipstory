@@ -86,6 +86,8 @@ export const actionTypes = {
   fetchStoriesDashboardListFulfilled: 'FETCH_STORIES_DASHBOARD_LIST_FULFILLED',
   fetchStoriesDashboardListRejected: 'FETCH_STORIES_DASHBOARD_LIST_REJECTED',
 
+  nextModule: 'NEXT_MODULE',
+  prevModule: 'PREV_MODULE',
   fetchStoryStarted: 'FETCH_STORY_STARTED',
   fetchStoryFulFilled: 'FETCH_STORY_FULFILLED',
   fetchStoryRejected: 'FETCH_STORY_REJECTED',
@@ -128,7 +130,9 @@ export const fetchRandomStories = () => {
       .ref('/stories')
       .once('value')
       .then(snapshot => {
-        let randomStories = shuffle(snapshot.val());
+        let stories = snapshot.val();
+        let arr = Object.keys(stories).map(k => stories[k]);
+        let randomStories = shuffle(arr);
 
         dispatch(fetchRandomStoriesFulfilled(randomStories.splice(0, 3)));
       })
@@ -168,6 +172,26 @@ export const fetchStoryFulFilled = story => ({
 export const fetchStoryRejected = err => ({
   type: actionTypes.fetchStoryRejected,
   err
+});
+
+export const gotoNextModule = () => {
+  return dispatch => {
+    dispatch(nextModule());
+  }
+}
+
+export const gotoPrevModule = () => {
+  return dispatch => {
+    dispatch(prevModule());
+  }
+}
+
+export const nextModule = () => ({
+  type: actionTypes.nextModule,
+});
+
+export const prevModule = () => ({
+  type: actionTypes.prevModule,
 });
 
 export const deleteModuleStarted = () => ({
