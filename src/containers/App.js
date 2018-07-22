@@ -30,6 +30,7 @@ import ScrollToTop from '../components/util/ScrollToTop';
 import AddStories from './views/AddStories/AddStories';
 import DashboardStoryList from './views/DashboardStoryList/DashboardStoryList';
 import EditStory from './views/EditStory/EditStory';
+import Filter from './views/Filter/Filter';
 
 import StoryDashboard from './views/StoryDashboard/StoryDashboard';
 
@@ -122,6 +123,11 @@ class App extends Component {
                 path="/story/:storyId"
                 exact
                 render={props => <Story user={user} {...props} />}
+              />
+              <Route
+                path="/filter"
+                exact
+                render={props => <Filter user={user} {...props} />}
               />
               <Route
                 path="/dashboardstorylist/:storyId/edit"

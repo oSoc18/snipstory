@@ -91,6 +91,10 @@ export const actionTypes = {
   fetchStoryStarted: 'FETCH_STORY_STARTED',
   fetchStoryFulFilled: 'FETCH_STORY_FULFILLED',
   fetchStoryRejected: 'FETCH_STORY_REJECTED',
+  fetchStoriesStarted: 'FETCH_STORIES_STARTED',
+  fetchStoriesFulFilled: 'FETCH_STORIES_FULFILLED',
+  fetchStoriesRejected: 'FETCH_STORIES_REJECTED',
+  setFilterYearRange: 'SET_FILTER_YEAR_RANGE',
   deleteModuleStarted: 'DELETE_MODULE_STARTED',
   deleteModuleFulFilled: 'DELETE_MODULE_FULFILLED',
   deleteModuleRejected: 'DELETE_MODULE_REJECTED',
@@ -192,6 +196,46 @@ export const nextModule = () => ({
 
 export const prevModule = () => ({
   type: actionTypes.prevModule,
+});
+
+export const setFiltersYearRange = range => ({
+  type: actionTypes.setFilterYearRange,
+  range
+});
+
+export const setYearRange = range => {
+  return dispatch => {
+    dispatch(setFiltersYearRange(range))
+  };
+}
+
+export const fetchStories = () => {
+  return dispatch => {
+    dispatch(fetchStoriesStarted());
+    return firebaseDatabase
+      .ref("/stories")
+      .once('value')
+      .then(stories => {
+        dispatch(fetchStoriesFulFilled(stories.val()));
+      })
+      .catch(err => {
+        dispatch(fetchStoriesRejected(err));
+      });
+  };
+};
+
+export const fetchStoriesStarted = () => ({
+  type: actionTypes.fetchStoriesStarted
+});
+
+export const fetchStoriesFulFilled = stories => ({
+  type: actionTypes.fetchStoriesFulFilled,
+  stories
+});
+
+export const fetchStoriesRejected = err => ({
+  type: actionTypes.fetchStoriesRejected,
+  err
 });
 
 export const deleteModuleStarted = () => ({
