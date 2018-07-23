@@ -16,6 +16,12 @@ const getArrayFrom = (modules) => Object.keys(modules || {}).map(k => modules[k]
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.selectStory:
+      return Object.assign({}, state, {
+        isLoading: false,
+        story: action.story,
+        modules: getArrayFrom(action.story.modules)
+      });
     case actionTypes.fetchStoryStarted:
       return Object.assign({}, state, { isLoading: true });
     case actionTypes.fetchStoryFulFilled:
@@ -34,6 +40,14 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         isLoading: false,
         error: action.error
+      });
+    case actionTypes.deleteLocationStarted:
+      return Object.assign({}, state, {
+        isModuleLoading: true
+      });
+    case actionTypes.deleteLocationRejected:
+      return Object.assign({}, state, {
+        isModuleLoading: false
       });
     case actionTypes.deleteModuleStarted:
       return Object.assign({}, state, {
@@ -55,8 +69,26 @@ export const reducer = (state = initialState, action) => {
         }
       });
       delete newState.story.modules[action.moduleId];
-      newState["modules"] = getArrayFrom(newState.story.modules);
+      newState["modules"] = getArrayFrom(newState.story.modules)
+      .map((module, index) => ({...module, order: index}));
       return newState;
+    case actionTypes.deleteLocationFulFilled:
+      let locations = Object.keys(state.story.locations)
+      .reduce((newLocations, locationId) => {
+        let location = state.story.locations[locationId];
+        if (locationId != action.locationId){
+          newLocations[location.id] = location;
+        }
+        return newLocations;
+      }, {});
+
+      return Object.assign({}, state, {
+        isModuleLoading: false,
+        story: {
+          ...state.story,
+          locations
+        }
+      });
     case actionTypes.switchModules:
       if (
         state.modules.length <= action.indexA ||

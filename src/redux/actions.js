@@ -90,12 +90,21 @@ export const actionTypes = {
   fetchStoryModulesFulfilled: 'FETCH_STORY_MODULES_FULFILLED',
   fetchStoryModulesRejected: 'FETCH_STORY_MODULES_REJECTED',
 
+  nextModule: 'NEXT_MODULE',
+  prevModule: 'PREV_MODULE',
   fetchStoryStarted: 'FETCH_STORY_STARTED',
   fetchStoryFulFilled: 'FETCH_STORY_FULFILLED',
   fetchStoryRejected: 'FETCH_STORY_REJECTED',
+  fetchStoriesStarted: 'FETCH_STORIES_STARTED',
+  fetchStoriesFulFilled: 'FETCH_STORIES_FULFILLED',
+  fetchStoriesRejected: 'FETCH_STORIES_REJECTED',
+  setFilterYearRange: 'SET_FILTER_YEAR_RANGE',
   deleteModuleStarted: 'DELETE_MODULE_STARTED',
   deleteModuleFulFilled: 'DELETE_MODULE_FULFILLED',
   deleteModuleRejected: 'DELETE_MODULE_REJECTED',
+  deleteLocationStarted: 'DELETE_LOCATION_STARTED',
+  deleteLocationFulFilled: 'DELETE_LOCATION_FULFILLED',
+  deleteLocationRejected: 'DELETE_LOCATION_REJECTED',
   uploadModuleStarted: 'UPLOAD_MODULE_STARTED',
   uploadModuleFulFilled: 'UPLOAD_MODULE_FULFILLED',
   uploadModuleRejected: 'UPLOAD_MODULE_REJECTED',
@@ -129,7 +138,9 @@ export const fetchRandomStories = () => {
       .ref('/stories')
       .once('value')
       .then(snapshot => {
-        let randomStories = shuffle(snapshot.val());
+        let stories = snapshot.val();
+        let arr = Object.keys(stories).map(k => stories[k]);
+        let randomStories = shuffle(arr);
 
         dispatch(fetchRandomStoriesFulfilled(randomStories.splice(0, 3)));
       })
@@ -171,6 +182,66 @@ export const fetchStoryRejected = err => ({
   err
 });
 
+export const gotoNextModule = () => {
+  return dispatch => {
+    dispatch(nextModule());
+  }
+}
+
+export const gotoPrevModule = () => {
+  return dispatch => {
+    dispatch(prevModule());
+  }
+}
+
+export const nextModule = () => ({
+  type: actionTypes.nextModule,
+});
+
+export const prevModule = () => ({
+  type: actionTypes.prevModule,
+});
+
+export const setFiltersYearRange = range => ({
+  type: actionTypes.setFilterYearRange,
+  range
+});
+
+export const setYearRange = range => {
+  return dispatch => {
+    dispatch(setFiltersYearRange(range))
+  };
+}
+
+export const fetchStories = () => {
+  return dispatch => {
+    dispatch(fetchStoriesStarted());
+    return firebaseDatabase
+      .ref("/stories")
+      .once('value')
+      .then(stories => {
+        dispatch(fetchStoriesFulFilled(stories.val()));
+      })
+      .catch(err => {
+        dispatch(fetchStoriesRejected(err));
+      });
+  };
+};
+
+export const fetchStoriesStarted = () => ({
+  type: actionTypes.fetchStoriesStarted
+});
+
+export const fetchStoriesFulFilled = stories => ({
+  type: actionTypes.fetchStoriesFulFilled,
+  stories
+});
+
+export const fetchStoriesRejected = err => ({
+  type: actionTypes.fetchStoriesRejected,
+  err
+});
+
 export const deleteModuleStarted = () => ({
   type: actionTypes.deleteModuleStarted,
 });
@@ -201,6 +272,40 @@ export const deleteModule = (storyId, moduleId) => {
       .catch(err => {
         console.log(err);
         dispatch(deleteModuleRejected(err));
+      });
+  };
+};
+
+
+export const deleteLocationStarted = () => ({
+  type: actionTypes.deleteLocationStarted,
+});
+
+export const deleteLocationFulFilled = locationId => ({
+  type: actionTypes.deleteLocationFulFilled,
+  locationId
+});
+
+export const deleteLocationRejected = error => ({
+  type: actionTypes.deleteLocationRejected,
+  error
+});
+
+export const deleteLocation = (storyId, locationId) => {
+  return dispatch => {
+    dispatch(deleteLocationStarted());
+
+    firebaseDatabase
+      .ref("/stories")
+      .child(storyId)
+      .child("locations")
+      .child(locationId)
+      .remove()
+      .then(story => {
+        dispatch(deleteLocationFulFilled(locationId));
+      })
+      .catch(err => {
+        dispatch(deleteLocationRejected(err));
       });
   };
 };
@@ -487,7 +592,17 @@ export const listenToFirebaseAuth = () => {
           const val = snapshot.val();
           const newVal = { ...val, ...userData };
           userRef.set(newVal);
-          dispatch(authFulfilled(newVal));
+          return newVal;
+        }).then(newVal => {
+          firebaseDatabase
+            .ref(`/admins/${newVal.uid}`)
+            .once('value')
+            .then(snapshot => {
+              if (snapshot.val()){
+                newVal.isAdmin = true;
+              }
+            }).catch(() => dispatch(authFulfilled(newVal)))
+            .then(() => dispatch(authFulfilled(newVal)));
         });
       } else {
         dispatch(authRejected(''));

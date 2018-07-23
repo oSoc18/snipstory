@@ -14,10 +14,10 @@ import Footer from '../../../components/footer/Footer.js';
 //
 // }
 
-const ResetPassword = ({ pristine, submitting, handleSubmit, error, showToast }) => {
+const ResetPassword = ({ pristine, submitting, logout, user, handleSubmit, error, showToast }) => {
   return (
     <div className="page">
-      <Navbar />
+      <Navbar logout={logout} user={user}/>
       <div className="container">
         <div className="login-box">
           <div className="login-small-container">

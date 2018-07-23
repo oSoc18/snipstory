@@ -12,13 +12,13 @@ class Snippers extends React.Component {
     this.props.fetchSnippers();
   }
   render() {
-    const { snippers, isLoading } = this.props;
+    const { snippers, isLoading, user } = this.props;
     if (isLoading || !snippers || snippers.length === 0) {
       return <Spinner page size="large" />;
     }
     return (
       <div className="page">
-        <Navbar />
+        <Navbar logout={this.props.logout} user={user}/>
         <div>
           <h1 className="creation-title" style={{ textAlign: 'center' }}>
             Snippers

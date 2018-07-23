@@ -13,7 +13,10 @@ exports.confirmFalse = functions.database.ref('/users/{userId}')
 
 exports.moduleCount = functions.database.ref('/stories/{storyId}')
   .onCreate((snap, context) => {
-    return snap.ref.child("moduleCount").set(0);
+    return Promise.all([
+      snap.ref.child("moduleCount").set(0),
+      snap.ref.child("id", context.params.storyId)
+    ]);
   });
 
 exports.orderOfNewModule = functions.database.ref("/stories/{storyId}/modules/{moduleId}")
@@ -42,6 +45,9 @@ exports.orderOfNewModule = functions.database.ref("/stories/{storyId}/modules/{m
         .catch(err => reject(err));
     });
   });
+
+exports.onNewLocation = functions.database.ref("/stories/{storyId}/locations/{locationId}")
+.onCreate((snap, context) => snap.ref.child("id").set(context.params.locationId));
 
 exports.orderAfterDeleteModule = functions.database.ref("/stories/{storyId}/modules/{moduleId}")
   .onDelete((snap, index) => {

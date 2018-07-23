@@ -93,7 +93,7 @@ class EditStory extends React.Component {
 
         return (
             <div className="page">
-                <Navbar />
+                <Navbar logout={logout} user={user}/>
                 <h1>Pas uw verhaal aan</h1>
                 <h2>{story.general.title}</h2>
 

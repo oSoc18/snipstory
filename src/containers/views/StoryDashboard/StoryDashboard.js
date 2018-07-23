@@ -6,6 +6,7 @@ import {
   resetOrder,
   uploadModules,
   upOrder,
+  deleteLocation,
   downOrder
 } from '../../../redux/actions';
 import Spinner from '../../../components/spinner/Spinner';
@@ -13,6 +14,7 @@ import Button from '../../../components/button/Button'
 import './StoryDashboard.css';
 
 import ModuleList from '../../../components/ModuleList/ModuleList';
+import LocationList from '../../../components/LocationList/LocationList';
 
 
 class StoryDashboard extends React.Component {
@@ -29,6 +31,7 @@ class StoryDashboard extends React.Component {
       downOrder,
       resetOrder,
       uploadModules,
+      deleteLocation,
       // rest
       story,
       isLoading,
@@ -61,6 +64,12 @@ class StoryDashboard extends React.Component {
             </Button>
       <Button
         disabled={isModuleLoading}
+        to={`/teacher/dashboard/${story.id}/addlocation/`}
+        size="small">
+        Add location
+            </Button>
+      <Button
+        disabled={isModuleLoading}
         to={`/teacher/dashboard/${story.id}/addimagequiz/`}
         size="small">
         Add Image quiz
@@ -83,6 +92,12 @@ class StoryDashboard extends React.Component {
         modules={modules}
         onDelete={moduleId => deleteModule(story.id, moduleId)}
         isLoading={isModuleLoading} />
+
+        <LocationList
+          canDelete={!isModuleLoading}
+          locations={Object.keys(story.locations || {}).map(k => story.locations[k])}
+          onDelete={locationId => deleteLocation(story.id, locationId)}
+        />
     </div>)
   }
 };
@@ -97,4 +112,5 @@ export default connect(mapStateToProps, {
   uploadModules,
   downOrder,
   upOrder,
+  deleteLocation,
 })(StoryDashboard);
