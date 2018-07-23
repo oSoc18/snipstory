@@ -47,7 +47,7 @@ const CreateUser = ({
 
   return (
     <div className="page">
-      <Navbar/>
+      <Navbar logout={props.logout} user={props.user}/>
       <div className="container">
       <div className="register-box">
             <form

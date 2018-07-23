@@ -11,6 +11,7 @@ class EditFunfact extends React.Component {
             pristine,
             submitting,
             history,
+            reset,
             match: { params: {storyId, moduleId} }
         } = this.props;
 
@@ -39,6 +40,7 @@ class EditFunfact extends React.Component {
                     />
                 </div>
             <Button type="submit" disabled={pristine || submitting}>Add weetje</Button>
+            <button onClick={() => reset()}>Reset</button>
             </div>
             </form>
         </div>

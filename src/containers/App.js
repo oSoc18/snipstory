@@ -5,6 +5,7 @@ import { ConnectedRouter } from 'connected-react-router';
 import {
   showToast,
   destroyToast,
+  logout,
   listenToFirebaseAuth
 } from '../redux/actions';
 import ProtectedRoute from '../components/auth/ProtectedRoute';
@@ -58,14 +59,14 @@ class App extends Component {
       user,
       toast: { toastActive, ...toast },
       showToast,
+      logout,
       destroyToast
     } = this.props;
     const isAuthorized = user.isAuthorized;
     const adminOnly = user.isAdmin && isAuthorized;
     const confirmedUsersOnly = user.confirmed && isAuthorized;
-    console.log(`confirmed: ${confirmedUsersOnly}`);
-
-    if (user.authPending || !user || user.initial) {
+    console.log(user);
+    if (user.authPending) {
       return <Spinner page size="large" />;
     }
     return (
@@ -73,47 +74,48 @@ class App extends Component {
         <ConnectedRouter history={history}>
           <ScrollToTop>
             <Switch>
+
               <Route
                 path="/"
                 exact
-                render={props => <Home user={user} {...props} />}
+                render={props => <Home user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
                 isAuthorized={!isAuthorized}
                 path="/teacher/register"
                 redirectUrl="/"
                 exact
-                render={props => <Register user={user} {...props} />}
+                render={props => <Register user={user} logout={logout} {...props} />}
               />
               <Route
                 path="/story/select"
                 exact
-                render={props => <StorySelect user={user} {...props} />}
+                render={props => <StorySelect user={user} logout={logout} {...props} />}
               />
               <Route
                 path="/story/share"
                 exact
-                render={props => <Share user={user} {...props} />}
+                render={props => <Share user={user} logout={logout} {...props} />}
               />
               <Route
                 path="/rooms/create"
                 exact
-                render={props => <CreateRoom user={user} {...props} />}
+                render={props => <CreateRoom user={user} logout={logout} {...props} />}
               />
               <Route
                 path="/rooms/:roomId"
                 exact
-                render={props => <Room user={user} {...props} />}
+                render={props => <Room user={user} logout={logout} {...props} />}
               />
               <Route
                 path="/knutseltips"
                 exact
-                render={props => <KnutselTips user={user} {...props} />}
+                render={props => <KnutselTips user={user} logout={logout} {...props} />}
               />
               <Route
                 path="/snippers"
                 exact
-                render={props => <Snippers user={user} {...props} />}
+                render={props => <Snippers user={user} logout={logout} {...props} />}
               />
               <Route
                 path="/snippers/:snipperId"
@@ -121,26 +123,26 @@ class App extends Component {
                 render={props =>
                   <SnipperDetail
                     showToast={showToast}
-                    user={user}
+                    user={user} logout={logout}
                     {...props}
                   />}
               />
               <Route
                 path="/story/:storyId"
                 exact
-                render={props => <Story user={user} {...props} />}
+                render={props => <Story user={user} logout={logout} {...props} />}
               />
               <Route
                 path="/filter"
                 exact
-                render={props => <Filter user={user} {...props} />}
+                render={props => <Filter user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
                 isAuthorized={confirmedUsersOnly}
                 path="/dashboardstorylist/:storyId/edit"
                 exact
                 redirectUrl="/teacher/login"
-                render={props => <EditStory user={user} {...props} />}
+                render={props => <EditStory user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
                 isAuthorized={confirmedUsersOnly}
@@ -149,7 +151,7 @@ class App extends Component {
                 redirectUrl="/teacher/login"
                 render={props =>
                   <AddFunfact
-                    user={user}
+                    user={user} logout={logout}
                     {...props}
                   />}
               />
@@ -171,7 +173,7 @@ class App extends Component {
                 redirectUrl="/teacher/login"
                 render={props =>
                   <AddImageQuiz
-                    user={user}
+                    user={user} logout={logout}
                     {...props}
                   />}
               />
@@ -182,7 +184,7 @@ class App extends Component {
                 redirectUrl="/teacher/login"
                 render={props =>
                   <AddLocation
-                    user={user}
+                    user={user} logout={logout}
                     {...props}
                   />}
               />
@@ -193,7 +195,7 @@ class App extends Component {
                 redirectUrl="/teacher/login"
                 render={props =>
                   <AddQuiz
-                    user={user}
+                    user={user} logout={logout}
                     {...props}
                   />}
               />
@@ -204,7 +206,7 @@ class App extends Component {
                 redirectUrl="/teacher/login"
                 render={props =>
                   <StoryDashboard
-                    user={user}
+                    user={user} logout={logout}
                     {...props}
                   />}
               />
@@ -213,33 +215,33 @@ class App extends Component {
                 isAuthorized={adminOnly}
                 redirectUrl="/admin/login"
                 exact
-                render={props => <CreateUser user={user} {...props} />}
+                render={props => <CreateUser user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
                 path="/teacher/addstory"
                 isAuthorized={confirmedUsersOnly}
                 redirectUrl="/teacher/login"
-                render={props => <AddStories user={user} {...props} />}
+                render={props => <AddStories user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
                 path="/teacher/dashboardstorylist"
                 isAuthorized={confirmedUsersOnly}
                 redirectUrl="/teacher/login"
-                render={props => <DashboardStoryList user={user} {...props} />}
+                render={props => <DashboardStoryList user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
                 path="/teacher/stories/create"
                 isAuthorized={isAuthorized}
                 redirectUrl="/teacher/login"
                 exact
-                render={props => <CreateStory user={user} {...props} />}
+                render={props => <CreateStory user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
                 path="/teacher"
                 isAuthorized={isAuthorized}
                 redirectUrl="/teacher/login"
                 exact
-                render={props => <TeacherArea user={user} {...props} />}
+                render={props => <TeacherArea user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
                 path="/teacher/login"
@@ -247,7 +249,7 @@ class App extends Component {
                 redirectUrl="/"
                 exact
                 render={props =>
-                  <Login user={user} showToast={showToast} {...props} />}
+                  <Login user={user} logout={logout} showToast={showToast} {...props} />}
               />
               <ProtectedRoute
                 path="/teacher/resetpassword"
@@ -255,7 +257,7 @@ class App extends Component {
                 redirectUrl="/teacher"
                 exact
                 render={props =>
-                  <ResetPassword user={user} showToast={showToast} {...props} />}
+                  <ResetPassword user={user} logout={logout} showToast={showToast} {...props} />}
               />
               <Route render={() => <Redirect to="/" />} />
             </Switch>
@@ -277,5 +279,6 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   showToast,
   destroyToast,
+  logout,
   listenToFirebaseAuth
 })(App);

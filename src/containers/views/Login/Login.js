@@ -11,10 +11,10 @@ import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer.js';
 
 
-const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
+const Login = ({ pristine, submitting, handleSubmit, user, error, showToast, logout }) => {
   return (
     <div className="page">
-      <Navbar />
+      <Navbar logout={logout} user={user}/>
       <div className="general-container container">
         <div className="login-box">
           <div className="login-small-container">

@@ -5,7 +5,7 @@ import Navlogo from '../../containers/views/Home/assets/menu-logo.png';
 import './Navlink.css';
 import { Menu } from 'react-feather';
 
-const Navbar = ({ fixed = true }) => {
+const Navbar = ({ fixed = true, user, logout }) => {
   return (
     <nav
       className={`navbar navbar-toggleable-md ${fixed
@@ -45,7 +45,11 @@ const Navbar = ({ fixed = true }) => {
             </Button>
           </li>
           <li className="nav-item">
-            <Navlink to="/teacher/login">Inloggen</Navlink>
+            {(user && user.uid) ?
+              <Button onClick={logout}>Uitloggen</Button>
+              :
+              <Navlink to="/teacher/login">Inloggen</Navlink>
+            }
           </li>
         </ul>
       </div>

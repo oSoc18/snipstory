@@ -21,6 +21,7 @@ const Register = ({
   error,
   change,
   selectedTypeOfUsers,
+  user,
   ...props
 }) => {
   const ContentPartnerOnly = (
@@ -40,7 +41,7 @@ const Register = ({
 
   return (
     <div className="page">
-      <Navbar/>
+      <Navbar logout={this.props.logout} user={user}/>
       <div className="general-container container">
       <div className="register-box">
             <form

@@ -36,7 +36,7 @@ class TeacherArea extends React.Component {
 
     return (
       <div className="page">
-        <Navbar />
+        <Navbar logout={this.props.logout} user={user}/>
         <h1>Leerkrachtenplatform</h1>
         <div>
           <Avatar

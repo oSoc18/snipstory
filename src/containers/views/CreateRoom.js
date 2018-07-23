@@ -19,13 +19,14 @@ class CreateRoom extends React.Component {
       isLoading,
       checkTeacherCode,
       createRoom,
-      checkTeacherCodeFulfilled
+      checkTeacherCodeFulfilled,
+      logout
     } = this.props;
 
     if (isLoading) return <div>Creating room...</div>;
     return (
       <div className="page">
-        <Navbar />
+        <Navbar logout={logout} user={this.props.user}/>
         <div className="container">
           <div className="col-md-6">
             <form
