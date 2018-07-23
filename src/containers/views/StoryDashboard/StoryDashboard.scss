@@ -1,0 +1,51 @@
+@import '../../../variables.scss';
+
+.dashboard-story-container{
+    width: 100%;
+}
+.dashboard-story-container .button{
+    padding: 0.4rem 0.6rem;
+    font-weight: 400;
+}
+.story-dashboard-header{
+    margin-top: -10px;
+    padding: 30px 0 15px 30px;
+    border-bottom: 2px solid $brand-blue;
+    background: #fff;
+}
+.story-dashboard-header span{
+    color: $brand-blue;
+    font-size: 1rem;
+}
+.story-dashboard-header h1{
+    color: $brand-blue;
+    font-size: 1.4rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.story-dashboard-body{
+    padding-left: 30px;
+    width: calc(100vw - 30px);
+}
+.story-info{
+    background: #fff;
+    margin-top: 15px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.38);
+    padding: 0;
+}
+.story-info-header{
+    background: $brand-blue;
+    margin: 0;
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 15px;
+}
+.story-info-header h1{
+    font-size: 1.1rem;
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    line-height: 1.5rem;
+}
