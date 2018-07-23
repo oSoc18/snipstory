@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../../../components/button/Button';
-import SmallButton from '../../../components/button-small/Button';
 import { firebaseAuth, googleAuthProvider } from '../../../helpers/firebase';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
 import { Link } from 'react-router-dom';
@@ -56,6 +55,7 @@ const Login = ({ pristine, submitting, handleSubmit, error, showToast }) => {
                     className="submit_button"
                     type="submit"
                     disabled={pristine || submitting}
+                    size="small"
                   >
                     Login
                   </Button>

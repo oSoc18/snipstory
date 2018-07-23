@@ -2,16 +2,19 @@
 
 .dashboard-story-container{
     width: 100%;
+    margin-bottom: 50px;
 }
 .dashboard-story-container .button{
     padding: 0.4rem 0.6rem;
     font-weight: 400;
+    margin: 0 10px 0 0;
 }
 .story-dashboard-header{
     margin-top: -10px;
-    padding: 30px 0 15px 30px;
+    padding: 30px 0 15px 60px;
     border-bottom: 2px solid $brand-blue;
     background: #fff;
+    width: 100%;
 }
 .story-dashboard-header span{
     color: $brand-blue;
@@ -21,17 +24,17 @@
     color: $brand-blue;
     font-size: 1.4rem;
     margin-bottom: 0;
-    padding-bottom: 0;
+    padding: 0;
 }
 .story-dashboard-body{
-    padding-left: 30px;
-    width: calc(100vw - 30px);
+    width: calc(100% - 60px);
+    margin-top: -15px;
 }
 .story-info{
     background: #fff;
     margin-top: 15px;
     border-radius: 10px;
-    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.38);
+    box-shadow: 0px 3px 7px rgba(0,0,0,0.38);
     padding: 0;
 }
 .story-info-header{
@@ -42,10 +45,31 @@
     border-top-right-radius: 10px;
     padding: 15px;
 }
+
 .story-info-header h1{
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     color: #fff;
     padding: 0;
+    line-height: 1.8rem;
+    margin: 20px 0 auto 0;
+}
+.story-info-header img{
+    border-radius: 50%;
+    width: 100px;
+}
+.story-info-body{
+    padding: 0 15px 15px 45px;
+}
+.story-info-body .blue-text{
+    color: $brand-blue;
+}
+.dashboard-story-container .story-edit-button{
+    color: $brand-orange;
+    border-color: $brand-orange;
+    font-size: 1.4rem;
+    padding: 0.6rem 1rem;
     margin: 0;
-    line-height: 1.5rem;
+}
+.story-info-button-container{
+    text-align: center;
 }
