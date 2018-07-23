@@ -60,6 +60,9 @@ class App extends Component {
       destroyToast
     } = this.props;
     const isAuthorized = user.isAuthorized;
+    const adminOnly = user.isAdmin && isAuthorized;
+    const confirmedUsersOnly = user.confirmed && isAuthorized;
+    console.log(`confirmed: ${confirmedUsersOnly}`);
 
     if (user.authPending || !user || user.initial) {
       return <Spinner page size="large" />;
@@ -74,8 +77,10 @@ class App extends Component {
                 exact
                 render={props => <Home user={user} {...props} />}
               />
-              <Route
+              <ProtectedRoute
+                isAuthorized={!isAuthorized}
                 path="/teacher/register"
+                redirectUrl="/"
                 exact
                 render={props => <Register user={user} {...props} />}
               />
@@ -129,72 +134,85 @@ class App extends Component {
                 exact
                 render={props => <Filter user={user} {...props} />}
               />
-              <Route
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
                 path="/dashboardstorylist/:storyId/edit"
                 exact
+                redirectUrl="/teacher/login"
                 render={props => <EditStory user={user} {...props} />}
               />
-              <Route
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
                 path="/teacher/dashboard/:storyId/addfunfact"
                 exact
+                redirectUrl="/teacher/login"
                 render={props =>
                   <AddFunfact
                     user={user}
                     {...props}
                   />}
               />
-              <Route
+
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
                 path="/teacher/dashboard/:storyId/addimagequiz"
                 exact
+                redirectUrl="/teacher/login"
                 render={props =>
                   <AddImageQuiz
                     user={user}
                     {...props}
                   />}
               />
-              <Route
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
                 path="/teacher/dashboard/:storyId/addlocation"
                 exact
+                redirectUrl="/teacher/login"
                 render={props =>
                   <AddLocation
                     user={user}
                     {...props}
                   />}
               />
-              <Route
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
                 path="/teacher/dashboard/:storyId/addquiz"
                 exact
+                redirectUrl="/teacher/login"
                 render={props =>
                   <AddQuiz
                     user={user}
                     {...props}
                   />}
               />
-              <Route
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
                 path="/teacher/dashboard/:storyId"
                 exact
+                redirectUrl="/teacher/login"
                 render={props =>
                   <StoryDashboard
                     user={user}
                     {...props}
                   />}
               />
-              <Route
+              <ProtectedRoute
                 path="/admin/createuser"
-                isAuthorized={isAuthorized}
+                isAuthorized={adminOnly}
                 redirectUrl="/admin/login"
                 exact
                 render={props => <CreateUser user={user} {...props} />}
               />
               <ProtectedRoute
                 path="/teacher/addstory"
-                isAuthorized={isAuthorized}
+                isAuthorized={confirmedUsersOnly}
                 redirectUrl="/teacher/login"
                 render={props => <AddStories user={user} {...props} />}
               />
               <ProtectedRoute
                 path="/teacher/dashboardstorylist"
-                isAuthorized={isAuthorized}
+                isAuthorized={confirmedUsersOnly}
                 redirectUrl="/teacher/login"
                 render={props => <DashboardStoryList user={user} {...props} />}
               />
@@ -215,7 +233,7 @@ class App extends Component {
               <ProtectedRoute
                 path="/teacher/login"
                 isAuthorized={!isAuthorized}
-                redirectUrl="/teacher/dashboardstorylist"
+                redirectUrl="/"
                 exact
                 render={props =>
                   <Login user={user} showToast={showToast} {...props} />}
