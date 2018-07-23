@@ -41,6 +41,7 @@ import './App.css';
 import AddFunfact from './views/AddFunfact/AddFunfact';
 import AddImageQuiz from './views/AddImageQuiz/AddImageQuiz';
 import AddQuiz from './views/AddQuiz/AddQuiz';
+import AddTextBlock from './views/AddTextBlock/AddTextBlock';
 
 class App extends Component {
   componentDidMount() {
@@ -157,6 +158,15 @@ class App extends Component {
                 exact
                 render={props =>
                   <AddQuiz
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <Route
+                path="/teacher/dashboard/:storyId/addtextblock"
+                exact
+                render={props =>
+                  <AddTextBlock
                     user={user}
                     {...props}
                   />}
