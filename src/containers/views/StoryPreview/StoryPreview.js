@@ -74,7 +74,7 @@ class StoryPreview extends React.Component {
                   </h2>
 
                   <p className="card-text">
-                    {story.general.description}
+                    {story.general.summary}
                   </p>
                   <p className="card-text card-text--icon">
                     <svg
@@ -119,6 +119,11 @@ class StoryPreview extends React.Component {
                     {story.general.nationality}
                   </p>
                 </div>
+                <img
+                  className="card-img-top-2"
+                  src={story.general.profilePicture}
+                  alt={story.general.title}
+                />
               </div>
             </div>
 
