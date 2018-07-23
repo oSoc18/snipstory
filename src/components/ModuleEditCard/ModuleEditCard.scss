@@ -14,19 +14,18 @@
 .story-module p{
     padding: 15px;
     font-size: 0.9rem;
+    margin-bottom: 0;
 }
 .module-button-container .row{
     margin-bottom: 0.3rem;
     padding-top: 0;
 }
-
 .module-delete{
     color: $brand-red;
 }
 .module-edit{
-    color: $brand-orange
+    color: $brand-orange;
 }
 .module-up-down-container{
-    flex-direction: column;
-    
+    flex-direction: column;   
 }

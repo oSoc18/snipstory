@@ -17,7 +17,7 @@ export default class ModuleEditCard extends React.Component {
       text } = this.props;
 
     return <div className="story-module row justify-content-between">
-        <div className="col-md-8">
+        <div className="col-md-11">
           <h1 className="type-title row">({order + 1}) { type }</h1>
           <div className="row">
             <p>{ text }</p>

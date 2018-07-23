@@ -63,6 +63,13 @@
 .story-info-body .blue-text{
     color: $brand-blue;
 }
+.story-info-body svg{
+    margin-right: 10px;
+    fill: $brand-blue;
+    color: #fff;
+    max-width: 24px;
+    max-height: 24px;
+}
 .dashboard-story-container .story-edit-button{
     color: $brand-orange;
     border-color: $brand-orange;
@@ -72,4 +79,7 @@
 }
 .story-info-button-container{
     text-align: center;
+}
+.head-metadata{
+    font-weight: 600;
 }
