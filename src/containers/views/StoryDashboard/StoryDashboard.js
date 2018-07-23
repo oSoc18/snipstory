@@ -33,6 +33,7 @@ class StoryDashboard extends React.Component {
       uploadModules,
       deleteLocation,
       // rest
+      history,
       story,
       isLoading,
       isModuleLoading,
@@ -79,6 +80,7 @@ class StoryDashboard extends React.Component {
         canDelete={!isDirty && !isModuleLoading}
         canChangeOrder={!isModuleLoading && !isUploadingModules}
         canSaveOrReset={isDirty && !isUploadingModules}
+        onEdit={moduleId => history.push(`/teacher/dashboard/${story.id}/edit/${module.contentType}/${moduleId}`)}
         onReset={resetOrder}
         onSaveOrder={() => uploadModules(story.id, modules)}
         upOrder={moduleId => upOrder(modules.findIndex(module => moduleId == module.id))}

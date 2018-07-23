@@ -26,7 +26,8 @@ class StorySelect extends React.Component {
       randomStories,
       error,
       selectStory,
-      createRoom
+      createRoom,
+      history
     } = this.props;
 
     return (
@@ -46,11 +47,11 @@ class StorySelect extends React.Component {
                   randomStories.map(story =>
                     <div
                       className="story card"
-                      key={story.id || story.general.id /* TODO choose between */}
+                      key={story.id}
                       onClick={e => {
                         e.preventDefault();
                         selectStory(story);
-                        createRoom('');
+                        history.push(`/story/${story.id}`);
                       }}
                       style={{ margin: '1em', width: '20em' }}
                     >

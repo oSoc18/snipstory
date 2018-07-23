@@ -13,6 +13,7 @@ export default class ModuleList extends React.Component {
       upOrder,
       downOrder,
       onSaveOrder,
+      onEdit,
       modules
     } = this.props;
 
@@ -33,6 +34,7 @@ export default class ModuleList extends React.Component {
 
                 return <ModuleEditCard
                   deleteDisabled={!canDelete}
+                  onEdit={() => onEdit(module.id)}
                   orderDisabled={!canChangeOrder}
                   onDelete={() => onDelete(module.id)}
                   onOrderUp={() => upOrder(module.id)}

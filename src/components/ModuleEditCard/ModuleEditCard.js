@@ -1,5 +1,6 @@
 import React from 'react';
 import './ModuleEditCard.css';
+import Button from '../button/Button';
 
 
 export default class ModuleEditCard extends React.Component {
@@ -11,6 +12,7 @@ export default class ModuleEditCard extends React.Component {
       order,
       onOrderDown,
       deleteDisabled,
+      onEdit,
       orderDisabled,
       text } = this.props;
 
@@ -24,6 +26,7 @@ export default class ModuleEditCard extends React.Component {
           if (window.confirm("This is IRREVERSIBLE!"))
             onDelete(e);
         }}>delete</button>
+        <button disabled={deleteDisabled} className="module-edit" onClick={onEdit}>Edit</button>
         <button disabled={orderDisabled} className="module-up" onClick={(e) => onOrderUp(e)}>Up</button>
         <button disabled={orderDisabled} className="module-down" onClick={(e) => onOrderDown(e)}>Down</button>
       </div>
