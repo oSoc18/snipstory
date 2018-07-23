@@ -67,7 +67,8 @@ const CreateUser = ({
                           emailVerified: false,
                           typeOfUser:"contentpartner",
                           institution,
-                          disabled: false
+                          disabled: false,
+                          confirmed: true
                       })
                       .then(function() {
                           console.log("message is sent")
