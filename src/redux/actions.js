@@ -588,7 +588,17 @@ export const listenToFirebaseAuth = () => {
           const val = snapshot.val();
           const newVal = { ...val, ...userData };
           userRef.set(newVal);
-          dispatch(authFulfilled(newVal));
+          return newVal;
+        }).then(newVal => {
+          firebaseDatabase
+            .ref(`/admins/${newVal.uid}`)
+            .once('value')
+            .then(snapshot => {
+              if (snapshot.val()){
+                newVal.isAdmin = true;
+              }
+            }).catch(() => dispatch(authFulfilled(newVal)))
+            .then(() => dispatch(authFulfilled(newVal)));
         });
       } else {
         dispatch(authRejected(''));
