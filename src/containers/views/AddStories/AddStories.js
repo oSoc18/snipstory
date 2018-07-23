@@ -71,7 +71,7 @@ class AddStories extends React.Component {
     return (
 
         <div className="page">
-            <Navbar />
+            <Navbar logout={logout} user={user}/>
             <h1>Voeg een verhaal toe</h1>
 
             <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,...fields,...props}) => {

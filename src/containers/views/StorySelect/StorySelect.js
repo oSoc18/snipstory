@@ -26,12 +26,13 @@ class StorySelect extends React.Component {
       randomStories,
       error,
       selectStory,
-      createRoom
+      createRoom,
+      user
     } = this.props;
 
     return (
       <div className="page">
-        <Navbar />
+        <Navbar logout={this.props.logout} user={user}/>
         <StepIndicator
           step={1}
           title="Kies een persoon"

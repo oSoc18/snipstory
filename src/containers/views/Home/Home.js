@@ -41,7 +41,7 @@ class Home extends React.Component {
 
     return (
       <div className="home page">
-        <Navbar />
+        <Navbar logout={this.props.logout} user={this.props.user}/>
         <header className={`${videoShown ? 'fade-out' : ''} header-container`}>
           <div className="logo__wrapper">
             <img src={logo} alt="logo" className="logo" />
