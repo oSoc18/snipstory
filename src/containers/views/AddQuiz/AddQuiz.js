@@ -23,13 +23,18 @@ class AddQuiz extends React.Component {
       <div className="page">
         <h1> Add quiz for {storyId}</h1>
         <form onSubmit={this.props.handleSubmit(
-          (formData) => {
-            return firebaseDatabase
+          ({formData, correct, other1, other2}) => {
+            let o = firebaseDatabase
                 .ref('stories/')
-                .child(storyId)
-                .child("modules")
+                .child(storyId);
+                o.child("modules")
                 .push({
                   contentType: "quiz",
+                  options: {
+                      correct,
+                      other1,
+                      other2
+                  },
                   ...formData
                 })
             .then(() => history.push(`/teacher/dashboard/${storyId}`))
