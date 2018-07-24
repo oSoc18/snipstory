@@ -25,7 +25,7 @@ class AddImageQuiz extends React.Component {
       <div className="page">
         <h1> Add image quiz for {storyId}</h1>
         <form onSubmit={this.props.handleSubmit(
-          ({ text, correctImage, otherImage1, otherImage2 }) => {
+          ({ correctPlace, text, correctImage, otherImage1, otherImage2 }) => {
             let names = ['correct', 'other1', 'other2'];
 
             let imagePromises = Promise.all([correctImage, otherImage1, otherImage2].map(
@@ -50,6 +50,7 @@ class AddImageQuiz extends React.Component {
                 .child("modules")
                 .push({
                   text,
+                  correctPlace,
                   resources: urlArray,
                   contentType: "imagequiz"
                 })
@@ -70,6 +71,15 @@ class AddImageQuiz extends React.Component {
                 component={FormField}
                 type="text"
                 label="Question text"
+                required
+              />
+            </div>
+            <div>
+              <Field
+                name="correctPlace"
+                component={FormField}
+                type="number"
+                label="Welke foto is juist?"
                 required
               />
             </div>

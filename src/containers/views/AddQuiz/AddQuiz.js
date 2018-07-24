@@ -23,7 +23,7 @@ class AddQuiz extends React.Component {
       <div className="page">
         <h1> Add quiz for {storyId}</h1>
         <form onSubmit={this.props.handleSubmit(
-          ({formData, correct, other1, other2}) => {
+          ({...fields, correct, other1, other2}) => {
             let o = firebaseDatabase
                 .ref('stories/')
                 .child(storyId);
@@ -35,7 +35,7 @@ class AddQuiz extends React.Component {
                       other1,
                       other2
                   },
-                  ...formData
+                  ...fields
                 })
             .then(() => history.push(`/teacher/dashboard/${storyId}`))
           })
@@ -43,7 +43,7 @@ class AddQuiz extends React.Component {
           <div className="general-container">
             <div>
               <Field
-                name="text"
+                name="question"
                 component={FormField}
                 type="text"
                 label="Question text"
