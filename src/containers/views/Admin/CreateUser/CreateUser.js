@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../../../../components/button/Button';
-import ButtonSmall from '../../../../components/button-small/Button';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError, formValueSelector } from 'redux-form';
 import {
