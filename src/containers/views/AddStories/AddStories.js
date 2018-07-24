@@ -6,14 +6,18 @@ import Footer from '../../../components/footer/Footer';
 
 import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
-import {firebaseAuth, googleAuthProvider, firebaseDatabase} from '../../../helpers/firebase';
+import {firebaseAuth, googleAuthProvider, firebaseDatabase, firebaseStorage} from '../../../helpers/firebase';
+import moment from 'moment';
+import FileField from '../../../components/filefield/FileField';
 import FormField from '../../../components/form/FormField';
 import './AddStories.css'
 
+
+
 class AddStories extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             id:"",
             title: "",
@@ -28,33 +32,66 @@ class AddStories extends React.Component {
             link:"",
             nationality:"",
             tags: {
-                poperinge: false,
-                brugge: false,
-                ieper: false,
-                food: false,
-                sport: false,
-                transportation: false
+                locations: {
+                    poperinge: false,
+                    brugge: false,
+                    ieper: false
+                },
+                categories: {
+                    food: false,
+                    sport: false,
+                    transportation: false
+                }
             }
         }
     }
 
     handleTag(e) {
         e.preventDefault;
-        console.log(e.target.value);
 
-        let tags = Object.keys(this.state.tags);
         let newState = Object.assign({}, this.state);
-        for(let i = 0; i < tags.length; i++) {
 
-            if(e.target.value === tags[i]) {
-                let tag = tags[i];
-                newState.tags[e.target.value] = !newState.tags[e.target.value]
-                this.setState(newState)
+        console.log(e.target.value)
 
-            }
-        }
+        Object.entries(this.state.tags).map(([child,tagsOfChild]) => {
+                Object.entries(tagsOfChild).map(([tag,value]) => {
+                    console.log(tag)
+                    if(e.target.value === tag) {
+                        console.log("yes")
+                        newState.tags[e.target.value] = !newState.tags[e.target.value]
+                        this.setState(newState)
+                    }
+
+                })
+            })
+
+        // let tags = Object.entries(this.state.tags);
+        // let newState = Object.assign({}, this.state);
+        // for(let i = 0; i < tags.length; i++) {
+        //
+        //     for(let j = 0; j < tags[i][1].length; j++){
+        //         console.log(tags[i][1])
+        //
+        //         if(e.target.value === tags[i][1][j]) {
+        //             let tag = tags[i][1][j];
+        //             newState.tags[e.target.value] = !newState.tags[e.target.value]
+        //             this.setState(newState)
+        //         }
+        //
+        //     }
+        // }
         console.log(this.state.tags);
         }
+
+    testMethod() {
+        console.log(Object.entries(this.state.tags).map(([key,value]) => {
+            return (
+                <Button size="small" >{value}</Button>
+            )
+
+
+        }))
+    }
 
 
     render() {
@@ -63,6 +100,7 @@ class AddStories extends React.Component {
             submitting,
             user,
             history,
+            handleChange,
             logout
         } = this.props;
 
@@ -73,36 +111,60 @@ class AddStories extends React.Component {
             <Navbar logout={logout} user={user}/>
             <h1>Voeg een verhaal toe</h1>
 
-            <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,...fields,...props}) => {
+            <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,profileImage,...fields,...props}) => {
+                let name = ['profileimage'];
+
+                let imagePromise = Promise.all([profileImage].map(
+                  (file, index) => {
+                    return firebaseStorage()
+                    .ref()
+                    .child(user.uid)
+                    .child("story")
+                    .child(moment().format('YYYYMMDD_hhmmss'))
+                    .child(name[index])
+                    .put(file);
+                })
+               );
+
+
+               let dbPromise = imagePromise.then(
+               (tasks) /* <- type = UploadTaskSnapshot[] */ => {
+                let urlArray = tasks.map(t => t.metadata.downloadURLs[0]);
                 let o = firebaseDatabase.ref('stories/');
-                o.child(id).child("general").set({
+                o.child(id).set({
                         id,
-                        userId: user.uid,
-                        schoolYear: {
-                            thirdYear: thirdYear || false,
-                            fourthYear: fourthYear || false,
-                            fifthYear: fifthYear || false,
-                            sixthYear: sixthYear || false,
-                            firstYearSecondary: firstYearSecondary || false,
-                            secondYearSecondary: secondYearSecondary || false
-                        },
-                        tags: {
-                            locations: {
-                                poperinge: this.state.tags.poperinge,
-                                brugge: this.state.tags.brugge,
-                                ieper: this.state.tags.ieper
+                        general: {
+                            userId: user.uid,
+                            schoolYear: {
+                                thirdYear: thirdYear || false,
+                                fourthYear: fourthYear || false,
+                                fifthYear: fifthYear || false,
+                                sixthYear: sixthYear || false,
+                                firstYearSecondary: firstYearSecondary || false,
+                                secondYearSecondary: secondYearSecondary || false
                             },
-                            categories: {
-                                food: this.state.tags.food,
-                                sport: this.state.tags.sport,
-                                transportation: this.state.tags.transportation
-                            }
-                        },
-                        ...fields
+                            tags: {
+                                locations: {
+                                    poperinge: this.state.tags.locations.poperinge,
+                                    brugge: this.state.tags.locations.brugge,
+                                    ieper: this.state.tags.locations.ieper
+                                },
+                                categories: {
+                                    food: this.state.tags.categories.food,
+                                    sport: this.state.tags.categories.sport,
+                                    transportation: this.state.tags.categories.transportation
+                                }
+                            },
+                            profilePicture: urlArray,
+                            ...fields
+                        }
+                    })
                 })
                 .then(() => history.push("/teacher/dashboardstorylist"))
-            })
-            }>
+
+            }
+            )}>
+            <div className="general-container">
                 <div className="form-box container">
                     <h1>Voeg een verhaal toe</h1>
                     <div className="row">
@@ -215,16 +277,13 @@ class AddStories extends React.Component {
                         <div className="col-md-4">
                             <Field
                                 name="difficulty"
-                                component="select"
-                                type="text"
-                                label="Moeilijkheidsgraad"
+                                component={FormField}
+                                type="number"
+                                min="1"
+                                max="5"
+                                label="Moeilijkheidsgraad (1 zeer gemakkelijk - 5 zeer moeilijk)"
                                 required
                             >
-                                <option value="easy">Gemakkelijk</option>
-                                <option value="rather-easy">Eerder gemakkelijk</option>
-                                <option value="intermediary">Gemiddeld</option>
-                                <option value="rather difficult">Eerder moeilijk</option>
-                                <option value="difficult">Moeilijk</option>
                             </Field>
                         </div>
                     </div>
@@ -263,6 +322,16 @@ class AddStories extends React.Component {
                             required
                         />
                         </div>
+                        <div>
+                          <Field
+                            name="profileImage"
+                            type="file"
+                            label="Voeg een foto toe"
+                            component={FileField}
+                            onChange={handleChange}
+                            required
+                          />
+                        </div>
                     </div>
                     <div className="row">
                         <div className="col-md-6">
@@ -286,35 +355,28 @@ class AddStories extends React.Component {
                     <div>
                     <div className="row">Belangrijke locaties</div>
                     <div className="row">
-                        <div className="col-md-4">
-                            <Button size="small" className={this.state.tags.brugge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="brugge">Brugge</Button>
-                        </div>
-                        <div className="col-md-4">
-                            <Button size="small" className={this.state.tags.ieper ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="ieper">Ieper</Button>
-                        </div>
-                        <div className="col-md-4">
-                            <Button size="small" className={this.state.tags.poperinge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="poperinge">Poperinge</Button>
-                        </div>
+
+                    {this.testMethod()}
+
+                    {Object.entries(this.state.tags).map(([child,tagsOfChild]) => {
+                            return Object.entries(tagsOfChild).map(([tag,value]) => {
+                                return (
+                                    <div key={tag}>
+                                        <Button size="small" type="button" className={value ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value={tag}>{tag}</Button>
+                                    </div>
+                                )
+                            })
+                    })}
+
                     </div>
-                    </div>
-                    <div>
-                    <div className="row">Categorie</div>
-                    <div className="row">
-                        <div className="col-md-4">
-                            <Button size="small" className={this.state.tags.food ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="food">Voedsel</Button>
-                        </div>
-                        <div className="col-md-4">
-                            <Button size="small" className={this.state.tags.sport ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="sport">Sport</Button>
-                        </div>
-                        <div className="col-md-4">
-                            <Button size="small" className={this.state.tags.transportation ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="transportation">Transport</Button>
-                        </div>
-                    </div>
-                    </div>
+                </div>
+                </div>
+
+
 
 
                     <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
-                </div>
+            </div>
 
             </form>
             <Footer />

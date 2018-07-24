@@ -60,7 +60,9 @@ class StoryDashboard extends React.Component {
             <div className="col-md-8">
               <div className="row">
                 <Button
-                  to="#" size="small" inverted="true">
+                    to={`/teacher/dashboard/${story.id}/addtextblock/`}
+                    size="small"
+                    inverted="true">
                   Add textblock
                 </Button>
 
@@ -95,7 +97,15 @@ class StoryDashboard extends React.Component {
                   inverted="true">
                   Add quiz
                 </Button>
+                <Button
+                  disabled={isModuleLoading}
+                  to={`/teacher/dashboard/${story.id}/preview/`}
+                  size="small"
+                  inverted="true">
+                  See preview
+                </Button>
               </div>
+
               <div className="row">
                 <ModuleList
                   onEdit={moduleId => {

@@ -57,7 +57,8 @@ class DashboardStoryList extends React.Component {
             <div className="page">
                 <Navbar logout={logout} user={user}/>
                 <h1>Dag {user.name}</h1>
-                <Button to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
+                <Button size="small" to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
+
                 <div className="row">
 
                 {filteredStories && filteredStories.length > 0
@@ -66,7 +67,7 @@ class DashboardStoryList extends React.Component {
 
                         return (
                             <div
-                                key={story.general.id}
+                                key={story.id}
                                 className="storyCards"
                                 id = {story.general.id}
                             >
@@ -79,16 +80,13 @@ class DashboardStoryList extends React.Component {
                                     </div>
 
                                     <div className="flex">
-                                    <Button
-                                    size="small"
+                                    <Button size="small"
                                     onClick={(e) => {
                                         this.props.fetchStory(story.id)
                                         .then(() => history.push(`/dashboardstorylist/${story.id}/edit`));
                                     }}
                                     >Aanpassen</Button>
-                                    <Button 
-                                    size="small"
-                                    onClick={(e) => {
+                                    <Button size="small" onClick={(e) => {
                                         if (window.confirm('Are you sure you wish to delete this item?')) deleteSt(story) } }>
                                     Verwijder
                                     </Button>
@@ -96,6 +94,8 @@ class DashboardStoryList extends React.Component {
 
                                     <div className="flex">
                                     <Button size="small" onClick={(e) => this.handleVisibility(e)}>Maak onzichtbaar</Button>
+                                    <Button size="small"
+                                    to={`/teacher/dashboard/${story.id}`}>Add modules</Button>
                                     </div>
 
                                 </div>
@@ -111,7 +111,7 @@ class DashboardStoryList extends React.Component {
                 }
 
                 </div>
-                <Button onClick={logout}>Uitloggen</Button>
+                <Button size="small" onClick={logout}>Uitloggen</Button>
                 <Footer />
             </div>
         )

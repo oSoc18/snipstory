@@ -35,11 +35,15 @@ import Filter from './views/Filter/Filter';
 
 import StoryDashboard from './views/StoryDashboard/StoryDashboard';
 
+import StoryPreview from './views/StoryPreview/StoryPreview';
+import FilterView from './views/FilterView/FilterView';
+
 
 import './App.css';
 import AddFunfact from './views/AddFunfact/AddFunfact';
 import AddImageQuiz from './views/AddImageQuiz/AddImageQuiz';
 import AddQuiz from './views/AddQuiz/AddQuiz';
+import AddTextBlock from './views/AddTextBlock/AddTextBlock';
 import AddLocation from './views/AddLocation/AddLocation';
 import Story from './views/Story/Story';
 import EditFunfact from './views/EditFunfact/EditFunfact';
@@ -81,6 +85,11 @@ class App extends Component {
                 path="/"
                 exact
                 render={props => <Home user={user} logout={logout} {...props} />}
+              />
+              <Route
+                path="/filterview"
+                exact
+                render={props => <FilterView user={user} {...props} />}
               />
               <ProtectedRoute
                 isAuthorized={!isAuthorized}
@@ -130,7 +139,12 @@ class App extends Component {
                   />}
               />
               <Route
-                path="/story/:storyId"
+                path="/teacher/dashboard/:storyId/preview"
+                exact
+                render={props => <StoryPreview user={user} {...props} />}
+              />
+              <Route
+                path="/dashboardstorylist/:storyId/edit"
                 exact
                 render={props => <Story user={user} logout={logout} {...props} />}
               />
@@ -140,14 +154,14 @@ class App extends Component {
                 render={props => <Filter user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
-                isAuthorized={confirmedUsersOnly}
+                isAuthorized={isAuthorized}
                 path="/dashboardstorylist/:storyId/edit"
                 exact
                 redirectUrl="/teacher/login"
                 render={props => <EditStory user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
-                isAuthorized={confirmedUsersOnly}
+                isAuthorized={isAuthorized}
                 path="/teacher/dashboard/:storyId/addfunfact"
                 exact
                 redirectUrl="/teacher/login"
@@ -180,7 +194,7 @@ class App extends Component {
                   />}
               />
               <ProtectedRoute
-                isAuthorized={confirmedUsersOnly}
+                isAuthorized={isAuthorized}
                 path="/teacher/dashboard/:storyId/addimagequiz"
                 exact
                 redirectUrl="/teacher/login"
@@ -191,7 +205,7 @@ class App extends Component {
                   />}
               />
               <ProtectedRoute
-                isAuthorized={confirmedUsersOnly}
+                isAuthorized={isAuthorized}
                 path="/teacher/dashboard/:storyId/addlocation"
                 exact
                 redirectUrl="/teacher/login"
@@ -202,7 +216,7 @@ class App extends Component {
                   />}
               />
               <ProtectedRoute
-                isAuthorized={confirmedUsersOnly}
+                isAuthorized={isAuthorized}
                 path="/teacher/dashboard/:storyId/addquiz"
                 exact
                 redirectUrl="/teacher/login"
@@ -212,8 +226,17 @@ class App extends Component {
                     {...props}
                   />}
               />
+              <Route
+                path="/teacher/dashboard/:storyId/addtextblock"
+                exact
+                render={props =>
+                  <AddTextBlock
+                    user={user}
+                    {...props}
+                  />}
+              />
               <ProtectedRoute
-                isAuthorized={confirmedUsersOnly}
+                isAuthorized={isAuthorized}
                 path="/teacher/dashboard/:storyId"
                 exact
                 redirectUrl="/teacher/login"
@@ -232,13 +255,13 @@ class App extends Component {
               />
               <ProtectedRoute
                 path="/teacher/addstory"
-                isAuthorized={confirmedUsersOnly}
+                isAuthorized={isAuthorized}
                 redirectUrl="/teacher/login"
                 render={props => <AddStories user={user} logout={logout} {...props} />}
               />
               <ProtectedRoute
                 path="/teacher/dashboardstorylist"
-                isAuthorized={confirmedUsersOnly}
+                isAuthorized={isAuthorized}
                 redirectUrl="/teacher/login"
                 render={props => <DashboardStoryList user={user} logout={logout} {...props} />}
               />
@@ -259,7 +282,7 @@ class App extends Component {
               <ProtectedRoute
                 path="/teacher/login"
                 isAuthorized={!isAuthorized}
-                redirectUrl="/"
+                redirectUrl="/teacher/dashboardstorylist"
                 exact
                 render={props =>
                   <Login user={user} logout={logout} showToast={showToast} {...props} />}

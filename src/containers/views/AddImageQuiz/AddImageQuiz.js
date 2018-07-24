@@ -50,20 +50,21 @@ class AddImageQuiz extends React.Component {
                   }
                 ));
 
-                let dbPromise = imagePromises.then(
-                  (tasks) /* <- type = UploadTaskSnapshot[] */ => {
-                    let urlArray = tasks.map(t => t.metadata.downloadURLs[0]);
-                    firebaseDatabase
-                    .ref('stories/')
-                    .child(storyId)
-                    .child("modules")
-                    .push({
-                      text,
-                      resources: urlArray,
-                      contentType: "imagequiz"
-                    })
-                  }
-                );
+            let dbPromise = imagePromises.then(
+              (tasks) /* <- type = UploadTaskSnapshot[] */ => {
+                let urlArray = tasks.map(t => t.metadata.downloadURLs[0]);
+                firebaseDatabase
+                .ref('stories/')
+                .child(storyId)
+                .child("modules")
+                .push({
+                  text,
+                  correctPlace,
+                  resources: urlArray,
+                  contentType: "imagequiz"
+                })
+              }
+            );
 
 
 
