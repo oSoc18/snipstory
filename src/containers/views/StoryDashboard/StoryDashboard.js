@@ -80,7 +80,10 @@ class StoryDashboard extends React.Component {
         canDelete={!isDirty && !isModuleLoading}
         canChangeOrder={!isModuleLoading && !isUploadingModules}
         canSaveOrReset={isDirty && !isUploadingModules}
-        onEdit={moduleId => history.push(`/teacher/dashboard/${story.id}/edit/${module.contentType}/${moduleId}`)}
+        onEdit={moduleId => {
+          let route = `/teacher/dashboard/${story.id}/edit/${story.modules[moduleId].contentType}/${moduleId}`;
+          console.log(route);
+          history.push(route)}}
         onReset={resetOrder}
         onSaveOrder={() => uploadModules(story.id, modules)}
         upOrder={moduleId => upOrder(modules.findIndex(module => moduleId == module.id))}

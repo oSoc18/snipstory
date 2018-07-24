@@ -39,7 +39,7 @@ class EditFunfact extends React.Component {
                         required
                     />
                 </div>
-            <Button type="submit" disabled={pristine || submitting}>Add weetje</Button>
+            <Button type="submit" disabled={pristine || submitting}>Edit weetje</Button>
             <button onClick={() => reset()}>Reset</button>
             </div>
             </form>
@@ -52,6 +52,6 @@ const EditFunfactForm = reduxForm({ form: 'addFunfact'})(EditFunfact);
 
 export default connect((state, props) => ({
   initialValues: {
-    text: state.story.story[props.match.params.moduleId].text
+    text: state.story.story.modules[props.match.params.moduleId].text
   }
 }))(EditFunfactForm);

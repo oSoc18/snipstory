@@ -65,8 +65,9 @@ class App extends Component {
     const isAuthorized = user.isAuthorized;
     const adminOnly = user.isAdmin && isAuthorized;
     const confirmedUsersOnly = user.confirmed && isAuthorized;
+    console.log(`isconfirmed : ${confirmedUsersOnly}`)
     console.log(user);
-    if (user.authPending) {
+    if (user.authPending || user.initial) {
       return <Spinner page size="large" />;
     }
     return (
