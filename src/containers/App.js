@@ -43,6 +43,7 @@ import AddQuiz from './views/AddQuiz/AddQuiz';
 import AddLocation from './views/AddLocation/AddLocation';
 import Story from './views/Story/Story';
 import EditFunfact from './views/EditFunfact/EditFunfact';
+import EditQuiz from './views/EditQuiz/EditQuiz';
 
 class App extends Component {
   componentDidMount() {
@@ -163,6 +164,17 @@ class App extends Component {
                 redirectUrl="/teacher/login"
                 render={props =>
                   <EditFunfact
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
+                path="/teacher/dashboard/:storyId/edit/quiz/:moduleId"
+                exact
+                redirectUrl="/teacher/login"
+                render={props =>
+                  <EditQuiz
                     user={user}
                     {...props}
                   />}
