@@ -16,6 +16,8 @@ import { getReadableDate } from '../../../helpers/moment';
 import Spinner from '../../../components/spinner/Spinner';
 import ImageModule from '../../../components/modules/ImageModule';
 import ImageQuizModule from '../../../components/modules/ImageQuizModule';
+import ImageQuiz from '../../../components/ImageQuiz/ImageQuiz';
+
 import MapModule from '../../../components/modules/MapModule';
 import QuizModule from '../../../components/modules/QuizModule';
 import SearchExerciseModule from '../../../components/modules/SearchExerciseModule';
@@ -42,7 +44,8 @@ class StoryPreview extends React.Component {
     }
 
     handleChange(module) {
-      this.props.updateModule(module);
+        console.log(module)
+      // this.props.updateModule(module);
     }
 
     render () {
@@ -51,7 +54,6 @@ class StoryPreview extends React.Component {
             story,
             modules,
             isLoading,
-
             showToast
         } = this.props;
 
@@ -65,18 +67,18 @@ class StoryPreview extends React.Component {
         <div className="page">
           <Navbar />
           <h1>Voorbeeld van verhaal ({story.general.title})</h1>
-          <div className=" room ">
-            <div className="story-information__wrapper">
-              <div className="story-information card">
+          <div className=" room general-container container ">
+            <div className="story-information__wrapper row">
+              <div className="story-information card row">
                 <div className="card-block block-width card-block--story-head">
-                  <h2 className="card-title">
+                  <h2 className="card-title row">
                     {story.general.title}
                   </h2>
 
-                  <p className="card-text">
+                  <p className="card-text row">
                     {story.general.summary}
                   </p>
-                  <p className="card-text card-text--icon">
+                  <p className="card-text card-text--icon row">
                     <svg
                       version="1.1"
                       xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +91,7 @@ class StoryPreview extends React.Component {
                     </svg>{' '}
                     {story.general.dayOfBirth}
                   </p>
-                  <p className="card-text card-text--icon">
+                  <p className="card-text card-text--icon row">
                     <svg
                       version="1.1"
                       xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +104,7 @@ class StoryPreview extends React.Component {
                     </svg>
                     {story.general.dayOfDeath}
                   </p>
-                  <p className="card-text card-text--icon">
+                  <p className="card-text card-text--icon row">
                     <svg
                       style={{ transform: 'scale(0.8)' }}
                       version="1.1"
@@ -120,7 +122,7 @@ class StoryPreview extends React.Component {
                   </p>
                 </div>
                 <img
-                  className="card-img-top-2"
+                  className="card-img-top-2 row"
                   src={story.general.profilePicture}
                   alt={story.general.title}
                 />
@@ -237,5 +239,6 @@ class StoryPreview extends React.Component {
 
 const mapStateToProps = state => state.story;
 export default connect(mapStateToProps,
-    {fetchStory
+    {fetchStory,
+        updateModule
     })(StoryPreview);
