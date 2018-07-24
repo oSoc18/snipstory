@@ -1,4 +1,5 @@
 import React from 'react';
+import './ImageThumbnail.css'
 
 const ImageThumbnail = ({ imageSource = 'placeholder', ...props }) => {
   const styles = {
@@ -10,7 +11,7 @@ const ImageThumbnail = ({ imageSource = 'placeholder', ...props }) => {
     backgroundSize: 'cover'
   };
 
-  return <div className="rounded-circle" style={styles} {...props} />;
+  return <div className="rounded-circle round-button" style={styles} {...props} />;
 };
 
 export default ImageThumbnail;
