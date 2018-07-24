@@ -8,6 +8,8 @@ const FormField = ({
   placeholder,
   value,
   id,
+  min,
+  max,
   meta: { asyncValidating, touched, error },
   required = false
 }) => {
@@ -28,6 +30,8 @@ const FormField = ({
       placeholder={placeholder}
       defaultValue={value}
       id={id}
+      min={min}
+      max={max}
       required={required}
     />
     {after}
