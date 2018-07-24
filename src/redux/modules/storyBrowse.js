@@ -11,6 +11,10 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {
         nbOfModules: Object.keys(action.story.modules||{}).length
       });
+    case actionTypes.selectStory:
+      return Object.assign({}, state, {
+        nbOfModules: Object.keys(action.story.modules).length
+      });
     case actionTypes.nextModule:
       if (state.currentIndex < state.nbOfModules - 1){
         return Object.assign({}, state, {
