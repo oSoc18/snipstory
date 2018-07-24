@@ -80,6 +80,12 @@ class StoryDashboard extends React.Component {
         size="small">
         Add quiz
             </Button>
+        <Button
+          disabled={isModuleLoading}
+          to={`/teacher/dashboard/${story.id}/addtextblock/`}
+          size="small">
+          Add textblock
+              </Button>
       <ModuleList
         canDelete={!isDirty && !isModuleLoading}
         canChangeOrder={!isModuleLoading && !isUploadingModules}
