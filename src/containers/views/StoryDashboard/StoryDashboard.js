@@ -35,7 +35,8 @@ class StoryDashboard extends React.Component {
       resetOrder,
       uploadModules,
       deleteLocation,
-
+      // rest
+      history,
       story,
       isLoading,
       isModuleLoading,
@@ -97,6 +98,9 @@ class StoryDashboard extends React.Component {
               </div>
               <div className="row">
                 <ModuleList
+                  onEdit={moduleId => {
+                    let route = `/teacher/dashboard/${story.id}/edit/${story.modules[moduleId].contentType}/${moduleId}`;
+                    history.push(route)}}
                   canDelete={!isDirty && !isModuleLoading}
                   canChangeOrder={!isModuleLoading && !isUploadingModules}
                   canSaveOrReset={isDirty && !isUploadingModules}
@@ -206,7 +210,7 @@ class StoryDashboard extends React.Component {
                         to="/teacher/editstory"
                         size="small"
                         inverted="true"
-                        className="story-edit-button" 
+                        className="story-edit-button"
                       >Edit</Button>
                     </div>
                   </div>
@@ -216,8 +220,8 @@ class StoryDashboard extends React.Component {
             </div>
           </div>
         </div>
-        
-        
+
+
         </div>
         <Footer />
     </div>)

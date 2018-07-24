@@ -42,6 +42,8 @@ import AddImageQuiz from './views/AddImageQuiz/AddImageQuiz';
 import AddQuiz from './views/AddQuiz/AddQuiz';
 import AddLocation from './views/AddLocation/AddLocation';
 import Story from './views/Story/Story';
+import EditFunfact from './views/EditFunfact/EditFunfact';
+import EditQuiz from './views/EditQuiz/EditQuiz';
 
 class App extends Component {
   componentDidMount() {
@@ -64,8 +66,9 @@ class App extends Component {
     const isAuthorized = user.isAuthorized;
     const adminOnly = user.isAdmin && isAuthorized;
     const confirmedUsersOnly = user.confirmed && isAuthorized;
+    console.log(`isconfirmed : ${confirmedUsersOnly}`)
     console.log(user);
-    if (user.authPending) {
+    if (user.authPending || user.initial) {
       return <Spinner page size="large" />;
     }
     return (
@@ -154,7 +157,28 @@ class App extends Component {
                     {...props}
                   />}
               />
-
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
+                path="/teacher/dashboard/:storyId/edit/funfact/:moduleId"
+                exact
+                redirectUrl="/teacher/login"
+                render={props =>
+                  <EditFunfact
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
+                path="/teacher/dashboard/:storyId/edit/quiz/:moduleId"
+                exact
+                redirectUrl="/teacher/login"
+                render={props =>
+                  <EditQuiz
+                    user={user}
+                    {...props}
+                  />}
+              />
               <ProtectedRoute
                 isAuthorized={confirmedUsersOnly}
                 path="/teacher/dashboard/:storyId/addimagequiz"
