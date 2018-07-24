@@ -1,25 +1,5 @@
-.storyCards {
-    background-color: #3274ff;
-    border-radius: 20px;
-    margin-left: 30px;
-    margin-top: 50px;
-    margin-bottom: 30px;
-    width: 400px;
-    padding: 30px;
-}
+@import '../../../variables.scss';
 
-.flex {
-    display: 'flex';
-    flexDirection: 'column';
-    justifyContent: 'center';
-}
-
-h1 {
-    margin-left: 30px;
-    margin-top: 50px;
-    margin-bottom: 30px;
-}
-
-h2 {
-    color: #fff;
+.dashboard-container{
+    margin: 80px auto;
 }

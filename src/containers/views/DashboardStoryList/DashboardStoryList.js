@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../../../components/button/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
+import CardMin from '../../../components/card-min/Card-min';
 import Spinner from '../../../components/spinner/Spinner';
 
 
@@ -56,62 +57,54 @@ class DashboardStoryList extends React.Component {
         return (
             <div className="page">
                 <Navbar logout={logout} user={user}/>
-                <h1>Dag {user.name}</h1>
-                <Button size="small" to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
+                <div className="dashboard-story-container">
+                    <div className="story-dashboard-header container">
+                        <div className="row">
+                            <div className="col">
+                                <div className="row">Dag {user.name}</div>
+                                <h1 className="row">List of your stories</h1>
+                            </div>
+                            <div className="col">
+                                <div className="row">
+                                    <Button size="small" to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
+                                </div>
+                            </div>
+                        </div>
 
-                <div className="row">
+                     </div>
+                    <div className="story-dashboard-body container">
+                        <div className="row">
+                            <div className="col">
+                                <div className="row cards-grid">
 
-                {filteredStories && filteredStories.length > 0
-                  ?
-                    filteredStories.map(story => {
+                                {filteredStories && filteredStories.length > 0
+                                ?
+                                    filteredStories.map(story => {
 
-                        return (
-                            <div
-                                key={story.id}
-                                className="storyCards"
-                                id = {story.general.id}
-                            >
-                                <div
-                                    className="flex"
-                                >
-                                    <div className="">
-                                        <h2>{story.general.title}</h2>
-                                        <p>{story.general.summary}</p>
+                                        return (
+                                            <CardMin
+                                            id={story.general.id}
+                                            title={story.general.title}
+                                            picture={story.general.profilePicture}
+                                            dateOfBirth={story.general.dayOfBirth}
+                                            dateOfDeath={story.general.dayOfDeath}
+                                            difficulty={story.general.difficulty}
+                                            />
+                                        )
+                                    })
+                                    : <div>
+                                        Je hebt nog geen verhalen toegevoegd
+                                        <span role="img" aria-label="Crying face">
+                                        😢
+                                        </span>
                                     </div>
-
-                                    <div className="flex">
-                                    <Button size="small"
-                                    onClick={(e) => {
-                                        this.props.fetchStory(story.id)
-                                        .then(() => history.push(`/dashboardstorylist/${story.id}/edit`));
-                                    }}
-                                    >Aanpassen</Button>
-                                    <Button size="small" onClick={(e) => {
-                                        if (window.confirm('Are you sure you wish to delete this item?')) deleteSt(story) } }>
-                                    Verwijder
-                                    </Button>
-                                    </div>
-
-                                    <div className="flex">
-                                    <Button size="small" onClick={(e) => this.handleVisibility(e)}>Maak onzichtbaar</Button>
-                                    <Button size="small"
-                                    to={`/teacher/dashboard/${story.id}`}>Add modules</Button>
-                                    </div>
+                                }
 
                                 </div>
                             </div>
-                        )
-                    })
-                    : <div>
-                        Je hebt nog geen verhalen toegevoegd
-                        <span role="img" aria-label="Crying face">
-                          😢
-                        </span>
-                      </div>
-                }
-
+                        </div>
+                    </div>
                 </div>
-                <Button size="small" onClick={logout}>Uitloggen</Button>
                 <Footer />
             </div>
         )

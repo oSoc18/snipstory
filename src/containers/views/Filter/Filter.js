@@ -75,7 +75,7 @@ class Filter extends React.Component {
                     <div classNem="row">
                         <h3>Results: </h3>
                     </div>
-                    <div className="row cards-grid">
+                    <div className="row cards-grid justify-content-between">
                             {filteredStories.map(story => {
                                 return  <div className="cards-container">
                                             <Card 
