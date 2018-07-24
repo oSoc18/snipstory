@@ -16,7 +16,7 @@ class EditQuiz extends React.Component {
 
     return (
       <div className="page">
-        <h1> Add quiz for {storyId}</h1>
+        <h1> Edit quiz for {storyId}</h1>
         <form onSubmit={this.props.handleSubmit(
           (formData) => {
             return firebaseDatabase
