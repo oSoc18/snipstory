@@ -8,6 +8,12 @@
     font-family: 'Roboto';
     font-size: 14pt;
     color: #545454;
+    background: #fff;
+}
+.cards:hover{
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.05);
+
 }
 .container{
     flex-direction: column;

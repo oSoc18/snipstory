@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { SIZES } from '../../constants';
-import './card.css';
+import './Card.css';
 
 import { MapPin, Calendar } from 'react-feather';
 
@@ -10,8 +10,10 @@ const Card = ({
   title,
   difficulty,
   tags,
-  dates,
-  location
+  dateOfBirth,
+  dateOfDeath,
+  location,
+  schoolyear
 }) => {
 return <div className="cards">
           <img src={image}/>
@@ -25,7 +27,7 @@ return <div className="cards">
                 </div>
                 <div className="card-line row">
                     <div class="col-12">                    
-                        <span><Calendar size={16} /></span>{dates}
+                        <span><Calendar size={16} /></span>{dateOfBirth}{' - '}{dateOfDeath}
                     </div>
                 </div>
                 <div className="card-line last-line row">
@@ -38,11 +40,8 @@ return <div className="cards">
                             {tags}
                     </div>
                     <div className="card-tag year-tag">
-                        1ste middelbaar
-                    </div>
-                    <div className="card-tag year-tag">
-                        1ste middelbaar
-                    </div>                                                           
+                            {schoolyear}
+                    </div>                                          
                 </div>
             </div>
             </div>

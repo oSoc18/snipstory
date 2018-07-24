@@ -8,6 +8,7 @@ import './Filter.css';
 import Button from '../../../components/button/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
+import Card from '../../../components/card/Card';
 
 class Filter extends React.Component {
     componentWillMount() {
@@ -31,39 +32,65 @@ class Filter extends React.Component {
         return <div className="page">
         <Navbar />
         <div className="filter-root container">
-            <div className="row filters-div">
-                <div className="col">
-                    <p>Filters :</p>
+            <div className="row filters-div justify-content-between">
+                <div className="col-md-5">
+                    <div className="row">
+                        <div className="col">
+                           <p> Filters: </p>
+                        </div> 
+                        <div className="col">
+                            <Button size="small" inverted="true">Partners</Button>
+                        </div> 
+                        <div className="col">
+                            <Button size="small" inverted="true">Jaar</Button>
+                        </div> 
+                        <div className="col">
+                            <Button size="small" inverted="true">Skills</Button>
+                        </div>
+                    </div>
                 </div>
-                <div className="col">
-                    <Button size="small" inverted="true">Partners</Button>
-                </div>
-                <div className="col">
-                    <Button size="small" inverted="true">Jaar</Button>
-                </div>
-                <div className="col">
-                    <Button size="small" inverted="true">Skills</Button>
-                </div>
-                <div className="col">
-                    <div className="range-container">
-                        {this.state.yearRange.join("-")}
-                        <Range
-                            max={maxYear}
-                            min={minYear}
-                            allowCross={false}
-                            value={this.state.yearRange}
-                            onChange={yearRange => this.setState({yearRange})}
-                            onAfterChange={setYearRange}
-                        />
+                <div className="col-md-3">
+                    <div className="row self-align-right">
+                        <div className="col">
+                            <p>Period:</p>
+                        </div>
+                        <div className="col-md-8">
+                            <div className="range-container">
+                                {this.state.yearRange.join("-")}
+                                <Range
+                                    max={maxYear}
+                                    min={minYear}
+                                    allowCross={false}
+                                    value={this.state.yearRange}
+                                    onChange={yearRange => this.setState({yearRange})}
+                                    onAfterChange={setYearRange}
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div className="row cards-div">
-                {filteredStories.map(story => {
-                                return <div key={story.id || story.general.id || story.general.title}>
-                                <h2>{story.general.title} ({story.general.dayOfBirth})</h2>
-                                </div>
+                <div className="col">
+                    <div classNem="row">
+                        <h3>Results: </h3>
+                    </div>
+                    <div className="row cards-grid">
+                            {filteredStories.map(story => {
+                                return  <div className="cards-container">
+                                            <Card 
+                                            title={story.general.title}
+                                            difficulty={story.general.difficulty}
+                                            schoolyear={story.general.level}
+                                            dateOfBirth={story.general.dayOfBirth}
+                                            dateOfDeath={story.general.dayOfDeath}
+                                            />
+                                        </div>
+                                
                             })}
+                    </div>
+                </div>
+                            
             </div>
             </div>
             
