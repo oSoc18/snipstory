@@ -57,7 +57,7 @@ class Room extends React.Component {
 
     return (
       <div className="page">
-        <Navbar />
+        <Navbar logout={this.props.logout} user={user}/>
         <StepIndicator
           step={2}
           title="Ontdek het verhaal"

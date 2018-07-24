@@ -55,7 +55,7 @@ class DashboardStoryList extends React.Component {
         )
         return (
             <div className="page">
-                <Navbar />
+                <Navbar logout={logout} user={user}/>
                 <h1>Dag {user.name}</h1>
                 <Button to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
                 <div className="row">
