@@ -22,9 +22,8 @@ class AddFunfact extends React.Component {
     return (
         <div className="page">
             <Navbar />
-           
             <div className="add-module-container">
-                <div className="container">
+            <div className="add-module-box container">
                     <form onSubmit={this.props.handleSubmit(({text}) => {
                         let o = firebaseDatabase
                         .ref('stories/')
@@ -36,20 +35,22 @@ class AddFunfact extends React.Component {
                         }).then(() => history.push(`/teacher/dashboard/${storyId}`));
                         })
                     }>
-                        <div className="row">
-                            <h1> Add weetje for { storyId }</h1>
+                        <div className="row justify-content-center">
+                            <h3> Add weetje for { storyId }</h3>
                         </div>
-                        <div className="row">
-                            <Field
-                                name="text"
-                                component={FormField}
-                                type="text"
-                                label="Weetje text"
-                                required
-                            />
+                        <div className="row justify-content-center">
+                            <div className="col-md-10">
+                                <Field
+                                    name="text"
+                                    component={FormField}
+                                    type="text"
+                                    label="Weetje text"
+                                    required
+                                />
+                            </div>
                         </div>
-                        <div className="row">
-                            <Button size="small" type="submit" disabled={pristine || submitting}>Add weetje</Button>
+                        <div className="row justify-content-center">
+                            <Button type="submit" disabled={pristine || submitting}>Add weetje</Button>
                         </div>
                     </form>
                 </div>

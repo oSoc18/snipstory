@@ -59,7 +59,6 @@ class AddImageQuiz extends React.Component {
                 .child("modules")
                 .push({
                   text,
-                  correctPlace,
                   resources: urlArray,
                   contentType: "imagequiz"
                 })
