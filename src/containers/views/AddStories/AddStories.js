@@ -12,14 +12,7 @@ import FileField from '../../../components/filefield/FileField';
 import FormField from '../../../components/form/FormField';
 import './AddStories.css'
 
-// class reduxTags extends React.Compenent {
-//     render() {
-//         return (
-//             <SmallButton type="button" className={value ? 'activeButton': ''} onClick={(e) => this.props.onChange(!this.props.input.value)} value={this.props.input.value}>{this.props.tag}</SmallButton>
-//         )
-//     }
-//
-// }
+
 
 class AddStories extends React.Component {
 
@@ -93,7 +86,7 @@ class AddStories extends React.Component {
     testMethod() {
         console.log(Object.entries(this.state.tags).map(([key,value]) => {
             return (
-                <SmallButton>{value}</SmallButton>
+                <Button size="small" >{value}</Button>
             )
 
 
@@ -369,22 +362,21 @@ class AddStories extends React.Component {
                             return Object.entries(tagsOfChild).map(([tag,value]) => {
                                 return (
                                     <div key={tag}>
-                                        <SmallButton type="button" className={value ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value={tag}>{tag}</SmallButton>
+                                        <Button size="small" type="button" className={value ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value={tag}>{tag}</Button>
                                     </div>
                                 )
                             })
-                        }
-                    )
-                }
+                    })}
 
                     </div>
+                </div>
                 </div>
 
 
 
 
                     <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
-                </div>
+            </div>
 
             </form>
             <Footer />

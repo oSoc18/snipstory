@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../../components/button-small/Button';
+import Button from '../../../components/button/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Spinner from '../../../components/spinner/Spinner';
@@ -57,7 +57,7 @@ class DashboardStoryList extends React.Component {
             <div className="page">
                 <Navbar logout={logout} user={user}/>
                 <h1>Dag {user.name}</h1>
-                <Button to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
+                <Button size="small" to="/teacher/addstory">Maak een nieuw verhaal aan</Button>
 
                 <div className="row">
 
@@ -80,21 +80,21 @@ class DashboardStoryList extends React.Component {
                                     </div>
 
                                     <div className="flex">
-                                    <Button
+                                    <Button size="small"
                                     onClick={(e) => {
                                         this.props.fetchStory(story.id)
                                         .then(() => history.push(`/dashboardstorylist/${story.id}/edit`));
                                     }}
                                     >Aanpassen</Button>
-                                    <Button onClick={(e) => {
+                                    <Button size="small" onClick={(e) => {
                                         if (window.confirm('Are you sure you wish to delete this item?')) deleteSt(story) } }>
                                     Verwijder
                                     </Button>
                                     </div>
 
                                     <div className="flex">
-                                    <Button onClick={(e) => this.handleVisibility(e)}>Maak onzichtbaar</Button>
-                                    <Button
+                                    <Button size="small" onClick={(e) => this.handleVisibility(e)}>Maak onzichtbaar</Button>
+                                    <Button size="small"
                                     to={`/teacher/dashboard/${story.id}`}>Add modules</Button>
                                     </div>
 
@@ -111,7 +111,7 @@ class DashboardStoryList extends React.Component {
                 }
 
                 </div>
-                <Button onClick={logout}>Uitloggen</Button>
+                <Button size="small" onClick={logout}>Uitloggen</Button>
                 <Footer />
             </div>
         )

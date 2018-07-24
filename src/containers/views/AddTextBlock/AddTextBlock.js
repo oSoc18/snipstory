@@ -82,7 +82,7 @@ class AddImageQuiz extends React.Component {
                 required
               />
             </div>
-            <Button type="submit" disabled={pristine || submitting}>Add weetje</Button>
+            <Button size="small" type="submit" disabled={pristine || submitting}>Voeg toe</Button>
           </div>
         </form>
       </div>
