@@ -1,5 +1,18 @@
-.filter-root {
-    h2 {
-        color: black;
-    }
+@import '../../../variables.scss';
+
+.filter-root{
+    margin: 65px auto 40px auto;
+    width: calc(100% - 60px);
+    height: calc(100vh - 180px);
+}
+.filter-root h2 {
+    color: black;
+}
+.filters-div, .cards-div{
+    background: #fff;
+    border: 2px solid $brand-blue;
+}
+.filters-div p{
+    line-height: 2.7rem;
+    color: $brand-blue;
 }
