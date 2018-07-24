@@ -25,10 +25,10 @@ class AddFunfact extends React.Component {
             <div className="add-module-container">
             <div className="add-module-box container">
                     <form onSubmit={this.props.handleSubmit(({text}) => {
-                        let o = firebaseDatabase
+                        return firebaseDatabase
                         .ref('stories/')
-                        .child(storyId);
-                        o.child("modules")
+                        .child(storyId)
+                        .child("modules")
                         .push({
                             text,
                             contentType: "funfact"
