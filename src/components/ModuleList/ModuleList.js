@@ -1,6 +1,7 @@
 import React from 'react';
 import './ModuleList.css';
 import ModuleEditCard from '../ModuleEditCard/ModuleEditCard';
+import Button from '../../components/button/Button'
 
 export default class ModuleList extends React.Component {
   render(){
@@ -13,26 +14,34 @@ export default class ModuleList extends React.Component {
       upOrder,
       downOrder,
       onSaveOrder,
+      onEdit,
       modules
     } = this.props;
 
-    return <div className="module-list-root">
-      <button
+    return <div className="module-list-root col">
+      <div className="row">
+      <Button
         onClick={onReset}
         disabled={!canSaveOrReset}
-        className="reset-button">
+        className="reset-button"
+        size="small"
+        >
         Reset
-      </button>
-      <button
+      </Button>
+      <Button
         onClick={onSaveOrder}
         disabled={!canSaveOrReset}
-        className="save-button">
+        className="save-button"
+        size="small"
+        >
         Save
-      </button>
+      </Button>
+      </div>
       {modules.map((module, index) => {
 
                 return <ModuleEditCard
                   deleteDisabled={!canDelete}
+                  onEdit={() => onEdit(module.id)}
                   orderDisabled={!canChangeOrder}
                   onDelete={() => onDelete(module.id)}
                   onOrderUp={() => upOrder(module.id)}

@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../../../components/button/Button';
-import SmallButton from '../../../components/button-small/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
@@ -385,7 +384,6 @@ class AddStories extends React.Component {
 
 
                     <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
-                </div>
                 </div>
 
             </form>

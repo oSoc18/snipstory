@@ -1,8 +1,6 @@
 @import '../../../variables.scss';
 body{
 background-image: url('../bg.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
   background-position: center;}
 .register-title {
   color: #3274ff;
@@ -12,8 +10,8 @@ background-image: url('../bg.svg');
   text-align: left;
   padding: 1rem 0 2rem 10px;
 }
-
 .register-box{
+  display: block;
   position: relative;
   width: 60%;
   margin: auto;
@@ -24,7 +22,6 @@ background-image: url('../bg.svg');
   padding: 2rem;
 }
 .submit_button{
-  display: flex;
   font-weight: 400;
   font-size: 20px;
   padding: 0.6rem 1rem;
@@ -46,4 +43,7 @@ label{
   padding-left: 16px;
   font-size: 0.7rem;
   color: #555;
+}
+.login-span{
+  text-align: center;
 }

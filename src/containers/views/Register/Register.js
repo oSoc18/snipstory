@@ -162,22 +162,42 @@ const Register = ({
               </div>
               <div className="submit_div">
 
-              <Button
-                className="submit_button"
-                type="submit"
-                disabled={pristine || submitting}
-              >
-                Submit
-              </Button>
-                <span>Heb je al een account?<br />
-                <Link to="/teacher/login">Log hier in!</Link></span>
-              </div>
-              </div>
+                    <Field 
+                      name="password"
+                      component={FormField}
+                      type="password"
+                      label="Wachtwoord"
+                    />
+                    <p className="notice">Password must contain at least 8 characters</p>
+                    <div>
+                      {selectedTypeOfUsers == 'contentPartner' ? 
+                          (ContentPartnerOnly): undefined}
+                    </div>
+                    {error &&
+                      <div>
+                        {error}
+                      </div>}
+                  </div>
+                </div>
+                <div className="row justify-content-center">
+                  <div className="col-md-12">
+                    <Button
+                      className="submit_button"
+                      type="submit"
+                      disabled={pristine || submitting}
+                    >
+                      Submit
+                    </Button>
+                    <span className="login-span">Heb je al een account?<br />
+                    <Link to="/teacher/login">Log hier in!</Link></span>
+                  </div>
+                </div>
 
             </form>
         </div>
-        </div>
-        <Footer/>
+    </div>
+    <Footer/>
+
     </div>
   );
 };

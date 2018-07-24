@@ -9,7 +9,7 @@ export const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.fetchStoryFulFilled:
       return Object.assign({}, state, {
-        nbOfModules: Object.keys(action.story.modules).length
+        nbOfModules: Object.keys(action.story.modules||{}).length
       });
     case actionTypes.selectStory:
       return Object.assign({}, state, {
