@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ButtonSmall from '../../../components/button-small/ButtonSmall';
+import Button from '../../../components/button/Button';
 import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError, formValueSelector } from 'redux-form';
 import {
@@ -181,13 +181,13 @@ const Register = ({
                 </div>
                 <div className="row justify-content-center">
                   <div className="col-md-12">
-                    <ButtonSmall
+                    <Button
                       className="submit_button"
                       type="submit"
                       disabled={pristine || submitting}
                     >
                       Submit
-                    </ButtonSmall>
+                    </Button>
                     <span className="login-span">Heb je al een account?<br />
                     <Link to="/teacher/login">Log hier in!</Link></span>
                   </div>
