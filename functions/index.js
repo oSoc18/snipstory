@@ -47,10 +47,55 @@ exports.orderOfNewModule = functions.database.ref("/stories/{storyId}/modules/{m
   });
 
 exports.onNewLocation = functions.database.ref("/stories/{storyId}/locations/{locationId}")
-.onCreate((snap, context) => snap.ref.child("id").set(context.params.locationId));
+  .onCreate((snap, context) => snap.ref.child("id").set(context.params.locationId));
 
 exports.orderAfterDeleteModule = functions.database.ref("/stories/{storyId}/modules/{moduleId}")
-  .onDelete((snap, index) => {
-// TODO
+  .onDelete(snap => {
+    let storyRef = snap
+      .ref
+      .parent
+      .parent;
+
+    return new Promise((resolve, reject) => {
+      snap.ref.child("order")
+        .once("value")
+        .then(moduleOrderSnap => {
+          const deletedModuleOrder = moduleOrderSnap.val();
+          storyRef
+            .child("moduleCount")
+            .once("value")
+            .then(snap => {
+              return parseInt(snap.val());
+            }).catch(reject)
+            .then(count => {
+              storyRef
+                .child("modules")
+                .orderByChild("order")
+                .startAt(deletedModuleOrder - 1)
+                .once("value")
+                .then(snap => {
+                  let val = snap.val();
+                  // TODO fix orderByChild so dont
+                  // need to call filter and then add .indexOn: order
+                  return Object.keys(val)
+                    .map(k => val[k])
+                    .filter(module => module.order > deletedModuleOrder);
+                })
+                .catch(reject)
+                .then(modules => {
+                  Promise.all([
+                    storyRef.ref.child("moduleCount").set(count - 1),
+                    ...modules.map(module => {
+                      return storyRef
+                        .child("modules")
+                        .child(module.id)
+                        .child("order")
+                        .set(module.order - 1)
+                    })
+                  ]).then(resolve).catch(reject);
+                }).catch(reject)
+            }).catch(reject);
+        }).catch(reject);
+    });
   });
 
