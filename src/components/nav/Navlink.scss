@@ -35,7 +35,8 @@
 .navbar {
   background-color: white;
   justify-content: center;
-  box-shadow: 0 0 40px 4px $brand-blue--darker;
+  height: 80px;
+  box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.45);
   &-toggler {
     border-color: transparent !important;
   }
@@ -48,14 +49,4 @@
 
 .navbar-toggler {
   background-color: white;
-}
-
-.nav-item {
-  .button:hover,
-  .button:focus {
-    color: #fff;
-  }
-  &:hover {
-    border: none;
-  }
 }

@@ -1,14 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from '../../../components/button/Button';
-import ButtonSmall from '../../../components/button-small/ButtonSmall';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Spinner from '../../../components/spinner/Spinner';
 
 
 import { fetchStory } from '../../../redux/actions';
-
 
 import { Link } from 'react-router-dom';
 import { Field, reduxForm, SubmissionError } from 'redux-form';
@@ -93,7 +91,7 @@ class EditStory extends React.Component {
 
         return (
             <div className="page">
-                <Navbar />
+                <Navbar logout={logout} user={user}/>
                 <h1>Pas uw verhaal aan</h1>
                 <h2>{story.general.title}</h2>
 
@@ -114,7 +112,7 @@ class EditStory extends React.Component {
                     })
                 })
                 }>
-                <div className="general-container">
+                <div className="general-container container">
                     <div>
                         <Field
                             name="id"
@@ -261,17 +259,17 @@ class EditStory extends React.Component {
                         <div>
                         <span>Belangrijke locaties</span>
 
-                        <ButtonSmall type="button" className={this.state.tags.brugge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="brugge">Brugge</ButtonSmall>
-                        <ButtonSmall type="button" className={this.state.tags.ieper ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="ieper">Ieper</ButtonSmall>
-                        <ButtonSmall type="button" className={this.state.tags.poperinge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="poperinge">Poperinge</ButtonSmall>
+                        <Button size="small" className={this.state.tags.brugge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="brugge">Brugge</Button>
+                        <Button size="small" className={this.state.tags.ieper ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="ieper">Ieper</Button>
+                        <Button size="small" className={this.state.tags.poperinge ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="poperinge">Poperinge</Button>
 
                         </div>
                         <div>
                         <span>Categorie</span>
 
-                        <ButtonSmall type="button" className={this.state.tags.food ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="food">Voedsel</ButtonSmall>
-                        <ButtonSmall type="button" className={this.state.tags.sport ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="sport">Sport</ButtonSmall>
-                        <ButtonSmall type="button" className={this.state.tags.transportation ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="transportation">Transport</ButtonSmall>
+                        <Button size="small" className={this.state.tags.food ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="food">Voedsel</Button>
+                        <Button size="small" className={this.state.tags.sport ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="sport">Sport</Button>
+                        <Button size="small" className={this.state.tags.transportation ? 'activeButton': ''} onClick={(e) => this.handleTag(e)} value="transportation">Transport</Button>
 
                         </div>
 

@@ -5,7 +5,7 @@ import Navlogo from '../../containers/views/Home/assets/menu-logo.png';
 import './Navlink.css';
 import { Menu } from 'react-feather';
 
-const Navbar = ({ fixed = true }) => {
+const Navbar = ({ fixed = true, user, logout }) => {
   return (
     <nav
       className={`navbar navbar-toggleable-md ${fixed
@@ -43,6 +43,13 @@ const Navbar = ({ fixed = true }) => {
             <Button to="/story/select" size="small">
               Start je verhaal hier
             </Button>
+          </li>
+          <li className="nav-item">
+            {(user && user.uid) ?
+              <Button  size="small" inverted="true" onClick={logout}>Uitloggen</Button>
+              :
+              <Button size="small" inverted="true" to="/teacher/login">Inloggen</Button>
+            }
           </li>
         </ul>
       </div>

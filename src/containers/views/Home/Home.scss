@@ -4,6 +4,7 @@
 
 .page {
   background: none !important;
+  margin-top: -40px;
 }
 
 .button-section {
@@ -17,12 +18,12 @@
 }
 
 .header-container {
-  height: 90vh;
+  height: 92vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-flow: column;
-  background-image: url('./assets/bg.svg');
+  background-image: url('../bg.svg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

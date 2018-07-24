@@ -86,9 +86,26 @@ export const actionTypes = {
   fetchStoriesDashboardListFulfilled: 'FETCH_STORIES_DASHBOARD_LIST_FULFILLED',
   fetchStoriesDashboardListRejected: 'FETCH_STORIES_DASHBOARD_LIST_REJECTED',
 
+  nextModule: 'NEXT_MODULE',
+  prevModule: 'PREV_MODULE',
   fetchStoryStarted: 'FETCH_STORY_STARTED',
   fetchStoryFulFilled: 'FETCH_STORY_FULFILLED',
   fetchStoryRejected: 'FETCH_STORY_REJECTED',
+  fetchStoriesStarted: 'FETCH_STORIES_STARTED',
+  fetchStoriesFulFilled: 'FETCH_STORIES_FULFILLED',
+  fetchStoriesRejected: 'FETCH_STORIES_REJECTED',
+  setFilterYearRange: 'SET_FILTER_YEAR_RANGE',
+  deleteModuleStarted: 'DELETE_MODULE_STARTED',
+  deleteModuleFulFilled: 'DELETE_MODULE_FULFILLED',
+  deleteModuleRejected: 'DELETE_MODULE_REJECTED',
+  deleteLocationStarted: 'DELETE_LOCATION_STARTED',
+  deleteLocationFulFilled: 'DELETE_LOCATION_FULFILLED',
+  deleteLocationRejected: 'DELETE_LOCATION_REJECTED',
+  uploadModuleStarted: 'UPLOAD_MODULE_STARTED',
+  uploadModuleFulFilled: 'UPLOAD_MODULE_FULFILLED',
+  uploadModuleRejected: 'UPLOAD_MODULE_REJECTED',
+  resetModulesOrder: 'RESET_MODULES_ORDER',
+  switchModules: 'SWITCH_MODULES',
   clearState: 'CLEAR_STATE'
 
 };
@@ -117,7 +134,9 @@ export const fetchRandomStories = () => {
       .ref('/stories')
       .once('value')
       .then(snapshot => {
-        let randomStories = shuffle(snapshot.val());
+        let stories = snapshot.val();
+        let arr = Object.keys(stories).map(k => stories[k]);
+        let randomStories = shuffle(arr);
 
         dispatch(fetchRandomStoriesFulfilled(randomStories.splice(0, 3)));
       })
@@ -139,6 +158,7 @@ export const fetchStory = storyId => {
         dispatch(fetchStoryFulFilled(story.val()));
       })
       .catch(err => {
+        console.error(err);
         dispatch(fetchStoryRejected(err));
       });
   };
@@ -157,6 +177,203 @@ export const fetchStoryRejected = err => ({
   type: actionTypes.fetchStoryRejected,
   err
 });
+
+export const gotoNextModule = () => {
+  return dispatch => {
+    dispatch(nextModule());
+  }
+}
+
+export const gotoPrevModule = () => {
+  return dispatch => {
+    dispatch(prevModule());
+  }
+}
+
+export const nextModule = () => ({
+  type: actionTypes.nextModule,
+});
+
+export const prevModule = () => ({
+  type: actionTypes.prevModule,
+});
+
+export const setFiltersYearRange = range => ({
+  type: actionTypes.setFilterYearRange,
+  range
+});
+
+export const setYearRange = range => {
+  return dispatch => {
+    dispatch(setFiltersYearRange(range))
+  };
+}
+
+export const fetchStories = () => {
+  return dispatch => {
+    dispatch(fetchStoriesStarted());
+    return firebaseDatabase
+      .ref("/stories")
+      .once('value')
+      .then(stories => {
+        dispatch(fetchStoriesFulFilled(stories.val()));
+      })
+      .catch(err => {
+        dispatch(fetchStoriesRejected(err));
+      });
+  };
+};
+
+export const fetchStoriesStarted = () => ({
+  type: actionTypes.fetchStoriesStarted
+});
+
+export const fetchStoriesFulFilled = stories => ({
+  type: actionTypes.fetchStoriesFulFilled,
+  stories
+});
+
+export const fetchStoriesRejected = err => ({
+  type: actionTypes.fetchStoriesRejected,
+  err
+});
+
+export const deleteModuleStarted = () => ({
+  type: actionTypes.deleteModuleStarted,
+});
+
+export const deleteModuleFulFilled = moduleId => ({
+  type: actionTypes.deleteModuleFulFilled,
+  moduleId
+});
+
+export const deleteModuleRejected = error => ({
+  type: actionTypes.deleteModuleRejected,
+  error
+});
+
+export const deleteModule = (storyId, moduleId) => {
+  return dispatch => {
+    dispatch(deleteModuleStarted());
+
+    firebaseDatabase
+      .ref("/stories")
+      .child(storyId)
+      .child("modules")
+      .child(moduleId)
+      .remove()
+      .then(story => {
+        dispatch(deleteModuleFulFilled(moduleId));
+      })
+      .catch(err => {
+        console.log(err);
+        dispatch(deleteModuleRejected(err));
+      });
+  };
+};
+
+
+export const deleteLocationStarted = () => ({
+  type: actionTypes.deleteLocationStarted,
+});
+
+export const deleteLocationFulFilled = locationId => ({
+  type: actionTypes.deleteLocationFulFilled,
+  locationId
+});
+
+export const deleteLocationRejected = error => ({
+  type: actionTypes.deleteLocationRejected,
+  error
+});
+
+export const deleteLocation = (storyId, locationId) => {
+  return dispatch => {
+    dispatch(deleteLocationStarted());
+
+    firebaseDatabase
+      .ref("/stories")
+      .child(storyId)
+      .child("locations")
+      .child(locationId)
+      .remove()
+      .then(story => {
+        dispatch(deleteLocationFulFilled(locationId));
+      })
+      .catch(err => {
+        dispatch(deleteLocationRejected(err));
+      });
+  };
+};
+
+export const upOrder = (index) => {
+  return dispatch => {
+    if (index <= 0) return;
+    dispatch(switchModules(index, index - 1));
+  };
+};
+
+export const downOrder = (index) => {
+  return dispatch => {
+    dispatch(switchModules(index, index + 1));
+  };
+};
+
+export const storySaveModules = () => ({
+  type: actionTypes.storySaveStarted
+});
+
+export const switchModules = (indexA, indexB) => ({
+  type: actionTypes.switchModules,
+  indexA,
+  indexB // ofc | indexA - indexB | = 1
+});
+
+export const story = () => ({
+  type: actionTypes.storySaveStarted
+});
+
+export const storySaveModulesStarted = () => ({
+  type: actionTypes.storySaveModulesStarted
+});
+
+export const resetOrder = () => {
+  return dispatch => {
+    dispatch(resetModulesOrder());
+  };
+}
+
+export const resetModulesOrder = () => ({
+  type: actionTypes.resetModulesOrder
+});
+
+export const uploadModuleStarted = () => ({
+  type: actionTypes.uploadModuleStarted
+});
+
+export const uploadModuleFulFilled = () => ({
+  type: actionTypes.uploadModuleFulFilled
+});
+
+export const uploadModuleRejected = error => ({
+  type: actionTypes.uploadModuleRejected,
+  error
+});
+
+export const uploadModules = (storyId, modules) => {
+  return dispatch => {
+    dispatch(uploadModuleStarted());
+    Promise.all(modules.map((module, index) => firebaseDatabase
+      .ref(`/stories/${storyId}/modules/${module.id}`)
+      .child("order").set(index)
+    ))
+    .then(() => dispatch(uploadModuleFulFilled()))
+    .catch(error => {
+      console.log(error)
+      dispatch(uploadModuleRejected(error))}
+    );
+  };
+};
 
 export const receiveClasses = classes => ({
   type: actionTypes.receiveClasses,
@@ -371,7 +588,17 @@ export const listenToFirebaseAuth = () => {
           const val = snapshot.val();
           const newVal = { ...val, ...userData };
           userRef.set(newVal);
-          dispatch(authFulfilled(newVal));
+          return newVal;
+        }).then(newVal => {
+          firebaseDatabase
+            .ref(`/admins/${newVal.uid}`)
+            .once('value')
+            .then(snapshot => {
+              if (snapshot.val()){
+                newVal.isAdmin = true;
+              }
+            }).catch(() => dispatch(authFulfilled(newVal)))
+            .then(() => dispatch(authFulfilled(newVal)));
         });
       } else {
         dispatch(authRejected(''));
@@ -822,10 +1049,13 @@ export const fetchRandomSnippers = () => {
     dispatch(fetchSnippersStarted());
     firebaseDatabase.ref(`/creations`).once('value').then(snippers => {
       const val = snippers.val();
-      const keys = Object.keys(val);
-      let randomSnippers = shuffle(keys.map(key => val[key]));
-      // keys.map(id => val[id])
-      dispatch(fetchRandomSnippersFulfilled(randomSnippers.splice(0, 4)));
+      if (val) {
+          const keys = Object.keys(val);
+            let randomSnippers = shuffle(keys.map(key => val[key]));
+            // keys.map(id => val[id])
+            dispatch(fetchRandomSnippersFulfilled(randomSnippers.splice(0, 4)));
+        }
+
     });
   };
 };

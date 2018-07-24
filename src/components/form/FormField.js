@@ -11,11 +11,16 @@ const FormField = ({
   meta: { asyncValidating, touched, error },
   required = false
 }) => {
-  let className = "";
-  if (type == "checkbox") className = "checkbox-label";
-  
-return <div className="form-field">
-    <label className={className}>{label}</label>
+  let before = undefined;
+  let after = undefined;
+  if (type == "checkbox") {
+    after = <label className="checkbox-label">{label}</label>;
+  } else {
+    before = <label>{label}</label>;
+  }
+
+  return <div className="form-field">
+    {before}
     <input
       className="form-field__input"
       {...input}
@@ -25,6 +30,7 @@ return <div className="form-field">
       id={id}
       required={required}
     />
+    {after}
     {touched &&
       error &&
       <span className="form-field__error">
@@ -32,4 +38,5 @@ return <div className="form-field">
       </span>}
   </div>;
 }
+
 export default FormField;

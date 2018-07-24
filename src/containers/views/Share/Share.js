@@ -18,11 +18,11 @@ class Room extends React.Component {
   }
 
   render() {
-    const { creation, sendCreation } = this.props;
+    const { creation, sendCreation, user } = this.props;
 
     return (
       <div className="share page">
-        <Navbar />
+        <Navbar logout={this.props.logout} user={user}/>
         <StepIndicator
           step="4"
           title="Deel je snipper"

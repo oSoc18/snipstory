@@ -21,6 +21,7 @@ const Register = ({
   error,
   change,
   selectedTypeOfUsers,
+  user,
   ...props
 }) => {
   const ContentPartnerOnly = (
@@ -40,11 +41,12 @@ const Register = ({
 
   return (
     <div className="page">
-      <Navbar/>
-      <div className="register-box container">
+      <Navbar logout={this.props.logout} user={user}/>
+      <div className="general-container container">
+      <div className="register-box">
             <form
               onSubmit={handleSubmit(
-                ({ name, email, password, typeOfUser, institution, password1, ...rest }) => {
+                ({ firstname, name, email, password, typeOfUser, institution, password1, ...rest }) => {
                 if (typeOfUser != "contentPartner"){
                   rest = {};
                 }
@@ -56,13 +58,14 @@ const Register = ({
                     return firebaseDatabase
                       .ref(`/users/${user.uid}`)
                       .set({ ...user.providerData[0],
-                        displayName: name,
-                        typeOfUser,
+                        firstname,
+                        name,
+                        typeOfUser: "teacher",
                         institution,
                         ...rest
                       })
                       .then(_ => {
-                        history.push('/teacher');
+                        history.push('/teacher/dashboardstorylist');
                       });
                   })
                   .catch(err => {
@@ -81,74 +84,83 @@ const Register = ({
                     });
                   });
               })}
-            > 
+            >
+            <div className="container">
+            <h1 className="register-title">Registreer</h1>
+
+              {/*<div className="toggle-container">
+                  <Field
+                    name="typeOfUser"
+                    component="select"
+                    label="Type of account"
+                    onChange={(e, value) => {
+                      change('typeOfUser', value);
+                      console.log(value)
+                    }}
+                    required
+                  >
+                    <option value="teacher">Teacher</option>
+                    <option value="contentPartner">Content Partner</option>
+                  </Field>
+                  </div>*/}
+              <div className="row">
+                  <div className="col-md-6">
+                    <Field
+                      name="firstname"
+                      component={FormField}
+                      type="text"
+                      label="Voornaam"
+                      className="name_in"
+                      required
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <Field
+                      name="name"
+                      component={FormField}
+                      type="text"
+                      label="Familienaam"
+                      className="name_in"
+                      required
+                    />
+                  </div>
+              </div>
+
+              <div className="row">
+                  <div className="col">
+                  <Field
+                    name="email"
+                    component={FormField}
+                    type="email"
+                    label="Email"
+                    required
+                  />
+                  </div>
+              </div>
               <div className="row">
                 <div className="col">
-                  <h1 className="register-title">Registreer</h1>
+                  <Field
+                  name="institution"
+                  label={selectedTypeOfUsers == "contentPartner" ?
+                  "Institution": "School"}
+                  type="text"
+                  component={FormField}
+                  required
+                  />
                 </div>
               </div>
-                {/*<div className="toggle-container">
-                    <Field
-                      name="typeOfUser"
-                      component="select"
-                      label="Type of account"
-                      onChange={(e, value) => {
-                        change('typeOfUser', value);
-                        console.log(value)
-                      }}
-                      required
-                    >
-                      <option value="teacher">Teacher</option>
-                      <option value="contentPartner">Content Partner</option>
-                    </Field>
-                    </div>*/}
-                <div className="row">
-                    <div className="col-md-6">
-                      <Field
-                        name="voornaam"
-                        component={FormField}
-                        type="text"
-                        label="Voornaam"
-                        className="name_in"
-                        required
-                      />
-                    </div>
-                    <div className="col-md-6">
-                      <Field
-                        name="name"
-                        component={FormField}
-                        type="text"
-                        label="Familienaam"
-                        className="name_in"
-                        required
-                      />
-                    </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <Field
+                    name="password"
+                    component={FormField}
+                    type="password"
+                    label="Wachtwoord"
+                  />
+                  <p className="notice">Password must contain at least 8 characters</p>
                 </div>
-                <div className="row">
-                  <div className="col">
-                    <Field
-                    name="institution"
-                    label={selectedTypeOfUsers == "contentPartner" ?
-                    "Institution": "School"}
-                    type="text"
-                    component={FormField} 
-                    required
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col">
-                    <Field
-                      name="email"
-                      component={FormField}
-                      type="email"
-                      label="Email"
-                      required
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col-md-6">
+              </div>
+              <div className="submit_div">
 
                     <Field 
                       name="password"
@@ -183,7 +195,9 @@ const Register = ({
 
             </form>
         </div>
-        <Footer/>
+    </div>
+    <Footer/>
+
     </div>
   );
 };

@@ -1,5 +1,7 @@
 @import '../../../variables.scss';
-
+body{
+background-image: url('../bg.svg');
+  background-position: center;}
 .register-title {
   color: #3274ff;
   font-size: 2.5rem;
@@ -11,7 +13,7 @@
 .register-box{
   display: block;
   position: relative;
-  width: 50%;
+  width: 60%;
   margin: auto;
   margin-top: 50px;
   margin-bottom: 100px;
@@ -23,15 +25,23 @@
   font-weight: 400;
   font-size: 20px;
   padding: 0.6rem 1rem;
-  display: inline-block;
-  margin-left: auto;
+  align-self: flex-end;
+  margin: 17px 0 10px auto;
+}
+.name-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.name_in{
+  display: flex;
 }
 label{
   padding-left: 16px;
 }
 .notice{
   padding-left: 16px;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   color: #555;
 }
 .login-span{

@@ -32,7 +32,7 @@ class SnipperDetail extends React.Component {
     fetchSnipper(snipperId);
   }
   render() {
-    let { snipper, isLoading, notFound, showToast } = this.props;
+    let { snipper, isLoading, notFound, showToast, user } = this.props;
     isLoading = false;
 
     if (isLoading || !snipper) {
@@ -59,7 +59,7 @@ class SnipperDetail extends React.Component {
           <meta name="twitter:image" content={snipper.photoURL} />
           <meta name="twitter:card" content="summary_large_image" />
         </Helmet>
-        <Navbar />
+        <Navbar logout={this.props.logout} user={user}/>
         <div className="snipper-detail-page">
           <div className="creators">
             <h1 className="container snipper-by">
