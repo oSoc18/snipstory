@@ -67,7 +67,7 @@ class DashboardStoryList extends React.Component {
 
                         return (
                             <div
-                                key={story.general.id}
+                                key={story.id}
                                 className="storyCards"
                                 id = {story.general.id}
                             >

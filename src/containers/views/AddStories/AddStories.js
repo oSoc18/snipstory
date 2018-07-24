@@ -285,16 +285,13 @@ class AddStories extends React.Component {
                         <div className="col-md-4">
                             <Field
                                 name="difficulty"
-                                component="select"
-                                type="text"
-                                label="Moeilijkheidsgraad"
+                                component={FormField}
+                                type="number"
+                                min="1"
+                                max="5"
+                                label="Moeilijkheidsgraad (1 zeer gemakkelijk - 5 zeer moeilijk)"
                                 required
                             >
-                                <option value="easy">Gemakkelijk</option>
-                                <option value="rather-easy">Eerder gemakkelijk</option>
-                                <option value="intermediary">Gemiddeld</option>
-                                <option value="rather difficult">Eerder moeilijk</option>
-                                <option value="difficult">Moeilijk</option>
                             </Field>
                         </div>
                     </div>
