@@ -51,7 +51,10 @@ class Story extends React.Component {
       <h1>{story.general.title}</h1>
 
       <div className="modules content-container">
-        {modules && <NavModule index={currentIndex} module={modules[currentIndex]}/>}
+        { modules &&
+          modules.length &&
+          <NavModule index={currentIndex} module={modules[currentIndex]}/> ||
+          <div>This story is empty</div>}
       </div>
       <button onClick={gotoNextModule} disabled={currentIndex + 1 >= nbOfModules}>Next</button>
       {/* <button onClick={gotoPrevModule} disabled={currentIndex == 0}>Prev</button> */}
