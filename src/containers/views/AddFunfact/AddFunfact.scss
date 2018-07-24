@@ -1,0 +1,16 @@
+@import '../../../variables.scss';
+
+.add-module-container{
+    min-height: calc(100vh - 180px);
+}
+.add-module-box{
+    display: block;
+    position: relative;
+    width: 50%;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+    background: #fff;
+    box-shadow: 4px 3px 39px -1px rgba(0,0,0,0.62);
+    padding: 4rem;
+}
