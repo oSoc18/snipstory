@@ -46,9 +46,9 @@ const Navbar = ({ fixed = true, user, logout }) => {
           </li>
           <li className="nav-item">
             {(user && user.uid) ?
-              <Button onClick={logout}>Uitloggen</Button>
+              <Button  size="small" inverted="true" onClick={logout}>Uitloggen</Button>
               :
-              <Navlink to="/teacher/login">Inloggen</Navlink>
+              <Button size="small" inverted="true" to="/teacher/login">Inloggen</Button>
             }
           </li>
         </ul>
