@@ -273,7 +273,7 @@ class EditStory extends React.Component {
 
                         </div>
 
-                        <ButtonSmall type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</ButtonSmall>
+                        <Button type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
                 </div>
                 </form>
                 <Footer />

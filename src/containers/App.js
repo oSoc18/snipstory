@@ -34,7 +34,6 @@ import EditStory from './views/EditStory/EditStory';
 import Filter from './views/Filter/Filter';
 
 import StoryDashboard from './views/StoryDashboard/StoryDashboard';
-import FilterView from './views/FilterView/FilterView';
 
 
 import './App.css';
@@ -197,15 +196,6 @@ class App extends Component {
                 render={props =>
                   <StoryDashboard
                     user={user} logout={logout}
-                    {...props}
-                  />}
-              />
-              <Route
-                path="/filterview"
-                exact
-                render={props =>
-                  <FilterView
-                    user={user}
                     {...props}
                   />}
               />

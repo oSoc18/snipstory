@@ -1,5 +1,5 @@
 import React from 'react';
-import ButtonSmall from '../../../components/button-small/ButtonSmall';
+import Button from '../../../components/button/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
