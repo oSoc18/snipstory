@@ -21,10 +21,10 @@ class AddFunfact extends React.Component {
         <div className="page">
             <h1> Add weetje for { storyId }</h1>
             <form onSubmit={this.props.handleSubmit(({text}) => {
-                let o = firebaseDatabase
+                return firebaseDatabase
                 .ref('stories/')
-                .child(storyId);
-                o.child("modules")
+                .child(storyId)
+                .child("modules")
                 .push({
                     text,
                     contentType: "funfact"
