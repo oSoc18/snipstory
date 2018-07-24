@@ -48,7 +48,7 @@ class EditFunfact extends React.Component {
     };
 };
 
-const EditFunfactForm = reduxForm({ form: 'addFunfact'})(EditFunfact);
+const EditFunfactForm = reduxForm({ form: 'editFunfact'})(EditFunfact);
 
 export default connect((state, props) => ({
   initialValues: {
