@@ -20,6 +20,9 @@ export default class ModuleList extends React.Component {
 
     return <div className="module-list-root col">
       <div className="row">
+        <h1>Modules</h1>
+      </div>
+      <div className="row">
       <Button
         onClick={onReset}
         disabled={!canSaveOrReset}

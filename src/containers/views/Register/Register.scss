@@ -10,6 +10,9 @@ background-image: url('../bg.svg');
   text-align: left;
   padding: 1rem 0 2rem 10px;
 }
+.general-container{
+  min-height: calc(100vh - 120px);
+}
 .register-box{
   display: block;
   position: relative;

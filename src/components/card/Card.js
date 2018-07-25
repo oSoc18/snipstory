@@ -54,11 +54,11 @@ return <div className="cards">
                     )}))
                 }
                 </div>
-                    <div className="row">
+                    <div className="row year-tag-row">
                         {Object.entries({schoolyear}.schoolyear).map(([key,value])=>{
                             if(value) {
                                     return (
-                                            <div key={key} className="card-tag year-tag">
+                                        <div key={key} className="card-tag year-tag">
                                               {key}
                                             </div>
                                     )

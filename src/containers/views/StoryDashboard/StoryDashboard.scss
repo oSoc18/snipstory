@@ -7,7 +7,7 @@
 .dashboard-story-container .button{
     padding: 0.4rem 0.7rem;
     font-weight: 400;
-    margin: 0 10px 0 0;
+    margin: 10px 10px 0 0;
     font-size: 1rem;
 }
 .story-dashboard-header{
@@ -21,7 +21,7 @@
     color: $brand-blue;
     font-size: 1rem;
 }
-.story-dashboard-header h1{
+.dashboard-story-container h1{
     color: $brand-blue;
     font-size: 1.4rem;
     margin-bottom: 0;
@@ -33,9 +33,9 @@
 }
 .story-info{
     background: #fff;
-    margin-top: 15px;
+    margin-top: 25px;
     border-radius: 10px;
-    box-shadow: 0px 3px 7px rgba(0,0,0,0.38);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.26);
     padding: 0;
 }
 .story-info-header{
@@ -83,4 +83,12 @@
 }
 .head-metadata{
     font-weight: 600;
+}
+.filter-buttons-container{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+@media (max-width: 1210px) {
+    
 }

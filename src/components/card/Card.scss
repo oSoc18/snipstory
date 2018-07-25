@@ -2,7 +2,7 @@
 
 .cards{
     width: 300px;
-    box-shadow: 0px 0px 20px 4px rgba(0,0,0,0.45);
+    box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.31);
     border-radius: 20px;
     min-height: 300px;
     font-family: 'Roboto';
@@ -79,4 +79,7 @@
 .year-tag{
     border: 1px solid #FC6560;
     color: #FC6560;
+}
+.year-tag-row{
+    margin-top: 0;
 }

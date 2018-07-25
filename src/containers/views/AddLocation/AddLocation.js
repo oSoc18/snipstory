@@ -3,7 +3,10 @@ import { Field, reduxForm } from 'redux-form';
 import FormField from '../../../components/form/FormField';
 import mapboxgl from 'mapbox-gl';
 import './AddLocation.css'
-import Button from '../../../components/button/Button'
+import Button from '../../../components/button/Button';
+import Navbar from '../../../components/nav/Navbar';
+import Footer from '../../../components/footer/Footer';
+import { Link } from 'react-router-dom';
 import { firebaseDatabase, firebaseStorage } from '../../../helpers/firebase';
 
 import FileField from '../../../components/filefield/FileField';
@@ -43,11 +46,14 @@ class AddLocation extends React.Component {
       match: { params: { storyId } },
       history,
       handleChange,
-      user
+      user,
+      logout
     } = this.props;
 
-    return <div className="AddLocation">
-      <h1>Add location</h1>
+    return <div className="page">
+    <Navbar logout={logout} user={user}/>
+    <div className="add-module-container">
+    <div className="add-module-box container">
       <form onSubmit={this.props.handleSubmit(({ motivation, title, image }) => {
         let imagePromise = firebaseStorage()
               .ref()
@@ -80,40 +86,58 @@ class AddLocation extends React.Component {
         });
       })}>
         <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css' rel='stylesheet' />
-        <div id="map"></div>
-        <div>
-          <Field
-            name="title"
-            component={FormField}
-            type="text"
-            label="Title"
-            required
-          />
+        <div className="row">
+          <h3>Add location</h3>
         </div>
-        <div>
-          <Field
-            name="motivation"
-            component={FormField}
-            label="Motivation"
-            type="text"
-            required
-          />
+        <div className="row justify-content-center">
+            <div id="map"></div>
         </div>
-        <div>
-          <Field
-            name="image"
-            type="file"
-            label="Image"
-            component={FileField}
-            onChange={handleChange}
-            required
-          />
+        <div className="row">
+          <div className="col-md-12">
+            <Field
+              name="title"
+              component={FormField}
+              type="text"
+              label="Title"
+              required
+            />
+          </div>
         </div>
-
-        <Button type="submit" disabled={pristine || submitting}>Add location</Button>
-
+        <div className="row">
+          <div className="col-md-12">
+            <Field
+              name="motivation"
+              component={FormField}
+              label="Motivation"
+              type="text"
+              required
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <Field
+              name="image"
+              type="file"
+              label="Image"
+              component={FileField}
+              onChange={handleChange}
+              required
+            />
+          </div>
+        </div>
+        <div className="row justify-content-center">
+          <Button type="submit" disabled={pristine || submitting}>Add location</Button>
+        </div>
+        <div className="row justify-content-center">
+          <Link to="../">Cancel</Link>
+        </div>
 
       </form>
+    </div>
+    </div>
+    <Footer />
+
     </div>
   }
 }

@@ -8,8 +8,7 @@ import FormField from '../../../components/form/FormField';
 import Button from '../../../components/button/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer.js';
-
-
+import { Link } from 'react-router-dom';
 
 class EditImageQuiz extends React.Component {
   render() {
@@ -55,13 +54,19 @@ class EditImageQuiz extends React.Component {
                 </div>
               </div>
               <div className="row justify-content-center">
-                <Button type="submit" disabled={pristine || submitting}>Add image quiz</Button>
-              </div>
+                <Button type="submit" disabled={pristine || submitting}>Save</Button>
+              </div>       
+              <div className="row justify-content-center">
+                <Link to="../../">Cancel</Link>
+              </div>       
             </form>
+            <div className="row">
+              <p>Click on a picture to replace it</p>
+            </div>
             {
-              resources && resources.map((url, index) => <div>
+              resources && resources.map((url, index) => <div className="row justify-content-center"><div className="col">
                 <img className="old-images" src={url} onClick={() => history.push(`/teacher/dashboard/${storyId}/edit/imagequiz/${moduleId}/replaceimage/${index}`)} />
-              </div>)
+              </div></div>)
             }
           </div>
         </div>

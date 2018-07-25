@@ -37,10 +37,10 @@ class AddFunfact extends React.Component {
                         })
                     }>
                         <div className="row justify-content-center">
-                            <h3> Add weetje for { storyId }</h3>
+                            <h3> Add weetje</h3>
                         </div>
                         <div className="row justify-content-center">
-                            <div className="col-md-10">
+                            <div className="col-md-12">
                                 <Field
                                     name="text"
                                     component={FormField}
