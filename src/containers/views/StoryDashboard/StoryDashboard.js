@@ -42,13 +42,15 @@ class StoryDashboard extends React.Component {
       isModuleLoading,
       isUploadingModules,
       modules,
+      user,
+      logout,
       isDirty } = this.props;
 
     if (isLoading || !story) {
       return <Spinner page size="large" />;
     }
     return (<div className="page">
-      <Navbar />
+            <Navbar logout={logout} user={user}/>
       <div className="dashboard-story-container">
         <div className="story-dashboard-header container">
             <div className="row">Manage a story</div>

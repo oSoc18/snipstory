@@ -22,7 +22,9 @@ class Filter extends React.Component {
             isLoading,
             minYear,
             maxYear,
-            filteredStories
+            filteredStories,
+            user,
+            logout
         } = this.props;
 
         if (isLoading) {
@@ -30,7 +32,7 @@ class Filter extends React.Component {
         }
 
         return <div className="page">
-        <Navbar />
+            <Navbar logout={logout} user={user}/>
         <div className="filter-root container">
             <div className="row filters-div justify-content-between">
                 <div className="col-md-5">

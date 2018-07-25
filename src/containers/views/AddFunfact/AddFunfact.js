@@ -22,7 +22,7 @@ class AddFunfact extends React.Component {
 
     return (
         <div className="page">
-            <Navbar />
+            <Navbar logout={logout} user={user}/>
             <div className="add-module-container">
             <div className="add-module-box container">
                     <form onSubmit={this.props.handleSubmit(({text}) => {

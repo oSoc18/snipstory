@@ -109,7 +109,6 @@ class AddStories extends React.Component {
 
         <div className="page">
             <Navbar logout={logout} user={user}/>
-            <h1>Voeg een verhaal toe</h1>
 
             <form onSubmit={this.props.handleSubmit(({id,thirdYear,fourthYear,fifthYear,sixthYear,firstYearSecondary,secondYearSecondary,profileImage,...fields,...props}) => {
                 let name = ['profileimage'];
@@ -367,15 +366,16 @@ class AddStories extends React.Component {
                                 )
                             })
                     })}
-
+                    
                     </div>
-                </div>
-                </div>
-
-
-
-
                     <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
+
+                </div>
+                </div>
+
+
+
+
             </div>
 
             </form>

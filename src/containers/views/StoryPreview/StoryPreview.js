@@ -51,6 +51,7 @@ class StoryPreview extends React.Component {
     render () {
         const {
             user,
+            logout,
             story,
             modules,
             isLoading,
@@ -65,7 +66,7 @@ class StoryPreview extends React.Component {
 
     return (
         <div className="page">
-          <Navbar />
+        <Navbar logout={logout} user={user}/>
           <div className=" room general-container container ">
             <h3 className="row">Voorbeeld van verhaal ({story.general.title})</h3>
             <div className="story-information__wrapper row">

@@ -24,7 +24,7 @@ class AddQuiz extends React.Component {
 
     return (
       <div className="page">
-        <Navbar />
+       <Navbar logout={logout} user={user}/>
         <div className="add-module-container">
           <div className="add-module-box container">
             <h3> Add quiz for {storyId}</h3>

@@ -29,7 +29,8 @@ class StorySelect extends React.Component {
       createRoom,
       history,
       user,
-    } = this.props;
+      logout
+      } = this.props;
 
     return (
       <div className="page">
