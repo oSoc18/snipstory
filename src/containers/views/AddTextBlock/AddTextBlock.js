@@ -18,7 +18,6 @@ class AddImageQuiz extends React.Component {
       submitting,
       user,
       history,
-      logout,
       handleChange,
       match: { params: { storyId } }
     } = this.props;
@@ -31,40 +30,49 @@ class AddImageQuiz extends React.Component {
             <h3> Add textblock for {storyId}</h3>
             <form onSubmit={this.props.handleSubmit(
               ({ text, textBlockImage }) => {
-                  let name = ['textblockimage'];
 
-                  let imagePromise = Promise.all([textBlockImage].map(
-                    (file, index) => {
-                      return firebaseStorage()
-                      .ref()
-                      .child(user.uid)
-                      .child("story")
-                      .child(moment().format('YYYYMMDD_hhmmss'))
-                      .child(name[index])
-                      .put(file);
-                  })
-              );
-
-                  let dbPromise = imagePromise.then(
-                  (tasks) /* <- type = UploadTaskSnapshot[] */ => {
-                    let urlArray = tasks.map(t => t.metadata.downloadURLs[0]);
-                    firebaseDatabase
+                let promise = new Promise((resolve, reject) => {
+                  firebaseDatabase
                     .ref('stories/')
                     .child(storyId)
                     .child("modules")
                     .push({
                       text,
-                      resources: urlArray,
                       contentType: "textblock"
+                    }).then(snap => {
+                      let moduleId = snap.key;
+                      firebaseStorage()
+                        .ref()
+                        .child(user.uid)
+                        .child("story")
+                        .child(storyId)
+                        .child(moduleId)
+                        .child('textblockimage')
+                        .put(textBlockImage)
+                        .then(task => {
+                          /* tasks:
+                          https://firebase.google.com/docs/reference/js/firebase.storage.UploadTask
+                          */
+                          firebaseDatabase
+                            .ref('stories/')
+                            .child(storyId)
+                            .child('modules')
+                            .child(moduleId)
+                            .child("resource")
+                            .set(task.metadata.downloadURLs[0])
+                            .catch(reject)
+                            .then(resolve)
+                        })
+                        .catch(reject)
                     })
-                  }
-                );
+                });
 
 
 
-                dbPromise.then(() => history.push(`/teacher/dashboard/${storyId}`));
 
-                return dbPromise;
+                promise.then(() => history.push(`/teacher/dashboard/${storyId}`));
+
+                return promise;
               })
             }>
               <div className="row">
@@ -79,14 +87,14 @@ class AddImageQuiz extends React.Component {
                 </div>
               </div>
               <div className="row">
-                  <Field
-                    name="textBlockImage"
-                    type="file"
-                    label="Voeg een foto toe"
-                    component={FileField}
-                    onChange={handleChange}
-                    required
-                  />
+                <Field
+                  name="textBlockImage"
+                  type="file"
+                  label="Voeg een foto toe"
+                  component={FileField}
+                  onChange={handleChange}
+                  required
+                />
               </div>
               <div className="row justify-content-center">
                 <Button type="submit" disabled={pristine || submitting}>Voeg toe</Button>

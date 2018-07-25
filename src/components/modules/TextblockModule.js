@@ -1,10 +1,10 @@
 import React from 'react';
 
-const TextblockModule = ({ module: { resources, text } }) =>
+const TextblockModule = ({ module: { resource, text } }) =>
   <article className="container module article-centering">
     <div
       style={{
-        backgroundImage: `url(${resources[0]})`,
+        backgroundImage: `url(${resource})`,
         backgroundPosition: 'center',
         backgroundSize: 'cover'
       }}
