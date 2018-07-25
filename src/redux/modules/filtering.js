@@ -35,7 +35,6 @@ const getFilteredStories = (state, filters) => {
         })
         .filter(story => {
             let filtered = "";
-            console.log(story.general.tags.locations)
             Object.entries(filters.tags.locations).map(([key,value])=>{
                 if(value === story.general.tags.locations[key]) {
                     filtered = true;
@@ -55,7 +54,6 @@ export const reducer = (state = initialState, action) => {
         case actionTypes.fetchStoriesStarted:
             return Object.assign({}, state, { isLoading: true });
         case actionTypes.fetchStoriesFulFilled:
-            console.log(action.stories)
             return Object.assign({}, state, {
                 isLoading: false,
                 stories: action.stories,
@@ -79,7 +77,6 @@ export const reducer = (state = initialState, action) => {
                 tags:
                     action.location
             };
-            console.log(filters)
 
             return Object.assign({}, state, {
                 filters,

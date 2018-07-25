@@ -217,7 +217,6 @@ class Filter extends React.Component {
                         <h3>Results: </h3>
                     </div>
                     <div className="row cards-grid">
-                    {console.log(testFilteredStories)}
                             {testFilteredStories.map(story => {
                                 return  <div className="cards-container" key={story.id} id={story.general.id}>
                                             <Link to={`/teacher/dashboard/${story.id}/preview`}>
