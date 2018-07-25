@@ -55,32 +55,12 @@ class AddStories extends React.Component {
 
         Object.entries(this.state.tags).map(([child,tagsOfChild]) => {
                 Object.entries(tagsOfChild).map(([tag,value]) => {
-                    console.log(tag)
                     if(e.target.value === tag) {
-                        console.log("yes")
-                        newState.tags[e.target.value] = !newState.tags[e.target.value]
+                        newState.tags[child][tag] = !value
                         this.setState(newState)
                     }
-
                 })
             })
-
-        // let tags = Object.entries(this.state.tags);
-        // let newState = Object.assign({}, this.state);
-        // for(let i = 0; i < tags.length; i++) {
-        //
-        //     for(let j = 0; j < tags[i][1].length; j++){
-        //         console.log(tags[i][1])
-        //
-        //         if(e.target.value === tags[i][1][j]) {
-        //             let tag = tags[i][1][j];
-        //             newState.tags[e.target.value] = !newState.tags[e.target.value]
-        //             this.setState(newState)
-        //         }
-        //
-        //     }
-        // }
-        console.log(this.state.tags);
         }
 
     testMethod() {
@@ -88,8 +68,6 @@ class AddStories extends React.Component {
             return (
                 <Button size="small" >{value}</Button>
             )
-
-
         }))
     }
 
@@ -277,13 +255,16 @@ class AddStories extends React.Component {
                         <div className="col-md-4">
                             <Field
                                 name="difficulty"
-                                component={FormField}
-                                type="number"
-                                min="1"
-                                max="5"
-                                label="Moeilijkheidsgraad (1 zeer gemakkelijk - 5 zeer moeilijk)"
+                                component="select"
+                                type="text"
+                                label="Moeilijkheidsgraad"
                                 required
                             >
+                                <option value="1">Gemakkelijk</option>
+                                <option value="2">Eerder gemakkelijk</option>
+                                <option value="3">Gemiddeld</option>
+                                <option value="4">Eerder moeilijk</option>
+                                <option value="5">Moeilijk</option>
                             </Field>
                         </div>
                     </div>
