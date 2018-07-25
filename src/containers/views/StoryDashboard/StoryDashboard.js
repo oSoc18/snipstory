@@ -137,7 +137,7 @@ class StoryDashboard extends React.Component {
                 <div className="col-md-7">
                   <h1 className="align-middle">{story.general.title.substr(0,story.general.title.indexOf(' '))}<br />{story.general.title.substr(story.general.title.indexOf(' ')+1)} </h1>
                 </div>
-                <div className="col-md-5"><img src="https://i.imgur.com/4yvB1No.jpg"/></div>
+                <div className="col-md-5"><img src={story.general.profilePicture}/></div>
               </div>
               <div className="story-info-body row">
                 <div className="col">
