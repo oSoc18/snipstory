@@ -10,7 +10,7 @@ export default class LocationList extends React.Component {
     } = this.props;
 
     return <div className="dashboard-location">
-              <h1>Locations</h1>
+              <h1>Locaties</h1>
           {locations.map((location) => {
             return <div className="col"><div className="dashboard-location-item" key={location.id}>
               <h2>{ location.title }</h2>

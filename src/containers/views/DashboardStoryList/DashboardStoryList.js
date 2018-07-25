@@ -41,7 +41,6 @@ class DashboardStoryList extends React.Component {
 
 
         const deleteSt = (story) => {
-            console.log(story.id);
             deleteStory(story);
 
         }
@@ -62,7 +61,7 @@ class DashboardStoryList extends React.Component {
                         <div className="row">
                             <div className="col">
                                 <div className="row">Dag {user.name}</div>
-                                <h1 className="row">List of your stories</h1>
+                                <h1 className="row">Lijst van uw verhalen</h1>
                             </div>
                             <div className="col">
                                 <div className="row">
@@ -82,7 +81,7 @@ class DashboardStoryList extends React.Component {
                                     filteredStories.map(story => {
 
                                         return (
-                                            <CardMin
+                                            <CardMin key={story.id}
                                             id={story.id}
                                             title={story.general.title}
                                             picture={story.general.profilePicture}
@@ -93,10 +92,7 @@ class DashboardStoryList extends React.Component {
                                         )
                                     })
                                     : <div>
-                                        Je hebt nog geen verhalen toegevoegd
-                                        <span role="img" aria-label="Crying face">
-                                        😢
-                                        </span>
+                                        <p>Je hebt nog geen verhalen toegevoegd! Voeg hierboven een verhaal toe.</p>
                                     </div>
                                 }
 

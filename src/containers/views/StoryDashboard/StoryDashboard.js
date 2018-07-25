@@ -26,6 +26,8 @@ class StoryDashboard extends React.Component {
     fetchStory(storyId);
   }
 
+
+
   render() {
     const {
       // dipatcher
@@ -53,7 +55,7 @@ class StoryDashboard extends React.Component {
             <Navbar logout={logout} user={user}/>
       <div className="dashboard-story-container">
         <div className="story-dashboard-header container">
-            <div className="row">Manage a story</div>
+            <div className="row">Beheer uw verhaal</div>
 
             <h1 className="row">{story.id}</h1>
         </div>
@@ -65,7 +67,7 @@ class StoryDashboard extends React.Component {
                     to={`/teacher/dashboard/${story.id}/addtextblock/`}
                     size="small"
                     inverted="true">
-                  Add textblock
+                  Voeg tekstblok toe
                 </Button>
 
                 <Button
@@ -73,7 +75,7 @@ class StoryDashboard extends React.Component {
                   to={`/teacher/dashboard/${story.id}/addfunfact/`}
                   size="small"
                   inverted="true">
-                  Add Fun fact
+                  Voeg weetje toe
                 </Button>
 
                 <Button
@@ -81,7 +83,7 @@ class StoryDashboard extends React.Component {
                   to={`/teacher/dashboard/${story.id}/addlocation/`}
                   size="small"
                   inverted="true">
-                  Add location
+                  Voeg locatie toe
                 </Button>
 
                 <Button
@@ -89,7 +91,7 @@ class StoryDashboard extends React.Component {
                   to={`/teacher/dashboard/${story.id}/addimagequiz/`}
                   size="small"
                   inverted="true">
-                  Add Image quiz
+                  Voeg foto quiz toe
                 </Button>
 
                 <Button
@@ -97,14 +99,14 @@ class StoryDashboard extends React.Component {
                   to={`/teacher/dashboard/${story.id}/addquiz/`}
                   size="small"
                   inverted="true">
-                  Add quiz
+                  Voeg quiz toe
                 </Button>
                 <Button
                   disabled={isModuleLoading}
                   to={`/teacher/dashboard/${story.id}/preview/`}
                   size="small"
                   inverted="true">
-                  See preview
+                  Voorbeeld pagina
                 </Button>
               </div>
 
@@ -195,10 +197,10 @@ class StoryDashboard extends React.Component {
                     <span className="head-metadata">tags</span>
                   </div>
                   <div className="row"/>
-                  <div className="row"><span className="blue-text">Age: </span> {story.general.age}</div>
+                  <div className="row"><span className="blue-text">Leeftijd: </span> {story.general.age} </div>
                   <div className="row">
                     <div className="col">
-                      <div className="row blue-text">Summary:</div>
+                      <div className="row blue-text">Korte omschrijving:</div>
                       <div className="row">{story.general.summary}</div>
                     </div>
                   </div>
@@ -214,16 +216,20 @@ class StoryDashboard extends React.Component {
                       <div className="row">{story.general.source}</div>
                     </div>
                   </div>
-                  <div className="row"><span className="blue-text">Copyrighted: </span> {story.general.copyright}</div>
-                  <div className="row"><span className="blue-text">Level: </span> {story.general.level}</div>
+                  <div className="row"><span className="blue-text">Copyright: </span> {story.general.copyright}</div>
+                  <div className="row"><span className="blue-text">Moeilijkheidsgraad: </span> {story.general.difficulty}</div>
                   <div className="row">
                     <div className="col story-info-button-container">
                       <Button
-                        to="/teacher/editstory"
+                        to="#"
                         size="small"
                         inverted="true"
                         className="story-edit-button"
-                      >Edit</Button>
+                        onClick={(e) => {
+                            let route = `/dashboardstorylist/${story.id}/edit`;
+                            history.push(route)
+                        }}
+                      >Aanpassen</Button>
                     </div>
                   </div>
                 </div>

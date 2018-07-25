@@ -26,7 +26,7 @@ export default class ModuleList extends React.Component {
         className="reset-button"
         size="small"
         >
-        Reset
+        Herstel
       </Button>
       <Button
         onClick={onSaveOrder}
@@ -34,7 +34,7 @@ export default class ModuleList extends React.Component {
         className="save-button"
         size="small"
         >
-        Save
+        Opslaan
       </Button>
       </div>
       {modules.map((module, index) => {
