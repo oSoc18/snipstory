@@ -62,7 +62,7 @@ const Login = ({ pristine, submitting, handleSubmit, user, error, showToast, log
                 </div>
               <div className="row submit_div">
                 <p className="col">Wachtwoord vergeten?<br />
-                  <Link to="/teacher/resetpassword">Reset hier uw wachtwoord!</Link>
+                  <Link to="/teacher/resetpassword">Vraag hier uw nieuw wachtwoord aan!</Link>
                 </p>
               </div>
               <div className="row submit_div">

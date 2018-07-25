@@ -158,12 +158,12 @@ const Register = ({
                     type="password"
                     label="Wachtwoord"
                   />
-                  <p className="notice">Password must contain at least 8 characters</p>
+                  <p className="notice">Wachtwoord moet minstens 8 karakter bevatten.</p>
                 </div>
               </div>
               <div className="submit_div">
                     <div>
-                      {selectedTypeOfUsers == 'contentPartner' ? 
+                      {selectedTypeOfUsers  == 'contentPartner' ?
                           (ContentPartnerOnly): undefined}
                     </div>
                     {error &&
@@ -179,7 +179,7 @@ const Register = ({
                       type="submit"
                       disabled={pristine || submitting}
                     >
-                      Submit
+                      Registreer
                     </Button>
                     <span className="login-span">Heb je al een account?<br />
                     <Link to="/teacher/login">Log hier in!</Link></span>

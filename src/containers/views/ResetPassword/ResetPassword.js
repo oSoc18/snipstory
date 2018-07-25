@@ -28,7 +28,7 @@ const ResetPassword = ({ pristine, submitting, logout, user, handleSubmit, error
                     .sendPasswordResetEmail(email)
                     .then(function() {
                         showToast({
-                            text: `We hebben naar "${email}" een link gestuurd om uw wachtwoord te resetten.`
+                            text: `We hebben naar "${email}" een link gestuurd om uw wachtwoord te vernieuwen.`
                         })
                     })
                     .catch(function(error) {
@@ -56,7 +56,7 @@ const ResetPassword = ({ pristine, submitting, logout, user, handleSubmit, error
                   type="submit"
                   disabled={pristine || submitting}
                 >
-                  Reset uw wachtwoord
+                  Vraag nieuw wachtwoord aan
                 </Button>
                 </div>
             </form>
