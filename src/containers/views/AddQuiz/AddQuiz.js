@@ -8,6 +8,7 @@ import Button from '../../../components/button/Button';
 import FileField from '../../../components/filefield/FileField';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
+import { Link } from 'react-router-dom';
 
 class AddQuiz extends React.Component {
   render() {
@@ -99,6 +100,9 @@ class AddQuiz extends React.Component {
               <div className="row justify-content-center">
                 <Button type="submit" disabled={pristine || submitting}>Add quiz</Button>
               </div>
+              <div className="row justify-content-center">
+                  <Link to="../">Cancel</Link>
+                </div>
             </form>
           </div>
         </div>

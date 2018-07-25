@@ -10,6 +10,7 @@ import moment from 'moment';
 import { resolve } from 'url';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer.js';
+import { Link } from 'react-router-dom';
 
 
 
@@ -120,8 +121,11 @@ class AddImageQuiz extends React.Component {
                 </div>
                 </div>
                 <div className="row justify-content-center">
-                <Button type="submit" disabled={pristine || submitting}>Add image quiz</Button>
-              </div>
+                  <Button type="submit" disabled={pristine || submitting}>Add image quiz</Button>
+                </div>
+                <div className="row justify-content-center">
+                  <Link to="../">Cancel</Link>
+                </div>
             </form>
           </div>
         </div>

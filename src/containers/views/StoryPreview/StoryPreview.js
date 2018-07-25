@@ -66,8 +66,8 @@ class StoryPreview extends React.Component {
     return (
         <div className="page">
           <Navbar />
-          <h1>Voorbeeld van verhaal ({story.general.title})</h1>
           <div className=" room general-container container ">
+            <h3 className="row">Voorbeeld van verhaal ({story.general.title})</h3>
             <div className="story-information__wrapper row">
               <div className="story-information card row">
                 <div className="card-block block-width card-block--story-head">

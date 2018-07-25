@@ -40,9 +40,14 @@ const Navbar = ({ fixed = true, user, logout }) => {
             <Navlink to="/knutseltips">Knutseltips</Navlink>
           </li>
           <li className="nav-item">
-            <Button to="/story/select">
+            <Button to="/filter">
               Start je verhaal hier
             </Button>
+          </li>
+          <li className="nav-item">
+            <Navlink to="/teacher/dashboardstorylist">
+              Dashboard
+            </Navlink>
           </li>
           <li className="nav-item">
             {(user && user.uid) ?

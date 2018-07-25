@@ -51,7 +51,6 @@ class StoryDashboard extends React.Component {
       <Navbar />
       <div className="dashboard-story-container">
         <div className="story-dashboard-header container">
-            <Link className="row" to="../dashboardstorylist"><ChevronLeft /> Back to dashboard</Link>
             <div className="row">Manage a story</div>
 
             <h1 className="row">{story.id}</h1>
