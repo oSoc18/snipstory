@@ -5,6 +5,8 @@ import './Card.css';
 
 import { MapPin, Calendar } from 'react-feather';
 
+
+
 const Card = ({
   image,
   title,
@@ -26,22 +28,42 @@ return <div className="cards">
                     </div>
                 </div>
                 <div className="card-line row">
-                    <div class="col-12">                    
+                    <div className="col-12">
                         <span><Calendar size={16} /></span>{dateOfBirth}{' - '}{dateOfDeath}
                     </div>
                 </div>
                 <div className="card-line last-line row">
-                    <div class="col-12">                    
+                    <div className="col-12">
                         <span><MapPin size={16} /></span>{location}
                     </div>
                 </div>
                 <div className="card-tags row">
-                    <div className="card-tag">
-                            {tags}
-                    </div>
-                    <div className="card-tag year-tag">
-                            {schoolyear}
-                    </div>                                          
+                {
+                    (Object.entries(Object.values({tags})[0]).map(([tagParent,tag])=>{
+                    return(
+                        Object.entries(tag).map(([key,value])=>{
+                            if(value) {
+                                    return (
+                                            <div className="card-tag">
+                                              {key}
+                                            </div>
+
+                                    )
+                            }
+                        })
+                    )}))
+                }
+                </div>
+                    <div className="row">
+                        {Object.entries({schoolyear}.schoolyear).map(([key,value])=>{
+                            if(value) {
+                                    return (
+                                            <div key={key} className="card-tag year-tag">
+                                              {key}
+                                            </div>
+                                    )
+                            }
+                        })}
                 </div>
             </div>
             </div>
