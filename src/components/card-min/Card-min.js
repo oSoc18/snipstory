@@ -29,12 +29,12 @@ return <div className="cards">
                     </div>
                 </div>
                 <div className="card-line row">
-                    <div class="col-12">                    
+                    <div className="col-12">
                         <span><Calendar size={16} /></span>{dateOfBirth}{' - '}{dateOfDeath}
                     </div>
                 </div>
                 <div className="card-line last-line row">
-                    <div class="col-12">                    
+                    <div className="col-12">
                         <span><MapPin size={16} /></span>{location}
                     </div>
                 </div>
@@ -60,7 +60,7 @@ return <div className="cards">
                     </div>*/}
                     <div className="col">
                         <Button size="small"
-                        to={`/teacher/dashboard/${id}`}>Manage content</Button>                          
+                        to={`/teacher/dashboard/${id}`}>Beheer verhaal</Button>
                     </div>
                 </div>
             </div>
