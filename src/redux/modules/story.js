@@ -76,7 +76,7 @@ export const reducer = (state = initialState, action) => {
       let locations = Object.keys(state.story.locations)
       .reduce((newLocations, locationId) => {
         let location = state.story.locations[locationId];
-        if (locationId != action.locationId){
+        if (locationId !== action.locationId){
           newLocations[location.id] = location;
         }
         return newLocations;
