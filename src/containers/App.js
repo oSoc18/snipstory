@@ -48,6 +48,9 @@ import AddLocation from './views/AddLocation/AddLocation';
 import Story from './views/Story/Story';
 import EditFunfact from './views/EditFunfact/EditFunfact';
 import EditQuiz from './views/EditQuiz/EditQuiz';
+import EditImageQuiz from './views/EditImageQuiz/EditImageQuiz';
+import EditTextBlock from './views/EditTextBlock/EditTextBlock';
+import ImageQuizReplace from './views/ImageQuizReplace/ImageQuizReplace';
 
 class App extends Component {
   componentDidMount() {
@@ -173,11 +176,45 @@ class App extends Component {
               />
               <ProtectedRoute
                 isAuthorized={confirmedUsersOnly}
+                path="/teacher/dashboard/:storyId/edit/imagequiz/:moduleId/replaceimage/:index"
+                exact
+                redirectUrl="/teacher/login"
+                render={props =>
+                  <ImageQuizReplace
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
                 path="/teacher/dashboard/:storyId/edit/funfact/:moduleId"
                 exact
                 redirectUrl="/teacher/login"
                 render={props =>
                   <EditFunfact
+                    user={user}
+                    {...props}
+                  />}
+              />
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
+                path="/teacher/dashboard/:storyId/edit/imagequiz/:moduleId"
+                exact
+                redirectUrl="/teacher/login"
+                render={props =>
+                  <EditImageQuiz
+                    user={user}
+                    {...props}
+                  />}
+              />
+
+              <ProtectedRoute
+                isAuthorized={confirmedUsersOnly}
+                path="/teacher/dashboard/:storyId/edit/textblock/:moduleId"
+                exact
+                redirectUrl="/teacher/login"
+                render={props =>
+                  <EditTextBlock
                     user={user}
                     {...props}
                   />}

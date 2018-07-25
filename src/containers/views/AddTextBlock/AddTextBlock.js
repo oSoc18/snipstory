@@ -6,8 +6,6 @@ import { firebaseDatabase, firebaseStorage } from '../../../helpers/firebase';
 import FormField from '../../../components/form/FormField';
 import Button from '../../../components/button/Button';
 import FileField from '../../../components/filefield/FileField';
-import moment from 'moment';
-import { resolve } from 'url';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 
