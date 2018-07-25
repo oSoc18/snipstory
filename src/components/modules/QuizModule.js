@@ -1,22 +1,29 @@
 import React from 'react';
 import { Check } from 'react-feather';
 import Button from '../button/Button';
+import { shuffle } from '../../helpers/RandomHelpers';
 import './QuizModule.css';
 
 
 class QuizModule extends React.Component {
     constructor(props) {
         super(props);
+        let values = Object.values(props.module.options)
+        let correct = values[0];
+        let answers = shuffle(values)
+        console.log(answers)
         this.state = {
             isCorrect: false,
             clicked: false,
-            clickedOn: ""
+            clickedOn: "",
+            answers,
+            correctIndex: answers.indexOf(correct)
         }
     }
 
 
     handleChange(index) {
-      (index === "correct") ? this.setState({isCorrect: true}) : ""
+      (index === this.state.correctIndex) ? this.setState({isCorrect: true}) : ""
       this.setState({clicked: true, clickedOn: index})
       console.log(!this.state.isCorrect)
       console.log(this.state.clicked)
@@ -49,7 +56,7 @@ class QuizModule extends React.Component {
                 <div className="question__notification question__notification--wrong">
                   Oeps! Probeer het nog eens.
                 </div> : ""}
-              {this.state.isCorrect
+              {!this.state.isCorrect
                 ? <div className="question__body row">
                     <div className="question__correct">
                       {this.props.module.correctMessage}
@@ -67,25 +74,23 @@ class QuizModule extends React.Component {
                     <Button
                       size="small"
                       style={{ borderRadius: '1rem' }}
-                      inverted
                       className="question__answer question__answer--right"
                       onClick={() => null}
                     >
-                      {this.props.module.correct}
+                      {this.state.answers[this.state.correctIndex]}
                     </Button>
                   </div>
                 : <div className="question__answers">
-                    {Object.entries(this.props.module.options).map((option, i) => {
+                    {Object.entries(this.state.answers).map((option, i) => {
                       return (
                         <Button
                           size="small"
                           style={{ borderRadius: '1rem' }}
-                          inverted
                           className={`question__answer ${option[i] == this.state.clickedOn && !this.state.isCorrect
                             ? ' question__answer--wrong'
                             : ''}`}
                           key={i}
-                          onClick={_ => this.handleChange(option[i])}
+                          onClick={_ => this.handleChange(i)}
                         >
                           {option[1]}
                         </Button>

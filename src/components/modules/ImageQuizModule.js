@@ -1,18 +1,25 @@
 import React from 'react';
 import ImageThumbnail from '../../components/imagethumbnail/ImageThumbnail';
+import { shuffle } from '../../helpers/RandomHelpers';
+
 
 
 class ImageQuizModule extends React.Component {
     constructor(props) {
         super(props);
+        let correct = props.module.resources[0];
+        let images = shuffle(props.module.resources);
+        console.log(images)
         this.state = {
             isCorrect: undefined,
-            clickedOn: ""
+            clickedOn: "",
+            images,
+            correctIndex: images.indexOf(correct)
         }
     }
 
     handleChange(index) {
-        ((index+1) == this.props.module.correctPlace) ? this.setState({isCorrect: true, clickedOn: index}) : ""
+        (index == this.state.correctIndex) ? this.setState({isCorrect: true, clickedOn: index}) : ""
         this.props.module.resources[this.state.clickedOn]
 
     }
@@ -57,7 +64,7 @@ class ImageQuizModule extends React.Component {
                 <div className="images">
 
                   <div>
-                    {this.props.module.resources.map((resource, i) =>
+                    {this.state.images.map((resource, i) =>
                       <ImageThumbnail
                         id={i}
                         key={i}
