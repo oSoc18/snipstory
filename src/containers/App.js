@@ -70,8 +70,6 @@ class App extends Component {
     const isAuthorized = user.isAuthorized;
     const adminOnly = user.isAdmin && isAuthorized;
     const confirmedUsersOnly = user.confirmed && isAuthorized;
-    console.log(`isconfirmed : ${confirmedUsersOnly}`)
-    console.log(user);
     if (user.authPending || user.initial) {
       return <Spinner page size="large" />;
     }
@@ -143,11 +141,7 @@ class App extends Component {
                 exact
                 render={props => <StoryPreview user={user} {...props} />}
               />
-              <Route
-                path="/dashboardstorylist/:storyId/edit"
-                exact
-                render={props => <Story user={user} logout={logout} {...props} />}
-              />
+
               <Route
                 path="/filter"
                 exact
