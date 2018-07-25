@@ -49,18 +49,22 @@ class AddImageQuiz extends React.Component {
                         contentType: "imagequiz"
                       }).then(snap => {
                         let moduleId = snap.key;
-                        Promise.all(
-                          [correctImage, otherImage1, otherImage2]
-                            .map((file, index) => {
-                              return firebaseStorage()
-                                .ref()
-                                .child(user.uid)
-                                .child("story")
-                                .child(storyId)
-                                .child(moduleId)
-                                .child(names[index])
-                                .put(file)
-                            })).then(tasks => {
+                        let promises = [correctImage, otherImage1, otherImage2]
+                          .map((file, index) => {
+                            return firebaseStorage()
+                              .ref()
+                              .child(user.uid)
+                              .child("story")
+                              .child(storyId)
+                              .child(moduleId)
+                              .child(names[index])
+                              .put(file)
+                          });
+                        promises.push(snap.ref.child("id").set(snap.key)) // this promise
+                        // dont give a task
+                        Promise.all(promises).then(tasks => {
+                              // so let's pop it's result there
+                              tasks.pop();
                               let urlArray = tasks.map(t => t.metadata.downloadURLs[0]);
                               firebaseDatabase
                                 .ref("stories/")

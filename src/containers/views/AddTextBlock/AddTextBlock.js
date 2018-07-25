@@ -24,14 +24,14 @@ class AddImageQuiz extends React.Component {
 
     return (
       <div className="page">
-        <Navbar logout={logout} user={user}/>
+        <Navbar logout={logout} user={user} />
         <div className="add-module-container">
           <div className="add-module-box container">
             <h3> Add textblock for {storyId}</h3>
             <form onSubmit={this.props.handleSubmit(
               ({ text, textBlockImage }) => {
 
-                let promise = new Promise((resolve, reject) => {
+                let promise = new Promise(resolve => {
                   firebaseDatabase
                     .ref('stories/')
                     .child(storyId)
@@ -41,7 +41,9 @@ class AddImageQuiz extends React.Component {
                       contentType: "textblock"
                     }).then(snap => {
                       let moduleId = snap.key;
-                      firebaseStorage()
+                      let setIdPromise = snap.ref.child("id").set(moduleId);
+                      let imagePromise = new Promise(imageResolve => {
+                        firebaseStorage()
                         .ref()
                         .child(user.uid)
                         .child("story")
@@ -60,10 +62,11 @@ class AddImageQuiz extends React.Component {
                             .child(moduleId)
                             .child("resource")
                             .set(task.metadata.downloadURLs[0])
-                            .catch(reject)
-                            .then(resolve)
+                            .then(imageResolve)
                         })
-                        .catch(reject)
+                      });
+                      Promise.all([setIdPromise, imagePromise])
+                      .then(resolve)
                     })
                 });
 

@@ -110,9 +110,7 @@ class StoryDashboard extends React.Component {
 
               <div className="row">
                 <ModuleList
-                  onEdit={moduleId => {
-                    let route = `/teacher/dashboard/${story.id}/edit/${story.modules[moduleId].contentType}/${moduleId}`;
-                    history.push(route)}}
+                  getEditUrl={moduleId => `/teacher/dashboard/${story.id}/edit/${story.modules[moduleId].contentType}/${moduleId}`}
                   canDelete={!isDirty && !isModuleLoading}
                   canChangeOrder={!isModuleLoading && !isUploadingModules}
                   canSaveOrReset={isDirty && !isUploadingModules}

@@ -8,6 +8,7 @@ import Button from '../../../components/button/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import { Link } from 'react-router-dom';
+import { resolve } from '../../../../node_modules/url';
 
 class AddFunfact extends React.Component {
     render() {
@@ -26,15 +27,21 @@ class AddFunfact extends React.Component {
             <div className="add-module-container">
             <div className="add-module-box container">
                     <form onSubmit={this.props.handleSubmit(({text}) => {
-                        return firebaseDatabase
+                        return new Promise((resolve, reject) => {
+                        firebaseDatabase
                         .ref('stories/')
                         .child(storyId)
                         .child("modules")
                         .push({
                             text,
                             contentType: "funfact"
-                        }).then(() => history.push(`/teacher/dashboard/${storyId}`));
                         })
+                        .then(snap => snap.ref.child("id").set(snap.key))
+                        .then(resolve)
+                        .catch(reject)
+                        .then(() => history.push(`/teacher/dashboard/${storyId}`));
+                        })
+                      })
                     }>
                         <div className="row justify-content-center">
                             <h3> Add weetje for { storyId }</h3>
