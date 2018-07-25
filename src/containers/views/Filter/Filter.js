@@ -21,16 +21,46 @@ class Filter extends React.Component {
         super(props);
         this.state = { yearRange: [0, 2018],
             activeFilter: "",
+            activeTags: "",
             tags: {
-                locations: {
-                    poperinge: false,
-                    brugge: false,
-                    ieper: false
+                partners: {
+                    overheid: false,
+                    erfgoedcel: false,
+                    museum: false,
+                    andere: false,
                 },
-                skills: {
-                    food: false,
+                categories: {
+                    landbouw: false,
+                    voeding: false,
+                    dieren: false,
+                    architectuur: false,
+                    ambacht: false,
+                    banken: false,
+                    bouw: false,
+                    biologie: false,
+                    verkoop: false,
+                    communicatie: false,
+                    cultuur: false,
+                    veiligheid: false,
+                    recht: false,
+                    boeken: false,
+                    elektronica: false,
+                    informatica: false,
+                    onderwijs: false,
+                    natuur: false,
+                    personeelszaken: false,
+                    toerisme: false,
+                    industrie: false,
+                    filosofie: false,
+                    machines: false,
+                    multimedia : false,
+                    gezondheidszorg: false,
+                    wetenschappen: false,
+                    secretariaat: false,
+                    sociaal: false,
+                    esthetiek: false,
                     sport: false,
-                    transportation: false
+                    transport: false
                 }
             }
         };
@@ -70,8 +100,9 @@ class Filter extends React.Component {
         let newState = Object.assign({}, this.state);
 
 
-        newState.tags.locations[e.target.value] = !newState.tags.locations[e.target.value]
-
+        newState.tags.categories[e.target.value] = !newState.tags.categories[e.target.value]
+        newState.tags.partners[e.target.value] = !newState.tags.partners[e.target.value]
+        newState.activeTags = e.target.value;
         // newState.tags.skills[e.target.value] = !newState.tags.skills[e.target.value]
 
         this.setState(newState)
@@ -86,43 +117,22 @@ class Filter extends React.Component {
 
                     <div className="row">
                         <div className="col-md-4">
-                        <p>Dit zijn de musea</p>
-                        </div>
-                    </div>
-                )
-                break;
-            case "locaties":
-                return (
-                    <div className="row">
-                        <div className="col-md-12">
-                    {Object.keys(this.state.tags.locations).map( tag => {
-                        return(
-                            <Button key={tag} className="col-3" size="small" inverted="true" value={tag} onClick={(e) =>{
-                                this.handleTag(e);
-                                let { tags } = this.props.filters;
-                                console.log(tags)
-                                let newTags = {
-                                    ...tags,
-                                    locations: {
-                                        ...tags.locations,
-                                        [tag]: !tags.locations[tag]
-                                    }
-                                }
-                                this.props.setLocation(newTags);
-                            } }>{tag}</Button>
-                        )
-                    })}
-                        </div>
-                    </div>
-                )
-                break;
-            case "skills":
-                return (
-                    <div className="row">
-                        <div className="col-md-12">
-                        {Object.keys(this.state.tags.skills).map( tag => {
+                        {Object.keys(this.state.tags.partners).map( tag => {
                             return(
-                                <Button key={tag} className="col-3" size="small" inverted="true" value={tag} onClick={(e) => this.handleTag(e)}>{tag}</Button>
+                                <Button key={tag} className="col-3" size="small" inverted="true" value={tag} className={this.state.activeTags === {tag} ? 'activeButton': ''} onClick={(e) => this.handleTag(e)}>{tag}</Button>
+                            )
+                        })}
+                        </div>
+                    </div>
+                )
+                break;
+            case "categories":
+                return (
+                    <div className="row">
+                        <div className="col-md-12">
+                        {Object.keys(this.state.tags.categories).map( tag => {
+                            return(
+                                <Button key={tag} className="col-3" size="small" inverted="true" value={tag} className={this.state.activeTags === {tag} ? 'activeButton': ''} onClick={(e) => this.handleTag(e)}>{tag}</Button>
                             )
                         })}
                         </div>
@@ -133,9 +143,9 @@ class Filter extends React.Component {
 
     testTags(story) {
         let filter = true;
-        (Object.entries(story.general.tags.locations).map(([key,value])=>{
+        (Object.entries(story.general.tags.categories).map(([key,value])=>{
             if(!value){
-                if(value !== this.state.tags.locations[key]) {
+                if(value !== this.state.tags.categories[key]) {
                     filter = false
                 }
             }
@@ -145,6 +155,7 @@ class Filter extends React.Component {
 
       return filter
     }
+
 
 
 
@@ -182,10 +193,7 @@ class Filter extends React.Component {
                             <Button size="small" inverted="true" value="partners" className={this.state.activeFilter === "partners" ? 'activeButton': ''} onClick={(e) => this.handleClick(e)}>Partners</Button>
                         </div>
                         <div className="col">
-                            <Button size="small" inverted="true" value="locaties"className={this.state.activeFilter === "locaties" ? 'activeButton': ''} onClick={(e) => this.handleClick(e)}>Locaties</Button>
-                        </div>
-                        <div className="col">
-                            <Button size="small" inverted="true" value="skills"className={this.state.activeFilter === "skills" ? 'activeButton': ''} onClick={(e) => this.handleClick(e)}>Skills</Button>
+                            <Button size="small" inverted="true" value="categories"className={this.state.activeFilter === "categories" ? 'activeButton': ''} onClick={(e) => this.handleClick(e)}>Skills</Button>
                         </div>
                     </div>
                     {this.switchStatement(this.state.activeFilter)}
@@ -193,7 +201,7 @@ class Filter extends React.Component {
                 <div className="col-md-3">
                     <div className="row self-align-right">
                         <div className="col">
-                            <p>Period:</p>
+                            <p>Periode:</p>
                         </div>
                         <div className="col-md-8">
                             <div className="range-container">
@@ -214,7 +222,7 @@ class Filter extends React.Component {
             <div className="row cards-div">
                 <div className="col">
                     <div className="row">
-                        <h3>Results: </h3>
+                        <h3>Resultaten: </h3>
                     </div>
                     <div className="row cards-grid">
                             {testFilteredStories.map(story => {
