@@ -18,7 +18,7 @@ import LocationList from '../../../components/LocationList/LocationList';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer.js';
 import { Link } from 'react-router-dom';
-import {Tag} from 'react-feather';
+import {Tag, ChevronLeft} from 'react-feather';
 
 class StoryDashboard extends React.Component {
   componentWillMount() {
@@ -51,6 +51,7 @@ class StoryDashboard extends React.Component {
       <Navbar />
       <div className="dashboard-story-container">
         <div className="story-dashboard-header container">
+            <Link className="row" to="../dashboardstorylist"><ChevronLeft /> Back to dashboard</Link>
             <div className="row">Manage a story</div>
 
             <h1 className="row">{story.id}</h1>

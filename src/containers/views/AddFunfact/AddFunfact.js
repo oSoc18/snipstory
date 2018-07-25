@@ -7,6 +7,7 @@ import FormField from '../../../components/form/FormField';
 import Button from '../../../components/button/Button';
 import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
+import { Link } from 'react-router-dom';
 
 class AddFunfact extends React.Component {
     render() {
@@ -51,6 +52,9 @@ class AddFunfact extends React.Component {
                         </div>
                         <div className="row justify-content-center">
                             <Button type="submit" disabled={pristine || submitting}>Add weetje</Button>
+                        </div>
+                        <div className="row justify-content-center">
+                            <Link to="../">Cancel</Link>
                         </div>
                     </form>
                 </div>
