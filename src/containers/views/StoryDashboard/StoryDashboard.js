@@ -60,7 +60,7 @@ class StoryDashboard extends React.Component {
         <div className="story-dashboard-body container">
           <div className="row justify-content-between">
             <div className="col-md-8">
-              <div className="row">
+              <div className="row filter-buttons-container">
                 <Button
                     to={`/teacher/dashboard/${story.id}/addtextblock/`}
                     size="small"
@@ -135,11 +135,12 @@ class StoryDashboard extends React.Component {
             </div>
             <div className="col-md-3">
               <div className="story-info">
-              <div className="story-info-header row">
-                <div className="col-md-7">
+              <div className="story-info-header row justify-content-center">
+                <div className="col justify-content-center"><img src={story.general.profilePicture}/></div>
+
+                <div className="col justify-content-center">
                   <h1 className="align-middle">{story.general.title.substr(0,story.general.title.indexOf(' '))}<br />{story.general.title.substr(story.general.title.indexOf(' ')+1)} </h1>
                 </div>
-                <div className="col-md-5"><img src={story.general.profilePicture}/></div>
               </div>
               <div className="story-info-body row">
                 <div className="col">

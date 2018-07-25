@@ -93,11 +93,10 @@ class Filter extends React.Component {
                 break;
             case "locaties":
                 return (
-                    <div className="row">
-                        <div className="col-md-12">
+                    <div className="row"><div className="col-md-3"/>
                     {Object.keys(this.state.tags.locations).map( tag => {
                         return(
-                            <Button key={tag} className="col-3" size="small" inverted="true" value={tag} onClick={(e) =>{
+                            <div className="col"><Button key={tag} size="small" inverted="true" value={tag} onClick={(e) =>{
                                 this.handleTag(e);
                                 let { tags } = this.props.filters;
                                 console.log(tags)
@@ -109,23 +108,20 @@ class Filter extends React.Component {
                                     }
                                 }
                                 this.props.setLocation(newTags);
-                            } }>{tag}</Button>
+                            } }>{tag}</Button></div>
                         )
                     })}
-                        </div>
                     </div>
                 )
                 break;
             case "skills":
                 return (
-                    <div className="row">
-                        <div className="col-md-12">
+                    <div className="row"><div className="col-md-3"/>
                         {Object.keys(this.state.tags.skills).map( tag => {
                             return(
-                                <Button key={tag} className="col-3" size="small" inverted="true" value={tag} onClick={(e) => this.handleTag(e)}>{tag}</Button>
+                                <div className="col"><Button key={tag} size="small" inverted="true" value={tag} onClick={(e) => this.handleTag(e)}>{tag}</Button></div>
                             )
                         })}
-                        </div>
                     </div>
                 )
                 break;
@@ -171,6 +167,9 @@ class Filter extends React.Component {
 
         return <div className="page">
             <Navbar logout={logout} user={user}/>
+            <div className="story-dashboard-header container">
+                <h1 className="row">Choose a story</h1>
+            </div>
         <div className="filter-root container">
             <div className="row filters-div justify-content-between">
                 <div className="col-md-5">

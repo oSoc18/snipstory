@@ -173,7 +173,7 @@ const Register = ({
                   </div>
                 </div>
                 <div className="row justify-content-center">
-                  <div className="col-md-12">
+                  <div className="col justify-content-center">
                     <Button
                       className="submit_button"
                       type="submit"
@@ -181,9 +181,11 @@ const Register = ({
                     >
                       Submit
                     </Button>
+                  </div>
+                </div>
+                <div className="row justify-content-center">
                     <span className="login-span">Heb je al een account?<br />
                     <Link to="/teacher/login">Log hier in!</Link></span>
-                  </div>
                 </div>
 
             </form>

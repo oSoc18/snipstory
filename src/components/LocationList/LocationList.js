@@ -1,5 +1,6 @@
 import React from 'react';
 import './LocationList.css';
+import Button from '../../components/button/Button'
 
 export default class LocationList extends React.Component {
   render(){
@@ -10,17 +11,18 @@ export default class LocationList extends React.Component {
     } = this.props;
 
     return <div className="dashboard-location">
-              <h1>Locations</h1>
+              <h1>Locations</h1><div className="row">
           {locations.map((location) => {
-            return <div className="col"><div className="dashboard-location-item" key={location.id}>
-              <h2>{ location.title }</h2>
-              <button disabled={!canDelete} className="delete-button" onClick={() => onDelete(location.id)}>
+            return <div className="col justify-content-center"><div className="dashboard-location-item" key={location.id}>
+              <div className="row justify-content-center"><h2>{ location.title }</h2></div>
+              <div className="row justify-content-center"><img src={ location.image }/></div>
+              <div className="row justify-content-center"><Button disabled={!canDelete} className="delete-button" onClick={() => onDelete(location.id)}>
                 Delete
-              </button>
+              </Button></div>
             </div></div>
             })
                 }
 
-    </div>;
+    </div></div>;
   }
 }
