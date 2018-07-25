@@ -26,7 +26,7 @@ export const reducer = (state = initialState, action) => {
       return Object.assign({}, state, { isLoading: true });
     case actionTypes.fetchStoryFulFilled:
       let modules = getArrayFrom(action.story.modules)
-      .map(module => ({
+      .map((module, _, modules) => ({
         ...module,
         order: isNumber(module.order) ? module.order : modules.length - 1
       }));
