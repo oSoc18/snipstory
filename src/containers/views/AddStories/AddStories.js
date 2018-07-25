@@ -32,15 +32,44 @@ class AddStories extends React.Component {
             link:"",
             nationality:"",
             tags: {
-                locations: {
-                    poperinge: false,
-                    brugge: false,
-                    ieper: false
+                partners: {
+                    overheid: false,
+                    erfgoedcel: false,
+                    museum: false,
+                    andere: false,
                 },
                 categories: {
-                    food: false,
+                    landbouw: false,
+                    voeding: false,
+                    dieren: false,
+                    architectuur: false,
+                    ambacht: false,
+                    banken: false,
+                    bouw: false,
+                    biologie: false,
+                    verkoop: false,
+                    communicatie: false,
+                    cultuur: false,
+                    veiligheid: false,
+                    recht: false,
+                    boeken: false,
+                    elektronica: false,
+                    informatica: false,
+                    onderwijs: false,
+                    natuur: false,
+                    personeelszaken: false,
+                    toerisme: false,
+                    industrie: false,
+                    filosofie: false,
+                    machines: false,
+                    multimedia : false,
+                    gezondheidszorg: false,
+                    wetenschappen: false,
+                    secretariaat: false,
+                    sociaal: false,
+                    esthetiek: false,
                     sport: false,
-                    transportation: false
+                    transport: false
                 }
             }
         }
@@ -51,7 +80,6 @@ class AddStories extends React.Component {
 
         let newState = Object.assign({}, this.state);
 
-        console.log(e.target.value)
 
         Object.entries(this.state.tags).map(([child,tagsOfChild]) => {
                 Object.entries(tagsOfChild).map(([tag,value]) => {
@@ -63,13 +91,7 @@ class AddStories extends React.Component {
             })
         }
 
-    testMethod() {
-        console.log(Object.entries(this.state.tags).map(([key,value]) => {
-            return (
-                <Button size="small" >{value}</Button>
-            )
-        }))
-    }
+
 
 
     render() {
@@ -82,7 +104,6 @@ class AddStories extends React.Component {
             logout
         } = this.props;
 
-        console.log(user.uid);
     return (
 
         <div className="page">
@@ -120,18 +141,7 @@ class AddStories extends React.Component {
                                 firstYearSecondary: firstYearSecondary || false,
                                 secondYearSecondary: secondYearSecondary || false
                             },
-                            tags: {
-                                locations: {
-                                    poperinge: this.state.tags.locations.poperinge,
-                                    brugge: this.state.tags.locations.brugge,
-                                    ieper: this.state.tags.locations.ieper
-                                },
-                                categories: {
-                                    food: this.state.tags.categories.food,
-                                    sport: this.state.tags.categories.sport,
-                                    transportation: this.state.tags.categories.transportation
-                                }
-                            },
+                            tags: this.state.tags,
                             profilePicture: urlArray,
                             ...fields
                         }
@@ -285,7 +295,7 @@ class AddStories extends React.Component {
                             name="link"
                             component={FormField}
                             type="text"
-                            label="Linked website"
+                            label="Interessante site"
                             placeholder="vb. www.museum.be"
                             required
                         />
@@ -336,8 +346,6 @@ class AddStories extends React.Component {
                     <div className="row">Belangrijke locaties</div>
                     <div className="row">
 
-                    {this.testMethod()}
-
                     {Object.entries(this.state.tags).map(([child,tagsOfChild]) => {
                             return Object.entries(tagsOfChild).map(([tag,value]) => {
                                 return (
@@ -347,7 +355,7 @@ class AddStories extends React.Component {
                                 )
                             })
                     })}
-                    
+
                     </div>
                     <Button className="submit_button" type="submit" disabled={pristine || submitting}>Voeg een verhaal toe</Button>
 
