@@ -50,3 +50,13 @@
 .navbar-toggler {
   background-color: white;
 }
+@media screen and (max-width: 800px) {
+  .navbar-collapse ul {
+    margin-top: 90px;
+    margin-left: -20px;
+    padding: 30px;
+    background: #fff;
+    box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.45);
+    width: 100vw;
+  }
+}
