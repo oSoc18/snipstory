@@ -156,8 +156,9 @@ class Filter extends React.Component {
             isLoading,
             minYear,
             maxYear,
-            history,
-            filteredStories
+            filteredStories,
+            user,
+            logout
         } = this.props;
 
         if (isLoading) {
@@ -169,7 +170,7 @@ class Filter extends React.Component {
         )
 
         return <div className="page">
-        <Navbar />
+            <Navbar logout={logout} user={user}/>
         <div className="filter-root container">
             <div className="row filters-div justify-content-between">
                 <div className="col-md-5">
@@ -223,6 +224,7 @@ class Filter extends React.Component {
                                             <Card
                                             image={story.general.profilePicture}
                                             title={story.general.title}
+                                            image={story.general.profilePicture}
                                             difficulty={story.general.difficulty}
                                             schoolyear={story.general.schoolYear}
                                             dateOfBirth={story.general.dayOfBirth}

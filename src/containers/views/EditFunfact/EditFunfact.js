@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { firebaseDatabase } from '../../../helpers/firebase';
 import FormField from '../../../components/form/FormField';
 import Button from '../../../components/button/Button'
+import Navbar from '../../../components/nav/Navbar';
 
 class EditFunfact extends React.Component {
     render() {
@@ -12,11 +13,14 @@ class EditFunfact extends React.Component {
             submitting,
             history,
             reset,
+            user,
+            logout,
             match: { params: {storyId, moduleId} }
         } = this.props;
 
     return (
         <div className="page">
+            <Navbar logout={logout} user={user}/>
             <h1> Add weetje for { storyId }</h1>
             <form onSubmit={this.props.handleSubmit(({text}) => {
                 return firebaseDatabase

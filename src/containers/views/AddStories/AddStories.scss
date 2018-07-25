@@ -34,3 +34,8 @@ input[type=checkbox]{
 .checkbox-label{
     display: inline;
 }
+@media screen and (max-width: 800px) {
+    .form-box {
+      width: 95%;
+    }
+  }

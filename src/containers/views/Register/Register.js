@@ -22,6 +22,7 @@ const Register = ({
   change,
   selectedTypeOfUsers,
   user,
+  logout,
   ...props
 }) => {
   const ContentPartnerOnly = (
@@ -41,7 +42,7 @@ const Register = ({
 
   return (
     <div className="page">
-      <Navbar logout={this.props.logout} user={user}/>
+      <Navbar user={user}/>
       <div className="general-container container">
       <div className="register-box">
             <form
@@ -161,14 +162,6 @@ const Register = ({
                 </div>
               </div>
               <div className="submit_div">
-
-                    <Field 
-                      name="password"
-                      component={FormField}
-                      type="password"
-                      label="Wachtwoord"
-                    />
-                    <p className="notice">Password must contain at least 8 characters</p>
                     <div>
                       {selectedTypeOfUsers == 'contentPartner' ? 
                           (ContentPartnerOnly): undefined}

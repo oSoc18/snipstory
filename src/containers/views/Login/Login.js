@@ -14,7 +14,7 @@ const Login = ({ pristine, submitting, handleSubmit, user, error, showToast, log
   return (
     <div className="page">
       <Navbar logout={logout} user={user}/>
-      <div className="general-container container">
+      <div className="general-container container justify-content-center">
         <div className="login-box">
           <div className="login-small-container">
             <h1 className="login-title">Inloggen</h1>
@@ -31,7 +31,7 @@ const Login = ({ pristine, submitting, handleSubmit, user, error, showToast, log
             >
               {error &&
                 <div className="form-field__error row">
-                  {error}
+                  <p>{error}</p>
                 </div>}
               <div className="input-field row">
                 <Field
