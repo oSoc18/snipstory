@@ -38,33 +38,43 @@ class AddImageQuiz extends React.Component {
               ({ text, correctImage, otherImage1, otherImage2 }) => {
                 let names = ['correct', 'other1', 'other2'];
 
-                let imagePromises = Promise.all([correctImage, otherImage1, otherImage2].map(
-                  (file, index) => {
-
-                    return firebaseStorage()
-                      .ref()
-                      .child(user.uid)
-                      .child("story")
-                      .child(moment().format('YYYYMMDD_hhmmss'))
-                      .child(names[index])
-                      .put(file);
+                let dbPromise = new Promise(
+                  (resolve, reject) => {
+                    firebaseDatabase
+                      .ref('stories/')
+                      .child(storyId)
+                      .child("modules")
+                      .push({
+                        text,
+                        contentType: "imagequiz"
+                      }).then(snap => {
+                        let moduleId = snap.key;
+                        Promise.all(
+                          [correctImage, otherImage1, otherImage2]
+                            .map((file, index) => {
+                              return firebaseStorage()
+                                .ref()
+                                .child(user.uid)
+                                .child("story")
+                                .child(storyId)
+                                .child(moduleId)
+                                .child(names[index])
+                                .put(file)
+                            })).then(tasks => {
+                              let urlArray = tasks.map(t => t.metadata.downloadURLs[0]);
+                              firebaseDatabase
+                                .ref("stories/")
+                                .child(storyId)
+                                .child("modules")
+                                .child(moduleId)
+                                .child("resources")
+                                .set(urlArray)
+                                .then(resolve)
+                                .catch(reject)
+                            })
+                      })
                   }
-                ));
-
-            let dbPromise = imagePromises.then(
-              (tasks) /* <- type = UploadTaskSnapshot[] */ => {
-                let urlArray = tasks.map(t => t.metadata.downloadURLs[0]);
-                firebaseDatabase
-                .ref('stories/')
-                .child(storyId)
-                .child("modules")
-                .push({
-                  text,
-                  resources: urlArray,
-                  contentType: "imagequiz"
-                })
-              }
-            );
+                )
 
 
 
@@ -119,13 +129,13 @@ class AddImageQuiz extends React.Component {
                     required
                   />
                 </div>
-                </div>
-                <div className="row justify-content-center">
-                  <Button type="submit" disabled={pristine || submitting}>Add image quiz</Button>
-                </div>
-                <div className="row justify-content-center">
+              </div>
+              <div className="row justify-content-center">
+                <Button type="submit" disabled={pristine || submitting}>Add image quiz</Button>
+              </div>
+              <div className="row justify-content-center">
                   <Link to="../">Cancel</Link>
-                </div>
+              </div>
             </form>
           </div>
         </div>
