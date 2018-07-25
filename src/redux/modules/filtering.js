@@ -5,7 +5,19 @@ const initialState = {
     stories: null,
     filteredStories: null,
     filters: {
-        yearRange: [0, 2018]
+        yearRange: [0, 2018],
+        tags: {
+            locations: {
+                poperinge: false,
+                brugge: false,
+                ieper: false
+            },
+            skills: {
+                food: false,
+                sport: false,
+                transportation: false
+            }
+        }
     },
     minYear: 1800,
     maxYear: 2018,
@@ -20,6 +32,20 @@ const getFilteredStories = (state, filters) => {
             let [min, max] = filters.yearRange;
             let birthYear = new Date(story.general.dayOfBirth).getFullYear();
             return min <= birthYear && max >= birthYear;
+        })
+        .filter(story => {
+            let filtered = "";
+            console.log(story.general.tags.locations)
+            Object.entries(filters.tags.locations).map(([key,value])=>{
+                if(value === story.general.tags.locations[key]) {
+                    filtered = true;
+                }
+                else{
+                    return false;
+                }
+
+          });
+          return true;
         })
 };
 
@@ -41,6 +67,19 @@ export const reducer = (state = initialState, action) => {
                 ...state.filters,
                 yearRange: action.range
             };
+
+            return Object.assign({}, state, {
+                filters,
+                filteredStories: getFilteredStories(state, filters)
+            });
+
+        case actionTypes.setFilterLocations:
+            filters = {
+                ...state.filters,
+                tags:
+                    action.location
+            };
+            console.log(filters)
 
             return Object.assign({}, state, {
                 filters,

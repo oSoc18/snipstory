@@ -99,6 +99,7 @@ export const actionTypes = {
   fetchStoriesFulFilled: 'FETCH_STORIES_FULFILLED',
   fetchStoriesRejected: 'FETCH_STORIES_REJECTED',
   setFilterYearRange: 'SET_FILTER_YEAR_RANGE',
+  setFilterLocations: 'SET_FILTER_LOCATIONS',
   deleteModuleStarted: 'DELETE_MODULE_STARTED',
   deleteModuleFulFilled: 'DELETE_MODULE_FULFILLED',
   deleteModuleRejected: 'DELETE_MODULE_REJECTED',
@@ -211,6 +212,17 @@ export const setYearRange = range => {
   return dispatch => {
     dispatch(setFiltersYearRange(range))
   };
+}
+
+export const setFiltersLocations = location => ({
+    type: actionTypes.setFilterLocations,
+    location
+});
+
+export const setLocation = location => {
+    return dispatch => {
+        dispatch(setFiltersLocations(location))
+    };
 }
 
 export const fetchStories = () => {
