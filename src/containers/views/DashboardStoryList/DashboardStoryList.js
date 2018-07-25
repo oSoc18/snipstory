@@ -83,7 +83,7 @@ class DashboardStoryList extends React.Component {
 
                                         return (
                                             <CardMin
-                                            id={story.general.id}
+                                            id={story.id}
                                             title={story.general.title}
                                             picture={story.general.profilePicture}
                                             dateOfBirth={story.general.dayOfBirth}
