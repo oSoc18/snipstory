@@ -56,7 +56,7 @@ class QuizModule extends React.Component {
                 <div className="question__notification question__notification--wrong">
                   Oeps! Probeer het nog eens.
                 </div> : ""}
-              {!this.state.isCorrect
+              {this.state.isCorrect
                 ? <div className="question__body row">
                     <div className="question__correct">
                       {this.props.module.correctMessage}
