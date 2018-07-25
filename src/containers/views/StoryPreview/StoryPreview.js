@@ -227,6 +227,44 @@ class StoryPreview extends React.Component {
             :
         <div>Oeps dit werkt niet!</div>
         }
+        {Object.entries(story.locations).map(([location, value]) => {
+            return(
+                <div
+                key={location}
+                  className="card monument"
+                  style={{
+                    width: '45em',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                  }}
+                >
+                  <img
+                    className="img-fluid card-img-top"
+                    src={value.image}
+                    alt={value.title}
+                  />
+                  <div className="card-block">
+                    <h4 className="card-title">
+                      {value.title}
+                    </h4>
+                    <div className="card-text monument-text">
+                      {value.motivation}
+                    </div>
+                    <iframe
+                      src="api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css"
+                      width="100%"
+                      height="350"
+                      frameBorder="0"
+                      title="monument map"
+                      style={{ border: 0 }}
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+            )
+    })}
+
 
 
 
