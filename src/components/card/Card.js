@@ -6,6 +6,41 @@ import './Card.css';
 import { MapPin, Calendar } from 'react-feather';
 
 
+const schoolYearSwitch = (schoolYear) => {
+        switch(schoolYear) {
+        case "thirdYear":
+            return (
+                <p>Derde leerjaar</p>
+            )
+            break;
+        case "fourthYear":
+        return (
+            <p>Vierde leerjaar</p>
+        )
+            break;
+        case "fifthYear":
+        return (
+            <p>Vijfde leerjaar</p>
+        )
+            break;
+        case "sixthYear":
+        return (
+            <p>Zesde leerjaar</p>
+        )
+            break;
+        case "firstYearSecondary":
+        return (
+            <p>Eerste middelbaar</p>
+        )
+            break;
+        case "secondYearSecondary":
+        return (
+            <p>Tweede middelbaar</p>
+        )
+            break;
+    }
+}
+
 
 const Card = ({
   image,
@@ -59,7 +94,7 @@ return <div className="cards">
                             if(value) {
                                     return (
                                             <div key={key} className="card-tag year-tag">
-                                              {key}
+                                              {schoolYearSwitch(key)}
                                             </div>
                                     )
                             }
