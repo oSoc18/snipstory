@@ -90,7 +90,7 @@ class FilterView extends React.Component {
 
         return (
             <div className="page container">
-                <Navbar />
+                <Navbar user={user} logout={logout}/>
                 <h1>Kies een verhaal!</h1>
                 <div className="row">
                     <div className="col-md-2">

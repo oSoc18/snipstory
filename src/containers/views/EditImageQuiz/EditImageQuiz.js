@@ -18,12 +18,14 @@ class EditImageQuiz extends React.Component {
       submitting,
       history,
       resources,
+      user,
+      logout,
       match: { params: { storyId, moduleId } }
     } = this.props;
 
     return (
       <div className="page">
-        <Navbar />
+        <Navbar user={user} logout={logout}/>
         <div className="add-module-container">
           <div className="add-module-box container">
             <div className="row">
@@ -58,7 +60,7 @@ class EditImageQuiz extends React.Component {
             </form>
             {
               resources && resources.map((url, index) => <div>
-                <img src={url} onClick={() => history.push(`/teacher/dashboard/${storyId}/edit/imagequiz/${moduleId}/replaceimage/${index}`)} />
+                <img className="old-images" src={url} onClick={() => history.push(`/teacher/dashboard/${storyId}/edit/imagequiz/${moduleId}/replaceimage/${index}`)} />
               </div>)
             }
           </div>

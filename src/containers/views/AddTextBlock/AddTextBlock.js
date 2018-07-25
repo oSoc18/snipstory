@@ -17,6 +17,7 @@ class AddImageQuiz extends React.Component {
       submitting,
       user,
       history,
+      logout,
       handleChange,
       match: { params: { storyId } }
     } = this.props;

@@ -17,15 +17,16 @@ class ImageReplace extends React.Component {
       pristine,
       submitting,
       history,
+      logout,
     } = this.props;
 
     return (
       <div className="page">
-        <Navbar />
+        <Navbar logout={logout} user={user}/>
         <div className="add-module-container">
           <div className="add-module-box container">
             <h3> Change an image in {storyId}</h3>
-            <img src={oldImg} />
+            <img className="old-images" src={oldImg} />
             <form onSubmit={this.props.handleSubmit(
               ({ file }) => {
                 let names = ['correct', 'other1', 'other2'];
