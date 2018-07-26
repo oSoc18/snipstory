@@ -6,9 +6,7 @@ const Creations1 = ({ snipper }) => {
   return (
     <div>
       <div
-        className="card card-container"
-        onClick={e => history.push(`/snippers/${snipper.id}`)}
-      >
+        className="card card-container">
         {snipper.fileType === 'video'
           ? <video
               className="img-fluid card-img"

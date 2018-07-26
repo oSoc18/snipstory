@@ -37,9 +37,6 @@ class Snippers extends React.Component {
                   key={snipper.id}
                   className="card snipper"
                   style={{ width: '25em', margin: '2em' }}
-                  onClick={_ => {
-                    history.push('/snippers/' + snipper.id);
-                  }}
                 >
                   {snipper.fileType === 'video'
                     ? <video
