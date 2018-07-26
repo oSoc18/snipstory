@@ -129,7 +129,7 @@ class Filter extends React.Component {
                 break;
             case "categories":
                 return (
-                        <div className="cards-grid"/>
+                        <div className="cards-grid">
                         {Object.entries(this.state.tags.categories).map( ([tag, value]) => {
                             return(
                                 <div className="col"><Button key={tag} size="small" inverted="true" value={tag} className={value ? 'activeButton': ''} onClick={(e) => this.handleTag(e)}>{tag}</Button></div>
