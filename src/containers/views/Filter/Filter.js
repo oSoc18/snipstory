@@ -105,7 +105,6 @@ class Filter extends React.Component {
 
 
         newState.tags.categories[e.target.value] = !newState.tags.categories[e.target.value]
-        newState.tags.partners[e.target.value] = !newState.tags.partners[e.target.value]
         newState.activeTags = e.target.value;
         // newState.tags.skills[e.target.value] = !newState.tags.skills[e.target.value]
 
