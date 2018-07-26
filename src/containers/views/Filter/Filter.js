@@ -10,6 +10,10 @@ import Navbar from '../../../components/nav/Navbar';
 import Footer from '../../../components/footer/Footer';
 import Card from '../../../components/card/Card';
 import { Link } from 'react-router-dom';
+import StapLogo from './assets/stap01.svg';
+import StepIndicator from '../../../components/step-indicator/StepIndicator';
+
+
 
 
 class Filter extends React.Component {
@@ -183,9 +187,12 @@ class Filter extends React.Component {
 
         return <div className="page">
             <Navbar logout={logout} user={user}/>
-            <div className="story-dashboard-header container">
-                <h1 className="row">Choose a story</h1>
-            </div>
+            <StepIndicator
+              step={1}
+              title="Kies een persoon"
+              description="Kies de persoon van wie je het verhaal wilt ontdekken"
+              image={StapLogo}
+            />
         <div className="filter-root container">
             <div className="row filters-div justify-content-between">
                 <div className="col-md-5">

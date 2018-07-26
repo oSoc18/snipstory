@@ -69,7 +69,7 @@ class StoryPreview extends React.Component {
         <div className="page">
         <Navbar logout={logout} user={user}/>
         <StepIndicator
-          step={1}
+          step={2}
           title="Ontdek"
           description="Ontdek verschillende historische figuren aan de hand van hun levensverhaal"
           image={StapLogo}

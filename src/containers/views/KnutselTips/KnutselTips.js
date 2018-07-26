@@ -39,7 +39,7 @@ class KnutselTips extends React.Component {
         <NavBar logout={this.props.logout} user={this.props.user}/>
         {storyId &&
           <StepIndicator
-            step={2}
+            step={3}
             title="Knutsel"
             description="Nu is het jouw beurt! Maak een snipper over het verhaal dat je hebt gelezen"
             image={StapLogo}
