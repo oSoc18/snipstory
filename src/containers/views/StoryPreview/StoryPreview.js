@@ -33,6 +33,7 @@ import FloatingSteps from '../../../components/step-indicator/FloatingSteps';
 import FloatingNext from '../../../components/step-indicator/FloatingNext';
 import WorkTogether from '../../../components/work-together/WorkTogether';
 import ModuleList from '../../../components/ModuleList/ModuleList';
+import StapLogo from './assets/stap02.svg';
 
 
 import './StoryPreview.css';
@@ -67,8 +68,13 @@ class StoryPreview extends React.Component {
     return (
         <div className="page">
         <Navbar logout={logout} user={user}/>
+        <StepIndicator
+          step={1}
+          title="Ontdek"
+          description="Ontdek verschillende historische figuren aan de hand van hun levensverhaal"
+          image={StapLogo}
+        />
           <div className=" room general-container container ">
-            <h3 className="row">Voorbeeld van verhaal ({story.general.title})</h3>
             <div className="story-information__wrapper row">
               <div className="story-information card row">
                 <div className="card-block block-width card-block--story-head">
@@ -226,8 +232,8 @@ class StoryPreview extends React.Component {
                 })
             :
         <div>Oeps dit werkt niet!</div>
-        }
-        {Object.entries(story.locations).map(([location, value]) => {
+    }
+        {Object.entries(story.locations || {}).map(([location, value]) => {
             return(
                 <div
                 key={location}
@@ -257,7 +263,10 @@ class StoryPreview extends React.Component {
     })}
 
 
-
+    <FloatingNext
+      to={`/knutseltips?storyId=${story.id}`}
+      nextStep="Knutselen"
+    />
 
             </div>
             <Footer />

@@ -30,7 +30,8 @@ class KnutselTips extends React.Component {
   }
 
   render() {
-    const { knutseltips } = this.props;
+    const { knutseltips,
+            story } = this.props;
     const { storyId } = this.state;
 
     return (
@@ -38,7 +39,7 @@ class KnutselTips extends React.Component {
         <NavBar logout={this.props.logout} user={this.props.user}/>
         {storyId &&
           <StepIndicator
-            step={3}
+            step={2}
             title="Knutsel"
             description="Nu is het jouw beurt! Maak een snipper over het verhaal dat je hebt gelezen"
             image={StapLogo}
@@ -111,7 +112,6 @@ class KnutselTips extends React.Component {
                   </div>
                 )}
               </div>
-              {storyId && <FloatingSteps activeStep={2} />}
               {storyId &&
                 <FloatingNext
                   to={`/story/share?storyId=${storyId}`}
