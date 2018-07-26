@@ -2,7 +2,7 @@
 
 .button {
 	text-decoration: none;
-	background-color: #f14a3b;
+	background-color: #F88C8A;
 	color: white;
 	font-family: "Poppins", sans-serif;
 	padding: 0.7rem 0.95rem;
@@ -11,17 +11,19 @@
 	transition: all 300ms;
 	display: inline-block;
 	text-align: center;
-	border: 1px solid #FF5046;
+	border: 1px solid #F88C8A;
+	border-radius: 50px;
 }
 
 	.button:hover {
-		background-color: #FF5046;
+		background-color: #FBAD5A;
+		border-color: #FBAD5A;
 	}
 
 .button--alt {
 	background-color: white;
-	border: 1px solid #f14a3b;
-	color: #f14a3b;
+	border: 1px solid #F88C8A;
+	color: #F88C8A;
 }
 
 	.button--alt:hover {
