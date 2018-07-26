@@ -20,8 +20,8 @@ exports.moduleCount = functions.database.ref('/stories/{storyId}')
   });
 
 exports.orderOfNewModule = functions.database.ref("/stories/{storyId}/modules/{moduleId}")
-  .onCreate((snap, context) => {
-    let storyRef = snap
+  .onCreate((moduleSnap, context) => {
+    let storyRef = moduleSnap
       .ref
       .parent // module
       .parent; // storyId;
@@ -36,10 +36,10 @@ exports.orderOfNewModule = functions.database.ref("/stories/{storyId}/modules/{m
         .catch(err => reject(err))
         .then(count => {
           Promise.all([
-            snap.ref.child("order").set(count),
+            moduleSnap.ref.child("order").set(count),
             storyRef.ref.child("moduleCount").set(count + 1),
-            snap.ref.child("id").set(context.params.moduleId)
-          ]).then((x) => resolve(x))
+            moduleSnap.ref.child("id").set(context.params.moduleId)
+          ]).then(resolve)
             .catch(err => reject(err));
         })
         .catch(err => reject(err));

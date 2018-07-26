@@ -18,10 +18,10 @@ const ResetPassword = ({ pristine, submitting, logout, user, handleSubmit, error
   return (
     <div className="page">
       <Navbar logout={logout} user={user}/>
-      <div className="container">
+      <div className="general-container container justify-content-center">
         <div className="login-box">
           <div className="login-small-container">
-            <h1 className="login-title">Inloggen</h1>
+            <h1 className="login-title">Reset your password</h1>
             <form
               onSubmit={handleSubmit(({ email }) => {
                 return firebaseAuth
@@ -38,11 +38,11 @@ const ResetPassword = ({ pristine, submitting, logout, user, handleSubmit, error
               }
             >
               {error &&
-                <div className="form-field__error">
+                <div className="form-field__error row">
                   {error}
                 </div>}
 
-              <div className="input-field">
+              <div className="input-field row">
                 <Field
                   name="email"
                   component={FormField}
@@ -50,7 +50,7 @@ const ResetPassword = ({ pristine, submitting, logout, user, handleSubmit, error
                   label="E-mailadres"
                 />
               </div>
-              <div className="submit_div">
+              <div className="submit_div row">
                 <Button
                   className="submit_button"
                   type="submit"
@@ -59,6 +59,9 @@ const ResetPassword = ({ pristine, submitting, logout, user, handleSubmit, error
                   Vraag nieuw wachtwoord aan
                 </Button>
                 </div>
+                <div className="row justify-content-center">
+                <Link to="../">Cancel</Link>
+              </div>
             </form>
           </div>
         </div>

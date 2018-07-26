@@ -13,7 +13,7 @@ export default class ModuleEditCard extends React.Component {
       order,
       onOrderDown,
       deleteDisabled,
-      onEdit,
+      editUrl,
       orderDisabled,
       text } = this.props;
 
@@ -30,7 +30,7 @@ export default class ModuleEditCard extends React.Component {
                 if (window.confirm("This is IRREVERSIBLE!"))
                   onDelete(e);
               }}><Trash size="20"/></Link>
-              <Link className="module-edit row" to="#" onClick={onEdit}><Edit size="20" /></Link>
+              <Link className="module-edit row" to={editUrl}><Edit size="20" /></Link>
               <div className="row module-up-down-container align-self-end">
                 <Link disabled={orderDisabled} className="module-up" to="#" onClick={(e) => onOrderUp(e)}><ChevronUp size="20"/></Link>
                 <Link disabled={orderDisabled} className="module-down" to="#" onClick={(e) => onOrderDown(e)}><ChevronDown size="20"/></Link>

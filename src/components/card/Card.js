@@ -89,7 +89,7 @@ return <div className="cards">
                     )}))
                 }
                 </div>
-                    <div className="row">
+                    <div className="row year-tag-row">
                         {Object.entries({schoolyear}.schoolyear).map(([key,value])=>{
                             if(value) {
                                     return (

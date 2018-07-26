@@ -29,11 +29,12 @@ class AddQuiz extends React.Component {
           <div className="add-module-box container">
             <h3> Add quiz for {storyId}</h3>
             <form onSubmit={this.props.handleSubmit(
-              ({...fields, correct, other1, other2}) => {
-                let o = firebaseDatabase
+              ({correct, other1, other2, ...fields}) => {
+                return new Promise(resolve => {
+                  firebaseDatabase
                     .ref('stories/')
-                    .child(storyId);
-                    o.child("modules")
+                    .child(storyId)
+                    .child("modules")
                     .push({
                       contentType: "quiz",
                       options: {
@@ -42,8 +43,9 @@ class AddQuiz extends React.Component {
                           other2
                       },
                       ...fields
-                    })
+                    }).then(snap => snap.ref.child("id").set(snap.key).then(resolve))
                 .then(() => history.push(`/teacher/dashboard/${storyId}`))
+                })
               })
             }>
               <div className="row">

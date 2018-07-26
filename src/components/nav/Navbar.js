@@ -44,18 +44,27 @@ const Navbar = ({ fixed = true, user, logout }) => {
               Start je verhaal hier
             </Button>
           </li>
-          <li className="nav-item">
-            <Navlink to="/teacher/dashboardstorylist">
-              Dashboard
-            </Navlink>
-          </li>
-          <li className="nav-item">
-            {(user && user.uid) ?
-              <Button  size="small" inverted="true" onClick={logout}>Uitloggen</Button>
-              :
+
+
+          {(user && user.uid) ?
+            <li className="nav-item">
+              <Navlink to="/teacher/dashboardstorylist">
+                Dashboard
+               </Navlink>
+            </li>
+            :
+            <li className="nav-item">
               <Button size="small" inverted="true" to="/teacher/login">Inloggen</Button>
-            }
-          </li>
+            </li>
+          }
+          {(user && user.uid) ?
+            <li className="nav-item">
+              <Button size="small" inverted="true" onClick={logout}>Uitloggen</Button>
+            </li>
+            :
+            undefined
+          }
+
         </ul>
       </div>
     </nav>

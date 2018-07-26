@@ -49,8 +49,8 @@ const Login = ({ pristine, submitting, handleSubmit, user, error, showToast, log
                   label="Wachtwoord"
                 />
               </div>
-              <div className="submit_div row">
-
+              <div className="row submit_div justify-content-center">
+                <div className="col-md-12">
                   <Button
                     className="submit_button"
                     type="submit"
@@ -59,16 +59,15 @@ const Login = ({ pristine, submitting, handleSubmit, user, error, showToast, log
                   >
                     Login
                   </Button>
-                </div>
-              <div className="row submit_div">
+                  </div>
+              </div>
+              <div className="row submit_div justify-content-center">
                 <p className="col">Wachtwoord vergeten?<br />
                   <Link to="/teacher/resetpassword">Vraag hier uw nieuw wachtwoord aan!</Link>
                 </p>
               </div>
-              <div className="row submit_div">
-                <div className="col">
+              <div className="row submit_div justify-content-center">
                   <Link to="/teacher/register">Registreer</Link>
-                </div>
               </div>
 
 

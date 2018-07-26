@@ -116,29 +116,26 @@ class Filter extends React.Component {
                 return (
 
                     <div className="row">
-                        <div className="col-md-4">
+                        <div className="col-md-3"/>
                         {Object.keys(this.state.tags.partners).map( tag => {
                             return(
-                                <Button key={tag} className="col-3" size="small" inverted="true" value={tag} className={this.state.activeTags === {tag} ? 'activeButton': ''} onClick={(e) => this.handleTag(e)}>{tag}</Button>
+                                <div className="col"><Button key={tag} size="small" inverted="true" value={tag} className={this.state.activeTags === {tag} ? 'activeButton': ''} onClick={(e) => this.handleTag(e)}>{tag}</Button></div>
                             )
                         })}
-                        </div>
                     </div>
                 )
                 break;
             case "categories":
                 return (
                     <div className="row">
-                        <div className="col-md-12">
+                        <div className="col-md-3"/>
                         {Object.keys(this.state.tags.categories).map( tag => {
                             return(
-                                <Button key={tag} className="col-3" size="small" inverted="true" value={tag} className={this.state.activeTags === {tag} ? 'activeButton': ''} onClick={(e) => this.handleTag(e)}>{tag}</Button>
+                                <div className="col"><Button key={tag} size="small" inverted="true" value={tag} className={this.state.activeTags === {tag} ? 'activeButton': ''} onClick={(e) => this.handleTag(e)}>{tag}</Button></div>
                             )
                         })}
-                        </div>
                     </div>
                 )
-                break;
         }}
 
     testTags(story) {
@@ -182,6 +179,9 @@ class Filter extends React.Component {
 
         return <div className="page">
             <Navbar logout={logout} user={user}/>
+            <div className="story-dashboard-header container">
+                <h1 className="row">Choose a story</h1>
+            </div>
         <div className="filter-root container">
             <div className="row filters-div justify-content-between">
                 <div className="col-md-5">

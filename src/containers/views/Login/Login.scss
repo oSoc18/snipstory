@@ -26,10 +26,6 @@
   color: $brand-blue;
 }
 
-.login-button-container {
-  display: flex;
-  flex-flow: column;
-}
 
 .input-field {
   margin-top: 1rem;
@@ -46,11 +42,7 @@
 }
 
 .submit_button{
-  display: flex;
-  font-weight: 400;
-  font-size: 20px;
-  padding: 0.6rem 1rem;
-  margin: 17px auto 10px auto;
+  margin: auto;
 }
 .submit_div{
   text-align: center;
