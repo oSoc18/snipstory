@@ -74,7 +74,7 @@ class DashboardStoryList extends React.Component {
                     <div className="story-dashboard-body container">
                         <div className="row">
                             <div className="col">
-                                <div className="row cards-grid">
+                                <div className="row cards-grid justify-content-center">
 
                                 {filteredStories && filteredStories.length > 0
                                 ?
