@@ -118,11 +118,10 @@ class Filter extends React.Component {
             case "partners":
                 return (
 
-                    <div className="row">
-                        <div className="col-md-3"/>
+                    <div className="cards-grid">
                         {Object.keys(this.state.tags.partners).map( tag => {
                             return(
-                                <div className="col"><Button key={tag} size="small" inverted="true" value={tag} className={this.state.activeTags === {tag} ? 'activeButton': ''} onClick={(e) => this.handleTag(e)}>{tag}</Button></div>
+                                <Button key={tag} size="small" inverted="true" value={tag} className="tag-button" onClick={(e) => this.handleTag(e)}>{tag}</Button>
                             )
                         })}
                     </div>
@@ -130,11 +129,10 @@ class Filter extends React.Component {
                 break;
             case "categories":
                 return (
-                    <div className="row">
-                        <div className="col-md-3"/>
+                    <div className="cards-grid">
                         {Object.keys(this.state.tags.categories).map( tag => {
                             return(
-                                <div className="col"><Button key={tag} size="small" inverted="true" value={tag} className={this.state.activeTags === {tag} ? 'activeButton': ''} onClick={(e) => this.handleTag(e)}>{tag}</Button></div>
+                                <Button key={tag} size="small" inverted="true" value={tag} className="tag-button" onClick={(e) => this.handleTag(e)}>{tag}</Button>
                             )
                         })}
                     </div>
