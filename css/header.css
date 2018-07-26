@@ -91,7 +91,7 @@
 .hero-intro {
 	font-size: 1.1rem;
 	line-height: 1.4;
-	font-family: "Montserrat", sans-serif;
+	font-family: "Poppins", sans-serif;
 	color: #555;
 	margin-bottom: 1rem;
 	font-weight: 300;
@@ -105,7 +105,7 @@
 
 	.hero-intro a {
 		color: #555;
-		font-family: "Montserrat", sans-serif;
+		font-family: "Poppins", sans-serif;
 	}
 
 	.hero-intro strong {

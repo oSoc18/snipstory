@@ -1,6 +1,6 @@
 /* General typography */
 * {
-	font-family: "Open sans", sans-serif;
+	font-family: "Roboto", sans-serif;
 }
 
 h1,
@@ -15,7 +15,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-	font-family: "Montserrat", sans-serif;
+	font-family: "Poppins", sans-serif;
 	color: #333;
 	margin-bottom: 0.5rem;
 }
@@ -136,7 +136,7 @@ a {
 	.h4 a,
 	.h5 a,
 	.h6 a {
-		font-family: "Montserrat", sans-serif;
+		font-family: "Poppins", sans-serif;
 	}
 
 p {
