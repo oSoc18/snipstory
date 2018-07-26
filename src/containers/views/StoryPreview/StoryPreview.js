@@ -233,6 +233,7 @@ class StoryPreview extends React.Component {
             :
         <div>Oeps dit werkt niet!</div>
     }
+        <div className="row justify-content-center">
         {Object.entries(story.locations || {}).map(([location, value]) => {
             return(
                 <div
@@ -261,7 +262,7 @@ class StoryPreview extends React.Component {
                 </div>
             )
     })}
-
+  </div>
 
     <FloatingNext
       to={`/knutseltips?storyId=${story.id}`}
@@ -269,8 +270,9 @@ class StoryPreview extends React.Component {
     />
 
             </div>
-            <Footer />
         </div>
+        <Footer />
+
         </div>
     );
 };
