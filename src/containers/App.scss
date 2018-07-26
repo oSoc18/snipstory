@@ -8,10 +8,7 @@
   outline-color: $brand-blue !important;
 }
 .card {
-  border-radius: 2.5rem;
-  img {
-    border: .5rem $brand-blue solid;
-  }
+  border-radius: 20px;
 }
 
 .room {
@@ -19,8 +16,8 @@
 }
 
 .snipper {
-  background-color: $brand-blue;
-  color: white;
+  background-color: #fff;
+  color: $brand-blue;
 }
 
 .story {

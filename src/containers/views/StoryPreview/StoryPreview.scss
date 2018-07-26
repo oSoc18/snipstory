@@ -28,14 +28,15 @@
 }
 
 .card-block {
-  background-color: $brand-blue;
-  border-bottom-left-radius: 2.5rem;
-  border-bottom-right-radius: 2.5rem;
+  background-color: #fff;
+  color: $brand-blue;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .card-block--story-head {
-  border-top-right-radius: 2.5rem;
-  border-bottom-right-radius: 2.5rem;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
   padding-left: 13rem;
 }
 
