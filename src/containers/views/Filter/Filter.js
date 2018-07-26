@@ -100,7 +100,6 @@ class Filter extends React.Component {
         let newState = Object.assign({}, this.state);
 
 
-
         newState.tags.categories[e.target.value] = !newState.tags.categories[e.target.value]
         newState.tags.partners[e.target.value] = !newState.tags.partners[e.target.value]
         newState.activeTags = e.target.value;
