@@ -100,6 +100,7 @@ class Filter extends React.Component {
         let newState = Object.assign({}, this.state);
 
 
+
         newState.tags.categories[e.target.value] = !newState.tags.categories[e.target.value]
         newState.tags.partners[e.target.value] = !newState.tags.partners[e.target.value]
         newState.activeTags = e.target.value;
@@ -142,10 +143,14 @@ class Filter extends React.Component {
         let filter = true;
         (Object.entries(story.general.tags.categories).map(([key,value])=>{
             if(!value){
-                if(value !== this.state.tags.categories[key]) {
-                    filter = false
+                let stateValue = this.state.tags.categories[key]
+                    if(stateValue !== undefined){
+                        if(value !== stateValue) {
+                            filter = false
+                        }
+                    }
+
                 }
-            }
 
         })
     )
