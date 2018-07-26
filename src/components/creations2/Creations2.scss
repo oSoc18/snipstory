@@ -11,7 +11,7 @@
 .creations-container-2 {
   width: 52rem;
   background-color: $brand-blue;
-  border-radius: 5rem;
+  border-radius: 20px;
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -20,8 +20,8 @@
 
 .img-mapping-2 {
   width: 49rem;
-  border-top-left-radius: 4rem;
-  border-top-right-radius: 4rem;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   margin-top: 1.5rem;
 }
 
