@@ -18,7 +18,7 @@ const Card = ({
   picture,
   story
 }) => {
-return <div className="cards">
+return <div className="cards cards-min">
           <img src={picture}/>
           <div className="info">
             <div className="container">
