@@ -251,15 +251,6 @@ class StoryPreview extends React.Component {
                     <div className="card-text monument-text">
                       {value.motivation}
                     </div>
-                    <iframe
-                      src="api.tiles.mapbox.com/mapbox-gl-js/v0.47.0/mapbox-gl.css"
-                      width="100%"
-                      height="350"
-                      frameBorder="0"
-                      title="monument map"
-                      style={{ border: 0 }}
-                      allowFullScreen
-                    />
                   </div>
                 </div>
             )

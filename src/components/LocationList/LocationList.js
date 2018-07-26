@@ -12,7 +12,7 @@ export default class LocationList extends React.Component {
     return <div className="dashboard-location">
               <h1>Locaties</h1>
           {locations.map((location) => {
-            return <div className="col"><div className="dashboard-location-item" key={location.id}>
+            return <div className="col" key={location}><div className="dashboard-location-item" key={location.id}>
               <h2>{ location.title }</h2>
               <button disabled={!canDelete} className="delete-button" onClick={() => onDelete(location.id)}>
                 Delete

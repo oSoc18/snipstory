@@ -154,7 +154,6 @@ export const fetchRandomStories = () => {
 export const fetchStory = storyId => {
   return dispatch => {
     dispatch(fetchStoryStarted());
-    console.log(`The story id is ${storyId}`)
     return firebaseDatabase
       .ref("/stories")
       .child(storyId)
@@ -282,7 +281,6 @@ export const deleteModule = (storyId, moduleId) => {
         dispatch(deleteModuleFulFilled(moduleId));
       })
       .catch(err => {
-        console.log(err);
         dispatch(deleteModuleRejected(err));
       });
   };
@@ -385,7 +383,6 @@ export const uploadModules = (storyId, modules) => {
     ))
     .then(() => dispatch(uploadModuleFulFilled()))
     .catch(error => {
-      console.log(error)
       dispatch(uploadModuleRejected(error))}
     );
   };
