@@ -201,7 +201,7 @@ class Filter extends React.Component {
                             <Button size="small" inverted="true" value="partners" className={this.state.activeFilter === "partners" ? 'activeButton': ''} onClick={(e) => this.handleClick(e)}>Partners</Button>
                         </div>
                         <div className="col">
-                            <Button size="small" inverted="true" value="categories"className={this.state.activeFilter === "categories" ? 'activeButton': ''} onClick={(e) => this.handleClick(e)}>Skills</Button>
+                            <Button size="small" inverted="true" value="categories"className={this.state.activeFilter === "categories" ? 'activeButton': ''} onClick={(e) => this.handleClick(e)}>Categorieën</Button>
                         </div>
                     </div>
                     {this.switchStatement(this.state.activeFilter)}
