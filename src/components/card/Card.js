@@ -10,32 +10,32 @@ const schoolYearSwitch = (schoolYear) => {
         switch(schoolYear) {
         case "thirdYear":
             return (
-                <p>Derde leerjaar</p>
+                <span>Derde leerjaar</span>
             )
             break;
         case "fourthYear":
         return (
-            <p>Vierde leerjaar</p>
+            <span>Vierde leerjaar</span>
         )
             break;
         case "fifthYear":
         return (
-            <p>Vijfde leerjaar</p>
+            <span>Vijfde leerjaar</span>
         )
             break;
         case "sixthYear":
         return (
-            <p>Zesde leerjaar</p>
+            <span>Zesde leerjaar</span>
         )
             break;
         case "firstYearSecondary":
         return (
-            <p>Eerste middelbaar</p>
+            <span>Eerste middelbaar</span>
         )
             break;
         case "secondYearSecondary":
         return (
-            <p>Tweede middelbaar</p>
+            <span>Tweede middelbaar</span>
         )
             break;
     }
