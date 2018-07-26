@@ -11,18 +11,19 @@
 }
 
 .snipper {
-  border-radius: 3.5rem;
+  border-radius: 20px;
   transition: 0.5s;
   cursor: pointer;
-  border: 15px solid $brand-blue;
+  border: 10px solid #fff;
+  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.31);
+
   transition: 0.5s;
   &:hover {
     transform: scale(1.04);
-    box-shadow: 0 0 1rem 0.2rem rgba($brand-blue--light, .8);
   }
   video,
   img {
-    border-top-left-radius: 2.7rem;
-    border-top-right-radius: 2.7rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
   }
 }

@@ -2,7 +2,8 @@
 
 .card-container {
   border: none;
-  background-color: $brand-blue;
+  background-color: #fff;
+  box-shadow: 0px 0px 30px 0px rgba(0,0,0,0.31);
   margin-bottom: 2rem;
   cursor: pointer;
 
@@ -11,7 +12,6 @@
   transition: 0.5s;
   &:hover {
     transform: scale(1.04);
-    box-shadow: 0 0 1rem 0.2rem rgba($brand-blue--light, .8);
   }
 }
 
@@ -21,7 +21,7 @@
 }
 
 .card-title {
-  color: white;
+  color: $brand-blue;
   font-family: $brand-font-stack;
   font-size: 1.2rem;
   line-height: 1.8rem;
@@ -30,7 +30,7 @@
 
 .card-text {
   font-family: $font-stack;
-  color: white;
+  color: #000;
   font-size: 1rem;
   padding-bottom: 1rem;
 }
