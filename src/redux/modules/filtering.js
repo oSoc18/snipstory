@@ -33,19 +33,6 @@ const getFilteredStories = (state, filters) => {
             let birthYear = new Date(story.general.dayOfBirth).getFullYear();
             return min <= birthYear && max >= birthYear;
         })
-        .filter(story => {
-            let filtered = "";
-            Object.entries(filters.tags.locations).map(([key,value])=>{
-                if(value === story.general.tags.locations[key]) {
-                    filtered = true;
-                }
-                else{
-                    return false;
-                }
-
-          });
-          return true;
-        })
 };
 
 export const reducer = (state = initialState, action) => {
