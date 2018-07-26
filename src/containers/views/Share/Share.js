@@ -24,7 +24,7 @@ class Room extends React.Component {
       <div className="share page">
         <Navbar logout={this.props.logout} user={user}/>
         <StepIndicator
-          step="4"
+        step={4}
           title="Deel je snipper"
           description="Deel je creatie met de wereld! Upload een foto of video van je knutselwerk"
           image={StapLogo}
@@ -44,7 +44,6 @@ class Room extends React.Component {
             <Button to={'/snippers/' + creation.id}>
               Ga naar jou snipper!
             </Button>}
-          <FloatingSteps activeStep={3} />
         </div>
         <Footer />
       </div>

@@ -30,7 +30,8 @@ class KnutselTips extends React.Component {
   }
 
   render() {
-    const { knutseltips } = this.props;
+    const { knutseltips,
+            story } = this.props;
     const { storyId } = this.state;
 
     return (
@@ -111,7 +112,6 @@ class KnutselTips extends React.Component {
                   </div>
                 )}
               </div>
-              {storyId && <FloatingSteps activeStep={2} />}
               {storyId &&
                 <FloatingNext
                   to={`/story/share?storyId=${storyId}`}
