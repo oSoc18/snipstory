@@ -11,7 +11,7 @@ import Snipper from '../spinner/Spinner';
 class UploadBox extends React.Component {
   render() {
     return (
-      <div className="upload container">
+      <div className="upload">
         {this.props.creation.uploading
           ? <Snipper />
           : <div>
