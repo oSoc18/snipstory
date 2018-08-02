@@ -1,4 +1,4 @@
-# iShare
+# Snipstory
 
 [![Build Status](https://travis-ci.org/oSoc17/snipstory.svg?branch=develop)](https://travis-ci.org/oSoc17/snipstory)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -27,3 +27,14 @@ npm start
 ```
 npm run build
 ```
+
+### Deploy on firebase
+
+```
+npm install -g firebase-tools # if you don't already have it
+firebase deploy
+```
+
+### Change firebase project
+
+change the id in `.firebaserc` and change the config object in `src\helpers\firebase.js`.

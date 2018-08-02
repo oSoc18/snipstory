@@ -95,7 +95,7 @@ class App extends Component {
                 render={props => <FilterView user={user} {...props} />}
               />
               <ProtectedRoute
-                isAuthorized={!isAuthorized}
+                isAuthorized={false/* !isAuthorized */}
                 path="/teacher/register"
                 redirectUrl="/"
                 exact
